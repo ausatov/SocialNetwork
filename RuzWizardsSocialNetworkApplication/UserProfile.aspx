@@ -69,70 +69,75 @@
                                     OnClick="btnSaveStatusMessage_Click" />
                             </asp:Panel>
                         </div>
+
                         <hr />
-                        <%-- Стена --%>
+
                         <div>
-                            <%--  Написать добавление --%>
+                        <%--DataKeyNames="ID" DataSourceID="edsPersonalInfo" убрать источник--%> 
+                            <asp:DetailsView ID="dtlUserInfo" runat="server" Height="50px" Width="98%" 
+                                AutoGenerateRows="false"
+                                DataKeyNames="ID" DataSourceID="edsPersonalInfo"
+                                ondatabound="dtlUserInfo_DataBound" GridLines="None">
+                                <Fields>
+                                    <asp:TemplateField HeaderText="Birthday:" SortExpression="Birthday">
+                                        <ItemTemplate>
+                                            <%--Text='<%# Eval("Birthday") != null ? 
+                                                Convert.ToDateTime(Eval("Birthday")).ToShortDateString() : 
+                                                Eval("Birthday") %>'--%>
+                                            <asp:Label ID="lblBirthday" runat="server" Text="">
+                                            </asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Sex:" SortExpression="Sex">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblSex" runat="server" Text=""></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Phone:" SortExpression="Phone">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblPhone" runat="server" Text=""></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Country:" SortExpression="Country">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCountry" runat="server" Text="Country"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="City:" SortExpression="City">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCity" runat="server" Text="City"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Area:" SortExpression="Area">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblArea" runat="server" Text="Area"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Street:" SortExpression="Street">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblStreet" runat="server" Text="Street"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Home:" SortExpression="Home">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblHome" runat="server" Text="Home"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Apartment:" SortExpression="Apartment">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblApartment" runat="server" Text="Apartment"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Fields>
+                            </asp:DetailsView>
+                            <asp:EntityDataSource ID="edsPersonalInfo" runat="server" 
+                                ConnectionString="name=SocialNetworkDBEntities" 
+                                DefaultContainerName="SocialNetworkDBEntities" 
+                                EnableFlattening="False" 
+                                EntitySetName="PersonalInfoes">
+                            </asp:EntityDataSource>
                         </div>
-                        <%-- Просмотр записей --%>
-                        <div>
-                        </div>
-
-
-
-
-                        <div>
-                        
-                        
-
-                         <asp:DetailsView ID="dtlUserInfo" runat="server" Height="50px" Width="98%" 
-                                    AutoGenerateRows="False" DataKeyNames="ID" DataSourceID="edsPersonalInfo" 
-                                    ondatabound="dtlUserInfo_DataBound" GridLines="None" 
-                                onpageindexchanging="dtlUserInfo_PageIndexChanging">
-                                    <Fields>
-                                        <%-- <asp:TemplateField HeaderText="Country:" SortExpression="CountryID" ItemStyle-Width="70%">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblCountryID" runat="server" Text='<%# Eval("CountryID") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="City:" SortExpression="CityID">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblCityID" runat="server" Text='<%# Eval("CityID") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>--%>
-                                        <asp:TemplateField HeaderText="Sex:" SortExpression="Sex">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblSex" runat="server" Text='<%# Eval("Sex") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Phone:" SortExpression="Phone">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblPhone" runat="server" Text='<%# Eval("Phone") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Fields>
-                                </asp:DetailsView>
-                
-                                <asp:EntityDataSource ID="edsPersonalInfo" runat="server" 
-                                    ConnectionString="name=SocialNetworkDBEntities" 
-                                    DefaultContainerName="SocialNetworkDBEntities" EnableDelete="True" 
-                                    EnableFlattening="False" EnableInsert="True" EnableUpdate="True" 
-                                    EntitySetName="PersonalInfoes">
-                                </asp:EntityDataSource>
-
-                            
-                        
-                                        </div>
-
-
-
-
-
-
-
-
-                                       
-                                        
+                                      
                         <div style="padding-top:10px;">
                             <table width="101%" cellpadding="0" cellspacing="0">
                                 <tr>
@@ -142,10 +147,42 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                         <asp:DetailsView ID="dtlWall" runat="server" Height="50px" Width="100%" 
+                                             AutoGenerateRows="False" DataKeyNames="ID" DataSourceID="edsWall" 
+                                             DefaultMode="Insert">
+                                             <Fields>
 
+                                                 <asp:TemplateField HeaderText="Special" Visible="False">
+                                                     <InsertItemTemplate>
 
-                                     <div>
-                        
+                                                         <asp:Label ID="lblFromID" runat="server" Text='<%# Bind("FromID") %>'></asp:Label>
+                                                         <asp:Label ID="lblToID" runat="server" Text='<%# Bind("ToID") %>'></asp:Label>
+                                                     
+                                                     </InsertItemTemplate>
+                                                     
+                                                 </asp:TemplateField>
+
+                                                 <asp:TemplateField HeaderText="Message" SortExpression="Message">
+                                                     <InsertItemTemplate>
+                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("ContentTypeID") %>'></asp:TextBox>
+                                                        <%-- <asp:DropDownList ID="ddlWallItemContentType" runat="server">
+                                                         </asp:DropDownList>--%>
+                                                        <br />
+                                                         <asp:TextBox ID="tbxMessage" runat="server" Text='<%# Bind("Message") %>'></asp:TextBox>
+                                                     </InsertItemTemplate>
+                                                 </asp:TemplateField>
+                                                 <asp:TemplateField ShowHeader="False">
+                                                     <InsertItemTemplate>
+                                                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" 
+                                                             CommandName="Insert" Text="Insert"></asp:LinkButton>
+                                                         &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
+                                                             CommandName="Cancel" Text="Cancel"></asp:LinkButton>
+                                                     </InsertItemTemplate>
+                                                 </asp:TemplateField>
+                                             </Fields>
+                                        </asp:DetailsView>  
+                                        
+                                         
                                          <asp:GridView ID="grdWall" runat="server" Width="100%" AllowPaging="True" 
                                             AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="edsWall" 
                                             ShowHeader="False" BorderColor="#E3D5FF" BorderStyle="None" 
@@ -218,8 +255,7 @@
                                             EnableFlattening="False" EnableInsert="True" EnableUpdate="True" 
                                             EntitySetName="WallBoardItems">
                                         </asp:EntityDataSource>
-                                        <asp:DetailsView ID="dtlWall" runat="server" Height="50px" Width="100%">
-                                        </asp:DetailsView>
+                                        
                         
                         
                                     </td>
@@ -235,7 +271,7 @@
 
 
                     </div>
-                </div>
+                
             </td>
         </tr>
     </table>

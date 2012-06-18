@@ -173,7 +173,7 @@
     <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
     <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
     <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Sex" Type="bit" />
+    <Property Name="Sex" Type="tinyint" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
     <Property Name="Birthday" Type="smalldatetime" />
     <Property Name="ImagePath" Type="nvarchar" Nullable="false" MaxLength="80" />
@@ -465,19 +465,6 @@
     <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
     <Parameter Name="Message" Type="nvarchar" Mode="In" />
     <Parameter Name="StatusID" Type="int" Mode="In" />
-  </Function>
-  <Function Name="spInsUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Email" Type="varchar" Mode="In" />
-    <Parameter Name="Password" Type="varchar" Mode="In" />
-    <Parameter Name="FirstName" Type="varchar" Mode="In" />
-    <Parameter Name="SecondName" Type="varchar" Mode="In" />
-    <Parameter Name="FatherName" Type="varchar" Mode="In" />
-    <Parameter Name="NickName" Type="varchar" Mode="In" />
-    <Parameter Name="Sex" Type="bit" Mode="In" />
-    <Parameter Name="Phone" Type="varchar" Mode="In" />
-    <Parameter Name="Country" Type="int" Mode="In" />
-    <Parameter Name="City" Type="int" Mode="In" />
-    <Parameter Name="Photo" Type="varchar" Mode="In" />
   </Function>
   <Function Name="spUpdDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />

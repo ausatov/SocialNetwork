@@ -13,7 +13,6 @@
     <RootNamespace>RuzWizardsSocialNetworkApplication</RootNamespace>
     <AssemblyName>RuzWizardsSocialNetworkApplication</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -162,7 +161,6 @@
     <Content Include="UserProfile.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\SessionHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -181,6 +179,7 @@
       <DependentUpon>LoginPage.master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="App_Code\SessionHelper.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

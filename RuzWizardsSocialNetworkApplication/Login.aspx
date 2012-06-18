@@ -2,6 +2,8 @@
 <%@ Register TagPrefix="aspajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit"%>
 
 
+<%-- Усатов --%>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHead" Runat="Server">
     <script type="text/javascript">
         function isValidEmail(email) {

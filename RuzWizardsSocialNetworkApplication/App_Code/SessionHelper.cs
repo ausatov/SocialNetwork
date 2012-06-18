@@ -10,7 +10,7 @@ namespace RuzWizardsSocialNetworkApplication.App_Code
         /// <summary>
         /// Проверяем прошел ли пользователь аутентификацию
         /// </summary>
-        public static bool IsAuthenticated
+        public static Boolean IsAuthenticated
         {
             get { return (bool)HttpContext.Current.Session["Authenticated"]; }
             set { HttpContext.Current.Session["Authenticated"] = value; }
@@ -19,7 +19,7 @@ namespace RuzWizardsSocialNetworkApplication.App_Code
         /// <summary>
         /// Проверяем является ли пользователь администратором
         /// </summary>
-        public static bool IsAdmin
+        public static Boolean IsAdmin
         {
             get { return (bool)HttpContext.Current.Session["Admin"]; }
             set { HttpContext.Current.Session["Admin"] = value; }

@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SocialNetwork.DataAccess.Enums;
-
-namespace SocialNetwork.DataAccess.Repositories
+﻿namespace SocialNetwork.DataAccess.Repositories
 {
-    public class StatusRepository : IStatusRepository
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using SocialNetwork.DataAccess.Enums;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class StatusRepository// : IStatusRepository
     {
-        
-        //private SocialNetworkDBEntities _entity;
-
-        public StatusRepository()
-        {
-            //_entity = new SocialNetworkDBEntities();
-        }
-
         /// <summary>
         /// Получить текущее установленное статус-сообщение
         /// </summary>
         /// <param name="UserID"></param>
         /// <returns></returns>
-        public String GetStatusMessage(Guid userID)
+        public static String GetStatusMessage(Guid userID)
         {
             String status = String.Empty;
             String statusMessage = String.Empty;
@@ -40,7 +35,7 @@ namespace SocialNetwork.DataAccess.Repositories
         /// </summary>
         /// <param name="userID"></param>
         /// <returns></returns>
-        public String GetStatusName(Guid userID)
+        public static String GetStatusName(Guid userID)
         {
             Int32 statusID = Int32.MinValue;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
@@ -52,7 +47,12 @@ namespace SocialNetwork.DataAccess.Repositories
             return EnumsHelper.ToString((UserStatus)statusID);
         }
 
-        public Int32 GetStatusID(Guid userID)
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public static Int32 GetStatusID(Guid userID)
         {
             Int32 statusID = Int32.MinValue;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
@@ -64,7 +64,13 @@ namespace SocialNetwork.DataAccess.Repositories
             return statusID;
         }
 
-        public void SetStatusMessage(Guid userID, String message, UserStatus status)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="message"></param>
+        /// <param name="status"></param>
+        public static void SetStatusMessage(Guid userID, String message, UserStatus status)
         {
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {

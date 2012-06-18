@@ -20,7 +20,6 @@ using System.Runtime.Serialization;
 
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Address_Cities", "Cities", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SocialNetwork.DataAccess.City), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Address), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Address_Countries", "Countries", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SocialNetwork.DataAccess.Country), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Address), true)]
-[assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Address_PersonalInfo", "PersonalInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.PersonalInfo), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Address), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Bans_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Bans", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Ban), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Bans_Users1", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Bans", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Ban), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Cities_Countries", "Countries", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.Country), "Cities", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.City), true)]
@@ -30,12 +29,13 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Friends_Users1", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Friends", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Friend), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Messages_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Message), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Messages_Users1", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Message), true)]
-[assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_PersonalInfo_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "PersonalInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.PersonalInfo), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Status_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Status", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Status), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_UsersXUserRoles_UserRoles", "UserRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.UserRole), "UsersXUserRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.UsersXUserRole), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_UsersXUserRoles_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "UsersXUserRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.UsersXUserRole), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_WallBoardItems_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "WallBoardItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.WallBoardItem), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_WallBoardItems_Users1", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "WallBoardItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.WallBoardItem), true)]
+[assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Address_PersonalInfo", "PersonalInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.PersonalInfo), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Address), true)]
+[assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_PersonalInfo_Users", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "PersonalInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.PersonalInfo), true)]
 
 #endregion
 
@@ -202,22 +202,6 @@ namespace SocialNetwork.DataAccess
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PersonalInfo> PersonalInfoes
-        {
-            get
-            {
-                if ((_PersonalInfoes == null))
-                {
-                    _PersonalInfoes = base.CreateObjectSet<PersonalInfo>("PersonalInfoes");
-                }
-                return _PersonalInfoes;
-            }
-        }
-        private ObjectSet<PersonalInfo> _PersonalInfoes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Status> Status
         {
             get
@@ -310,6 +294,22 @@ namespace SocialNetwork.DataAccess
             }
         }
         private ObjectSet<WallBoardItem> _WallBoardItems;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PersonalInfo> PersonalInfoes
+        {
+            get
+            {
+                if ((_PersonalInfoes == null))
+                {
+                    _PersonalInfoes = base.CreateObjectSet<PersonalInfo>("PersonalInfoes");
+                }
+                return _PersonalInfoes;
+            }
+        }
+        private ObjectSet<PersonalInfo> _PersonalInfoes;
 
         #endregion
         #region AddTo Methods
@@ -371,14 +371,6 @@ namespace SocialNetwork.DataAccess
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the PersonalInfoes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPersonalInfoes(PersonalInfo personalInfo)
-        {
-            base.AddObject("PersonalInfoes", personalInfo);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Status EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToStatus(Status status)
@@ -424,6 +416,14 @@ namespace SocialNetwork.DataAccess
         public void AddToWallBoardItems(WallBoardItem wallBoardItem)
         {
             base.AddObject("WallBoardItems", wallBoardItem);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PersonalInfoes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPersonalInfoes(PersonalInfo personalInfo)
+        {
+            base.AddObject("PersonalInfoes", personalInfo);
         }
 
         #endregion
@@ -2434,7 +2434,7 @@ namespace SocialNetwork.DataAccess
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> Sex
+        public Nullable<global::System.Byte> Sex
         {
             get
             {
@@ -2449,8 +2449,8 @@ namespace SocialNetwork.DataAccess
                 OnSexChanged();
             }
         }
-        private Nullable<global::System.Boolean> _Sex;
-        partial void OnSexChanging(Nullable<global::System.Boolean> value);
+        private Nullable<global::System.Byte> _Sex;
+        partial void OnSexChanging(Nullable<global::System.Byte> value);
         partial void OnSexChanged();
     
         /// <summary>
@@ -2581,16 +2581,16 @@ namespace SocialNetwork.DataAccess
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_PersonalInfo_Users", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_PersonalInfo_Users", "User")]
         public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_PersonalInfo_Users", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_PersonalInfo_Users", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_PersonalInfo_Users", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_PersonalInfo_Users", "User").Value = value;
             }
         }
         /// <summary>
@@ -2602,13 +2602,13 @@ namespace SocialNetwork.DataAccess
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_PersonalInfo_Users", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_PersonalInfo_Users", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SocialNetworkDBModel.FK_PersonalInfo_Users", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SocialNetworkDBModel.FK_PersonalInfo_Users", "User", value);
                 }
             }
         }
@@ -3438,28 +3438,6 @@ namespace SocialNetwork.DataAccess
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_PersonalInfo_Users", "PersonalInfo")]
-        public EntityCollection<PersonalInfo> PersonalInfoes
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonalInfo>("SocialNetworkDBModel.FK_PersonalInfo_Users", "PersonalInfo");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonalInfo>("SocialNetworkDBModel.FK_PersonalInfo_Users", "PersonalInfo", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_Status_Users", "Status")]
         public EntityCollection<Status> Status
         {
@@ -3538,6 +3516,28 @@ namespace SocialNetwork.DataAccess
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WallBoardItem>("SocialNetworkDBModel.FK_WallBoardItems_Users1", "WallBoardItems", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_PersonalInfo_Users", "PersonalInfo")]
+        public EntityCollection<PersonalInfo> PersonalInfoes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonalInfo>("SocialNetworkDBModel.FK_PersonalInfo_Users", "PersonalInfo");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonalInfo>("SocialNetworkDBModel.FK_PersonalInfo_Users", "PersonalInfo", value);
                 }
             }
         }

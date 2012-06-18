@@ -8,7 +8,6 @@
     <EntitySet Name="FriendInvitations" EntityType="SocialNetworkDBModel.FriendInvitation" />
     <EntitySet Name="Friends" EntityType="SocialNetworkDBModel.Friend" />
     <EntitySet Name="Messages" EntityType="SocialNetworkDBModel.Message" />
-    <EntitySet Name="PersonalInfoes" EntityType="SocialNetworkDBModel.PersonalInfo" />
     <EntitySet Name="Status" EntityType="SocialNetworkDBModel.Status" />
     <EntitySet Name="sysdiagrams" EntityType="SocialNetworkDBModel.sysdiagram" />
     <EntitySet Name="UserRoles" EntityType="SocialNetworkDBModel.UserRole" />
@@ -21,10 +20,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_Address_Countries" Association="SocialNetworkDBModel.FK_Address_Countries">
       <End Role="Countries" EntitySet="Countries" />
-      <End Role="Address" EntitySet="Addresses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Address_PersonalInfo" Association="SocialNetworkDBModel.FK_Address_PersonalInfo">
-      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
       <End Role="Address" EntitySet="Addresses" />
     </AssociationSet>
     <AssociationSet Name="FK_Bans_Users" Association="SocialNetworkDBModel.FK_Bans_Users">
@@ -63,10 +58,6 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Messages" EntitySet="Messages" />
     </AssociationSet>
-    <AssociationSet Name="FK_PersonalInfo_Users" Association="SocialNetworkDBModel.FK_PersonalInfo_Users">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
-    </AssociationSet>
     <AssociationSet Name="FK_Status_Users" Association="SocialNetworkDBModel.FK_Status_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Status" EntitySet="Status" />
@@ -92,6 +83,15 @@
       <Parameter Name="Message" Mode="In" Type="String" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="PersonalInfoes" EntityType="SocialNetworkDBModel.PersonalInfo" />
+    <AssociationSet Name="FK_Address_PersonalInfo" Association="SocialNetworkDBModel.FK_Address_PersonalInfo">
+      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonalInfo_Users" Association="SocialNetworkDBModel.FK_PersonalInfo_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Address">
     <Key>
@@ -183,24 +183,6 @@
     <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_Messages_Users" FromRole="Messages" ToRole="Users" />
     <NavigationProperty Name="User1" Relationship="SocialNetworkDBModel.FK_Messages_Users1" FromRole="Messages" ToRole="Users" />
   </EntityType>
-  <EntityType Name="PersonalInfo">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Guid" Nullable="false" />
-    <Property Name="UserID" Type="Guid" Nullable="false" />
-    <Property Name="NickName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-    <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-    <Property Name="Sex" Type="Boolean" />
-    <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-    <Property Name="Birthday" Type="DateTime" />
-    <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="80" Unicode="true" FixedLength="false" />
-    <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
-    <NavigationProperty Name="Addresses" Relationship="SocialNetworkDBModel.FK_Address_PersonalInfo" FromRole="PersonalInfo" ToRole="Address" />
-    <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="PersonalInfo" ToRole="Users" />
-  </EntityType>
   <EntityType Name="Status">
     <Key>
       <PropertyRef Name="ID" />
@@ -253,11 +235,11 @@
     <NavigationProperty Name="Friends1" Relationship="SocialNetworkDBModel.FK_Friends_Users1" FromRole="Users" ToRole="Friends" />
     <NavigationProperty Name="Messages" Relationship="SocialNetworkDBModel.FK_Messages_Users" FromRole="Users" ToRole="Messages" />
     <NavigationProperty Name="Messages1" Relationship="SocialNetworkDBModel.FK_Messages_Users1" FromRole="Users" ToRole="Messages" />
-    <NavigationProperty Name="PersonalInfoes" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="Users" ToRole="PersonalInfo" />
     <NavigationProperty Name="Status" Relationship="SocialNetworkDBModel.FK_Status_Users" FromRole="Users" ToRole="Status" />
     <NavigationProperty Name="UsersXUserRoles" Relationship="SocialNetworkDBModel.FK_UsersXUserRoles_Users" FromRole="Users" ToRole="UsersXUserRoles" />
     <NavigationProperty Name="WallBoardItems" Relationship="SocialNetworkDBModel.FK_WallBoardItems_Users" FromRole="Users" ToRole="WallBoardItems" />
     <NavigationProperty Name="WallBoardItems1" Relationship="SocialNetworkDBModel.FK_WallBoardItems_Users1" FromRole="Users" ToRole="WallBoardItems" />
+    <NavigationProperty Name="PersonalInfoes" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="User" ToRole="PersonalInfo" />
   </EntityType>
   <EntityType Name="UsersXUserRole">
     <Key>
@@ -305,18 +287,6 @@
       </Principal>
       <Dependent Role="Address">
         <PropertyRef Name="CountryID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Address_PersonalInfo">
-    <End Role="PersonalInfo" Type="SocialNetworkDBModel.PersonalInfo" Multiplicity="1" />
-    <End Role="Address" Type="SocialNetworkDBModel.Address" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PersonalInfo">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Address">
-        <PropertyRef Name="UserInfoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -430,18 +400,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PersonalInfo_Users">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="PersonalInfo" Type="SocialNetworkDBModel.PersonalInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="UserID" />
-      </Principal>
-      <Dependent Role="PersonalInfo">
-        <PropertyRef Name="UserID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Status_Users">
     <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
     <End Role="Status" Type="SocialNetworkDBModel.Status" Multiplicity="*" />
@@ -499,6 +457,48 @@
       </Principal>
       <Dependent Role="WallBoardItems">
         <PropertyRef Name="FromID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PersonalInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Guid" Name="ID" Nullable="false" />
+    <Property Type="Guid" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="NickName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="Sex" />
+    <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="Birthday" />
+    <Property Type="String" Name="ImagePath" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Addresses" Relationship="SocialNetworkDBModel.FK_Address_PersonalInfo" FromRole="PersonalInfo" ToRole="Address" />
+    <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="PersonalInfo" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Address_PersonalInfo">
+    <End Type="SocialNetworkDBModel.PersonalInfo" Role="PersonalInfo" Multiplicity="1" />
+    <End Type="SocialNetworkDBModel.Address" Role="Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonalInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="UserInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonalInfo_Users">
+    <End Type="SocialNetworkDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="SocialNetworkDBModel.PersonalInfo" Role="PersonalInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="PersonalInfo">
+        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
