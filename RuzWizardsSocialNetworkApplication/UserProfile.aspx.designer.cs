@@ -111,6 +111,15 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.EntityDataSource edsPersonalInfo;
     
     /// <summary>
+    /// dtlWall control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.DetailsView dtlWall;
+    
+    /// <summary>
     /// grdWall control.
     /// </summary>
     /// <remarks>
@@ -127,15 +136,6 @@ public partial class UserProfile {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.EntityDataSource edsWall;
-    
-    /// <summary>
-    /// dtlWall control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.DetailsView dtlWall;
     
     /// <summary>
     /// Menu1 control.

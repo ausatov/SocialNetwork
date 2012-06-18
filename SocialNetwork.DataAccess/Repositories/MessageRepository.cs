@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SocialNetwork.DataAccess.Repositories
+﻿namespace SocialNetwork.DataAccess.Repositories
 {
-    public class MessageRepository
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class MessageRepository
     {
     }
 }

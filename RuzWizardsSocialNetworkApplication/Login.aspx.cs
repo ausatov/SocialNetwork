@@ -9,14 +9,14 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using SocialNetwork.DataAccess;
-using RuzWizardsSocialNetworkApplication.App_Code;
 
-
+/// <summary>
+/// Усатов
+/// </summary>
 public partial class Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
         if (Request.QueryString["reg"] != null)
         {
             pnlLogin.Visible = false;
@@ -26,12 +26,10 @@ public partial class Login : System.Web.UI.Page
         }
         else
         {
-
-
             pnlLogin.Visible = true;
             pnlRegistrtion.Visible = false;
             btnRegistration.ImageUrl = "~/App_Themes/MainSkin/img/buttons/snw_button_registration.png";
-            btnRegistration.Enabled = true;
+            btnRegistration.Enabled = true; 
         }
     }
 
@@ -40,7 +38,7 @@ public partial class Login : System.Web.UI.Page
     /// </summary>
     protected void btnRegistration_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("Login.aspx?Reg=" + Session.SessionID);
+        Response.Redirect("Login.aspx?Reg=1");
     }
 
     /// <summary>
@@ -54,7 +52,7 @@ public partial class Login : System.Web.UI.Page
         if (ddlCountry.SelectedIndex > 0)
         {
             trCity.Visible = true;
-            edsCity.Where = string.Format("it.[CountryID] = {0}", ddlCountry.SelectedValue);
+            edsCity.Where = string.Format("it.[CountryID] = {0}", ddlCountry.SelectedValue); 
         }
         // иначе скрываем поле с выбором города
         else
@@ -81,7 +79,7 @@ public partial class Login : System.Web.UI.Page
     protected void btnRegCompleteRegistration_Click(object sender, ImageClickEventArgs e)
     {
         SqlConnection sqlConnection = new SqlConnection();
-        sqlConnection.ConnectionString =
+        sqlConnection.ConnectionString = 
             ConfigurationManager.ConnectionStrings["RusWizardsSocialNetworkDBConnectionString"]
             .ConnectionString;
         SqlCommand sqlCommand = new SqlCommand();
@@ -120,7 +118,7 @@ public partial class Login : System.Web.UI.Page
                 } break;
         }
         sqlCommand.Parameters.Add("@Phone", SqlDbType.VarChar, 24);
-        sqlCommand.Parameters["@Phone"].Value = tbxPhone.Text;
+        sqlCommand.Parameters["@Phone"].Value =  tbxPhone.Text;
         sqlCommand.Parameters.Add("@Country", SqlDbType.Int);
         if (ddlCountry.SelectedIndex > 0)
         {
@@ -146,48 +144,17 @@ public partial class Login : System.Web.UI.Page
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
         }
-
+        catch (SqlException ex)
+        {
+            //Label1.Text = ex.InnerException.Message;
+        }
+        catch (Exception ex)
+        {
+            //Label1.Text = ex.Message;
+        }
         finally
         {
             sqlConnection.Close();
         }
-
-
-    }
-    /// <summary>
-    /// Нажатие на кнопку входа в персональную страницу
-    /// </summary>
-    protected void btnLogin_Click(object sender, ImageClickEventArgs e)
-    {
-        //тут все тестовое на данный момент (без реализации для БД )
-        bool _exist = false;
-        bool _admin = false;
-        HttpCookie _exCookie = Request.Cookies["EmailCookie"];
-        if (_exCookie != null)
-        {
-            tbxEmail.Text = _exCookie["Email"].ToString();
-        }
-        //идет проверка на существование пользователя с такими введенными данными в БД
-        SocialNetworkDBEntities fdsf = new SocialNetworkDBEntities();
-       
-        if (_exist)
-        {
-            SessionHelper.IsAuthenticated = true;
-            if (_admin)
-            {
-                SessionHelper.IsAdmin = true;
-            }
-        }
-        //пока что помещаем в куки и перенаправляем на личную страницу в любом случае
-        //куки для логина
-        HttpCookie _emailCookie = new HttpCookie("EmailCookie");
-        //куки будет храниться в течение одного месяца (можно поменять)
-        _emailCookie.Expires = DateTime.Now.AddMonths(1);
-        //заносим в куки введенный Email
-        _emailCookie["Email"] = tbxEmail.Text;
-        //добавляем куки в браузер пользователя
-        Response.Cookies.Add(_emailCookie);
-        //после id идет айди определенный по email и passward из базы
-        Response.Redirect("~/UserProfile.aspx?id="+"...");
     }
 }

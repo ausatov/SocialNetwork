@@ -1,26 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SocialNetwork.DataAccess;
-
-namespace SocialNetwork.DataAccess.Repositories
+﻿namespace SocialNetwork.DataAccess.Repositories
 {
-    
-    public class CountryRepository
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using SocialNetwork.DataAccess;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class CountryRepository
     {
-        public List<Country> country = new List<Country>();
-
-        //----------------- вариант 1
-
-        public List<Country> GetAllCountriesExample1()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="countryID"></param>
+        /// <returns></returns>
+        public static String GetCountryName(Int32 countryID)
         {
-            // каждый раз создавать объект в инструкции using
-            using (SocialNetworkDBEntities entity = new SocialNetworkDBEntities())
+            String countryName = String.Empty;
+            using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                country = entity.Countries.ToList<Country>();
+                countryName = record.Countries
+                    .Where(x => x.CountryID == countryID)
+                    .Select(x => x.Name)
+                    .First();
             }
-            return country;
+            return countryName;
         }
     }
 }

@@ -2,6 +2,8 @@
 <%@ Register TagPrefix="aspajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit"%>
 
 
+<%-- Усатов --%>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHead" Runat="Server">
     <script type="text/javascript">
         function isValidEmail(email) {
@@ -359,7 +361,7 @@
                 <p>
                     <asp:ImageButton ID="btnLogin" runat="server" 
                         ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_login.png" 
-                        ValidationGroup="vg1" onclick="btnLogin_Click" />
+                        ValidationGroup="vg1" />
                 </p>
                 <p>
                     <asp:ImageButton ID="btnRegistration" runat="server" 

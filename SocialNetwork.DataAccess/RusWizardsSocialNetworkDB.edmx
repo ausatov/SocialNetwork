@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SocialNetworkDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SocialNetworkDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SocialNetworkDBModelStoreContainer">
           <EntitySet Name="Address" EntityType="SocialNetworkDBModel.Store.Address" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Bans" EntityType="SocialNetworkDBModel.Store.Bans" store:Type="Tables" Schema="dbo" />
@@ -178,7 +178,7 @@
           <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Sex" Type="bit" />
+          <Property Name="Sex" Type="tinyint" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Birthday" Type="smalldatetime" />
           <Property Name="ImagePath" Type="nvarchar" Nullable="false" MaxLength="80" />
@@ -471,25 +471,11 @@
           <Parameter Name="Message" Type="nvarchar" Mode="In" />
           <Parameter Name="StatusID" Type="int" Mode="In" />
         </Function>
-        <Function Name="spInsUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Email" Type="varchar" Mode="In" />
-          <Parameter Name="Password" Type="varchar" Mode="In" />
-          <Parameter Name="FirstName" Type="varchar" Mode="In" />
-          <Parameter Name="SecondName" Type="varchar" Mode="In" />
-          <Parameter Name="FatherName" Type="varchar" Mode="In" />
-          <Parameter Name="NickName" Type="varchar" Mode="In" />
-          <Parameter Name="Sex" Type="bit" Mode="In" />
-          <Parameter Name="Phone" Type="varchar" Mode="In" />
-          <Parameter Name="Country" Type="int" Mode="In" />
-          <Parameter Name="City" Type="int" Mode="In" />
-          <Parameter Name="Photo" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="spUpdDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="Description" Type="varchar" Mode="In" />
         </Function>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SocialNetworkDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -501,7 +487,6 @@
           <EntitySet Name="FriendInvitations" EntityType="SocialNetworkDBModel.FriendInvitation" />
           <EntitySet Name="Friends" EntityType="SocialNetworkDBModel.Friend" />
           <EntitySet Name="Messages" EntityType="SocialNetworkDBModel.Message" />
-          <EntitySet Name="PersonalInfoes" EntityType="SocialNetworkDBModel.PersonalInfo" />
           <EntitySet Name="Status" EntityType="SocialNetworkDBModel.Status" />
           <EntitySet Name="sysdiagrams" EntityType="SocialNetworkDBModel.sysdiagram" />
           <EntitySet Name="UserRoles" EntityType="SocialNetworkDBModel.UserRole" />
@@ -514,10 +499,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Address_Countries" Association="SocialNetworkDBModel.FK_Address_Countries">
             <End Role="Countries" EntitySet="Countries" />
-            <End Role="Address" EntitySet="Addresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Address_PersonalInfo" Association="SocialNetworkDBModel.FK_Address_PersonalInfo">
-            <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
             <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
           <AssociationSet Name="FK_Bans_Users" Association="SocialNetworkDBModel.FK_Bans_Users">
@@ -556,10 +537,6 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Messages" EntitySet="Messages" />
           </AssociationSet>
-          <AssociationSet Name="FK_PersonalInfo_Users" Association="SocialNetworkDBModel.FK_PersonalInfo_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
-          </AssociationSet>
           <AssociationSet Name="FK_Status_Users" Association="SocialNetworkDBModel.FK_Status_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Status" EntitySet="Status" />
@@ -585,6 +562,15 @@
             <Parameter Name="Message" Mode="In" Type="String" />
             <Parameter Name="StatusID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="PersonalInfoes" EntityType="SocialNetworkDBModel.PersonalInfo" />
+          <AssociationSet Name="FK_Address_PersonalInfo" Association="SocialNetworkDBModel.FK_Address_PersonalInfo">
+            <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonalInfo_Users" Association="SocialNetworkDBModel.FK_PersonalInfo_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -676,24 +662,6 @@
           <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_Messages_Users" FromRole="Messages" ToRole="Users" />
           <NavigationProperty Name="User1" Relationship="SocialNetworkDBModel.FK_Messages_Users1" FromRole="Messages" ToRole="Users" />
         </EntityType>
-        <EntityType Name="PersonalInfo">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="UserID" Type="Guid" Nullable="false" />
-          <Property Name="NickName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Sex" Type="Boolean" />
-          <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Birthday" Type="DateTime" />
-          <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="80" Unicode="true" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Addresses" Relationship="SocialNetworkDBModel.FK_Address_PersonalInfo" FromRole="PersonalInfo" ToRole="Address" />
-          <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="PersonalInfo" ToRole="Users" />
-        </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="ID" />
@@ -746,11 +714,11 @@
           <NavigationProperty Name="Friends1" Relationship="SocialNetworkDBModel.FK_Friends_Users1" FromRole="Users" ToRole="Friends" />
           <NavigationProperty Name="Messages" Relationship="SocialNetworkDBModel.FK_Messages_Users" FromRole="Users" ToRole="Messages" />
           <NavigationProperty Name="Messages1" Relationship="SocialNetworkDBModel.FK_Messages_Users1" FromRole="Users" ToRole="Messages" />
-          <NavigationProperty Name="PersonalInfoes" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="Users" ToRole="PersonalInfo" />
           <NavigationProperty Name="Status" Relationship="SocialNetworkDBModel.FK_Status_Users" FromRole="Users" ToRole="Status" />
           <NavigationProperty Name="UsersXUserRoles" Relationship="SocialNetworkDBModel.FK_UsersXUserRoles_Users" FromRole="Users" ToRole="UsersXUserRoles" />
           <NavigationProperty Name="WallBoardItems" Relationship="SocialNetworkDBModel.FK_WallBoardItems_Users" FromRole="Users" ToRole="WallBoardItems" />
           <NavigationProperty Name="WallBoardItems1" Relationship="SocialNetworkDBModel.FK_WallBoardItems_Users1" FromRole="Users" ToRole="WallBoardItems" />
+          <NavigationProperty Name="PersonalInfoes" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="User" ToRole="PersonalInfo" />
         </EntityType>
         <EntityType Name="UsersXUserRole">
           <Key>
@@ -798,18 +766,6 @@
             </Principal>
             <Dependent Role="Address">
               <PropertyRef Name="CountryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Address_PersonalInfo">
-          <End Role="PersonalInfo" Type="SocialNetworkDBModel.PersonalInfo" Multiplicity="1" />
-          <End Role="Address" Type="SocialNetworkDBModel.Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PersonalInfo">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="UserInfoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -923,18 +879,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PersonalInfo_Users">
-          <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-          <End Role="PersonalInfo" Type="SocialNetworkDBModel.PersonalInfo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="PersonalInfo">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Status_Users">
           <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
           <End Role="Status" Type="SocialNetworkDBModel.Status" Multiplicity="*" />
@@ -992,6 +936,48 @@
             </Principal>
             <Dependent Role="WallBoardItems">
               <PropertyRef Name="FromID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PersonalInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Guid" Name="ID" Nullable="false" />
+          <Property Type="Guid" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="NickName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Byte" Name="Sex" />
+          <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Birthday" />
+          <Property Type="String" Name="ImagePath" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Addresses" Relationship="SocialNetworkDBModel.FK_Address_PersonalInfo" FromRole="PersonalInfo" ToRole="Address" />
+          <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="PersonalInfo" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Address_PersonalInfo">
+          <End Type="SocialNetworkDBModel.PersonalInfo" Role="PersonalInfo" Multiplicity="1" />
+          <End Type="SocialNetworkDBModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="UserInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonalInfo_Users">
+          <End Type="SocialNetworkDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="SocialNetworkDBModel.PersonalInfo" Role="PersonalInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="PersonalInfo">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1055,19 +1041,6 @@
             <ScalarProperty Name="Status" ColumnName="Status" />
             <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="PersonalInfoes"><EntityTypeMapping TypeName="SocialNetworkDBModel.PersonalInfo"><MappingFragment StoreEntitySet="PersonalInfo">
-            <ScalarProperty Name="ID" ColumnName="ID" />
-            <ScalarProperty Name="UserID" ColumnName="UserID" />
-            <ScalarProperty Name="NickName" ColumnName="NickName" />
-            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-            <ScalarProperty Name="LastName" ColumnName="LastName" />
-            <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-            <ScalarProperty Name="Sex" ColumnName="Sex" />
-            <ScalarProperty Name="Phone" ColumnName="Phone" />
-            <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-            <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-            <ScalarProperty Name="Description" ColumnName="Description" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Status"><EntityTypeMapping TypeName="SocialNetworkDBModel.Status"><MappingFragment StoreEntitySet="Status">
             <ScalarProperty Name="ID" ColumnName="ID" />
             <ScalarProperty Name="StatusID" ColumnName="StatusID" />
@@ -1115,6 +1088,23 @@
             <ScalarProperty Name="NullLink" ColumnName="NullLink" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spInsStatus" FunctionName="SocialNetworkDBModel.Store.spInsStatus" />
+          <EntitySetMapping Name="PersonalInfoes">
+            <EntityTypeMapping TypeName="SocialNetworkDBModel.PersonalInfo">
+              <MappingFragment StoreEntitySet="PersonalInfo">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1129,7 +1119,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
@@ -1143,7 +1133,6 @@
         <EntityTypeShape EntityType="SocialNetworkDBModel.FriendInvitation" Width="1.5" PointX="3" PointY="6.875" Height="2.2496956380208335" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialNetworkDBModel.Friend" Width="1.5" PointX="3" PointY="9.875" Height="2.0853483072916674" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialNetworkDBModel.Message" Width="1.5" PointX="3" PointY="12.625" Height="2.5783902994791674" IsExpanded="true" />
-        <EntityTypeShape EntityType="SocialNetworkDBModel.PersonalInfo" Width="1.5" PointX="3" PointY="16" Height="3.0714322916666674" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialNetworkDBModel.Status" Width="1.5" PointX="3" PointY="19.875" Height="2.2496956380208317" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialNetworkDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="1.125" Height="1.7566536458333317" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialNetworkDBModel.UserRole" Width="1.5" PointX="3.75" PointY="0.75" Height="1.592306315104171" IsExpanded="true" />
@@ -1153,80 +1142,72 @@
         <AssociationConnector Association="SocialNetworkDBModel.FK_Address_Cities" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="29.503326822916666" />
           <ConnectorPoint PointX="6" PointY="29.503326822916666" />
-          <ConnectorPoint PointX="6" PointY="19.0320849609375" />
+          <ConnectorPoint PointX="6" PointY="19.032084960937503" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Address_Countries" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="28.751152846153843" />
           <ConnectorPoint PointX="2.625" PointY="28.376152846153843" />
-          <ConnectorPoint PointX="2.625" PointY="19.407084960937496" />
-          <ConnectorPoint PointX="4.8761528461538468" PointY="19.407084960937496" />
-          <ConnectorPoint PointX="5.2511528461538424" PointY="19.0320849609375" />
-        </AssociationConnector>
-        <AssociationConnector Association="SocialNetworkDBModel.FK_Address_PersonalInfo" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="17.578542480468748" />
-          <ConnectorPoint PointX="5.25" PointY="17.578542480468748" />
+          <ConnectorPoint PointX="2.625" PointY="19.407084960937503" />
+          <ConnectorPoint PointX="4.8761528461538468" PointY="19.407084960937503" />
+          <ConnectorPoint PointX="5.2511528461538459" PointY="19.032084960937503" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Bans_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="12.375" />
-          <ConnectorPoint PointX="1.5" PointY="4.832021484375" />
-          <ConnectorPoint PointX="3" PointY="4.832021484375" />
+          <ConnectorPoint PointX="1.48242234375" PointY="12.375" />
+          <ConnectorPoint PointX="1.48242234375" PointY="4.435294458007812" />
+          <ConnectorPoint PointX="3" PointY="4.435294458007812" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Bans_Users1" ManuallyRouted="false">
           <ConnectorPoint PointX="1.9062525" PointY="12.375" />
-          <ConnectorPoint PointX="1.9062525" PointY="5.4667847265625" />
-          <ConnectorPoint PointX="3" PointY="5.4667847265625" />
+          <ConnectorPoint PointX="1.9062525" PointY="5.2684212133789057" />
+          <ConnectorPoint PointX="3" PointY="5.2684212133789057" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Cities_Countries" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="29.577982080629006" />
           <ConnectorPoint PointX="3" PointY="29.577982080629006" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_FriendInvitations_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.0937475" PointY="12.375" />
-          <ConnectorPoint PointX="1.0937475" PointY="7.9998478190104167" />
-          <ConnectorPoint PointX="1.4166666666666667" PointY="7.9998478190104159" />
-          <ConnectorPoint PointX="1.5833333333333333" PointY="7.9998478190104167" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="7.9998478190104159" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="7.9998478190104167" />
-          <ConnectorPoint PointX="3" PointY="7.9998478190104167" />
+          <ConnectorPoint PointX="0.97460671874999993" PointY="12.375" />
+          <ConnectorPoint PointX="0.97460671874999993" PointY="7.6288000630696615" />
+          <ConnectorPoint PointX="1.3990890104166667" PointY="7.6288000630696606" />
+          <ConnectorPoint PointX="1.5657556770833332" PointY="7.6288000630696615" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="7.6288000630696606" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="7.6288000630696615" />
+          <ConnectorPoint PointX="3" PointY="7.6288000630696615" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_FriendInvitations_Users1" ManuallyRouted="false">
           <ConnectorPoint PointX="2.10937875" PointY="12.375" />
-          <ConnectorPoint PointX="2.10937875" PointY="8.5935242285156264" />
-          <ConnectorPoint PointX="3" PointY="8.5935242285156264" />
+          <ConnectorPoint PointX="2.10937875" PointY="8.4080003505452474" />
+          <ConnectorPoint PointX="3" PointY="8.4080003505452474" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Friends_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.70312625" PointY="12.375" />
-          <ConnectorPoint PointX="1.70312625" PointY="10.917674153645834" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="10.917674153645834" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="10.917674153645834" />
-          <ConnectorPoint PointX="2.0260454166666664" PointY="10.917674153645834" />
-          <ConnectorPoint PointX="2.1927120833333333" PointY="10.917674153645834" />
-          <ConnectorPoint PointX="3" PointY="10.917674153645834" />
+          <ConnectorPoint PointX="1.6943374218749998" PointY="12.375" />
+          <ConnectorPoint PointX="1.6943374218749998" PointY="10.572305668131509" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="10.572305668131509" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="10.572305668131509" />
+          <ConnectorPoint PointX="2.0260454166666664" PointY="10.572305668131509" />
+          <ConnectorPoint PointX="2.1927120833333333" PointY="10.572305668131509" />
+          <ConnectorPoint PointX="3" PointY="10.572305668131509" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Friends_Users1" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.29687375" PointY="12.375" />
-          <ConnectorPoint PointX="1.29687375" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.4166666666666667" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.5833333333333333" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.6197929166666667" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.7864595833333332" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="2.0260454166666664" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="2.1927120833333333" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="3" PointY="11.470263730468751" />
+          <ConnectorPoint PointX="1.2285145312499999" PointY="12.375" />
+          <ConnectorPoint PointX="1.2285145312499999" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.3990890104166667" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.5657556770833332" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.6110040885416666" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.7776707552083331" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="2.0260454166666664" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="2.1927120833333333" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="3" PointY="11.297579487711589" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Messages_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="13.914195149739584" />
-          <ConnectorPoint PointX="3" PointY="13.914195149739584" />
+          <ConnectorPoint PointX="2.25" PointY="14.356131134033204" />
+          <ConnectorPoint PointX="3" PointY="14.356131134033204" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Messages_Users1" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="13.207097574869792" />
-          <ConnectorPoint PointX="3" PointY="13.207097574869792" />
-        </AssociationConnector>
-        <AssociationConnector Association="SocialNetworkDBModel.FK_PersonalInfo_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="16.38060546875" />
-          <ConnectorPoint PointX="3" PointY="16.38060546875" />
+          <ConnectorPoint PointX="2.25" PointY="13.428065567016603" />
+          <ConnectorPoint PointX="3" PointY="13.428065567016603" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Status_Users" ManuallyRouted="false">
           <ConnectorPoint PointX="1.5" PointY="16.761210937500003" />
@@ -1249,19 +1230,28 @@
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_WallBoardItems_Users" ManuallyRouted="false">
           <ConnectorPoint PointX="1.9062525" PointY="16.761210937500003" />
-          <ConnectorPoint PointX="1.9062525" PointY="26.664195149739584" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="26.664195149739584" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="26.664195149739584" />
-          <ConnectorPoint PointX="3" PointY="26.664195149739584" />
+          <ConnectorPoint PointX="1.9062525" PointY="27.086601446533205" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="27.086601446533205" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="27.086601446533205" />
+          <ConnectorPoint PointX="3" PointY="27.086601446533205" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_WallBoardItems_Users1" ManuallyRouted="false">
           <ConnectorPoint PointX="1.0937475" PointY="16.761210937500003" />
-          <ConnectorPoint PointX="1.0937475" PointY="25.988345074869791" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="25.988345074869791" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="25.988345074869791" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="25.988345074869791" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="25.988345074869791" />
-          <ConnectorPoint PointX="3" PointY="25.988345074869791" />
+          <ConnectorPoint PointX="1.0937475" PointY="26.199548223266603" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="26.199548223266603" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="26.199548223266603" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="26.199548223266603" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="26.199548223266603" />
+          <ConnectorPoint PointX="3" PointY="26.199548223266603" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SocialNetworkDBModel.PersonalInfo" Width="1.5" PointX="3" PointY="16" Height="3.0714322916666674" />
+        <AssociationConnector Association="SocialNetworkDBModel.FK_Address_PersonalInfo" >
+          <ConnectorPoint PointX="4.5" PointY="17.578542480468752" />
+          <ConnectorPoint PointX="5.25" PointY="17.578542480468752" />
+        </AssociationConnector>
+        <AssociationConnector Association="SocialNetworkDBModel.FK_PersonalInfo_Users" >
+          <ConnectorPoint PointX="2.25" PointY="16.38060546875" />
+          <ConnectorPoint PointX="3" PointY="16.38060546875" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
