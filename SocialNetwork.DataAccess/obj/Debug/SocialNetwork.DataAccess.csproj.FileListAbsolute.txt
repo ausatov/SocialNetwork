@@ -1,0 +1,18 @@
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.pdb
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.dll
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.pdb
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll.config
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll.config
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.pdb
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.dll
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.pdb
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll.config
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.pdb
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.dll
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.pdb

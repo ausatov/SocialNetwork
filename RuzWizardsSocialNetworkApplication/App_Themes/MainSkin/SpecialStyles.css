@@ -1,0 +1,209 @@
+.tablewith 
+{
+    width:1000px;
+    overflow: hidden;
+}
+
+.dv_header
+{
+    text-align:center;
+    font-size:16px;
+    font-weight:700;
+    color:#FFFFFF;
+}
+
+.dv_CommandFieldItem_Insert
+{
+    text-align:center;
+    color:#000000;
+    /*background-image:url('image.jpg');*/
+}
+
+.dv_CommandFieldItem_Update
+{
+    text-align:center;
+    color:#000000;
+    /*background-image:url('image.jpg');*/
+}
+
+.dv_CommandFieldItem_Delete
+{
+    text-align:center;
+    color:#000000;
+    /*background-image:url('image.jpg');*/
+}
+
+.control_filter_f1
+{
+    float:right;
+}
+
+
+.GridViewStyle
+{    
+    border-right: 2px solid #A7A6AA;
+    border-bottom: 2px solid #A7A6AA;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    padding: 4px;
+}
+
+.GridViewStyle a
+{
+    color: #333333;
+}
+
+.GridViewHeaderStyle th
+{
+    border-left: 1px solid #EBE9ED;
+    border-right: 1px solid #EBE9ED;
+}
+
+.GridViewHeaderStyle
+{
+    background-color: #5D7B9D;
+    font-weight: bold;
+    color: White;
+    text-align:center;
+}
+
+.GridViewFooterStyle
+{
+    background-color: #5D7B9D;
+    font-weight: bold;
+
+    color: White;
+}
+
+.GridViewRowStyle
+{
+    background-color: #F7F6F3;
+    color: #333333;
+}
+
+.GridViewAlternatingRowStyle 
+{
+    background-color: #FFFFFF;
+    color: #284775;
+}
+
+.GridViewRowStyle td, .GridViewAlternatingRowStyle td
+{
+    border: 1px solid #EBE9ED;
+}
+
+.GridViewSelectedRowStyle
+{
+    background-color: #E2DED6;
+    font-weight: bold;
+    color: #333333;
+}
+
+.GridViewPagerStyle
+{
+    background-color: #5D7B9D;
+    color: #FFFFFF;
+    font-weight:900;
+    font-size:19px;
+}
+
+.GridViewPagerStyle table /* to center the paging links*/
+{
+    margin: 0 auto 0 auto;
+}
+
+.GridViewEmptyTemplateStyle
+{
+    text-align:center;
+    border-width:5px;
+    border-color:Red;
+    background-color: #FACACA;
+    padding-left: 20px; 
+	padding-right: 20px; 
+}
+
+.goodRemark
+{
+    text-align:center;
+    border-width:5px;
+    border-color:Red;
+    background-color: #11AF11;
+    padding-left: 20px; 
+	padding-right: 20px; 
+}
+
+.errorRemark
+{
+    text-align:center;
+    border-width:5px;
+    border-color:Red;
+    background-color: #FACACA;
+    padding-left: 20px; 
+	padding-right: 20px; 
+}
+
+.remark {
+	background-color: #FACACA;
+	border-style: solid; 
+	border-width: 1px; 
+	border-color: #E1E1E1;
+	font:12pt Arial;
+	font-weight: normal; 
+	color: #000000; 
+	text-indent: 0px; 
+	padding: 10px; 
+
+	text-align: center; 
+	
+
+}
+
+.paragraph
+{
+    background-image:url('img/icons/paragraph_1.png');
+    background-repeat:no-repeat;
+    width: 80px;
+    height: 66px;
+}
+
+.setting-icon-50
+{
+    background-image:url('img/icons/settings_2_55x55.png');
+    background-repeat:no-repeat;
+    /*width: 55px;
+    height: 55px;*/
+}
+
+.div-ShowInsertTable-bottom
+{
+    float:right; 
+    margin:-30px 0 0 0;
+}
+
+.div-ShowInsertTable
+{
+    float:right; 
+}
+
+.error_message
+{
+    font-size:10px;
+    font-family:Arial;
+}
+
+.infopage_fontsize
+{
+    font-size:16px;
+}
+
+/*
+.GridviewDiv {}
+Table.Gridview{border:solid 1px #df5015;}
+.GridviewTable{border:none}
+.GridviewTable td{margin-top:0;padding: 1px 1px 1px 1px; vertical-align:middle; }
+.GridviewTable tr{text-align:center}
+.Gridview th{border-right-color:#abb079;border-bottom-color:#abb079;padding:0.5em 0.5em 0.5em 0.5em;text-align:center}  
+.Gridview td{border-bottom-color:#f0f2da;border-right-color:#f0f2da;padding:0.5em 0.5em 0.5em 0.5em;}
+.Gridview tr{text-align:left}
+:link,:visited { color: #DF4F13; text-decoration:none }
+*/

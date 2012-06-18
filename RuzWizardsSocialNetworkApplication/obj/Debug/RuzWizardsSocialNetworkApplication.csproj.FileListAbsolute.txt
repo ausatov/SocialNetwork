@@ -1,0 +1,38 @@
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.pdb
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\AjaxControlToolkit.pdb
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.pdb
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\ar\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\cs\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\de\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\es\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\fr\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\he\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\hi\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\it\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\ja\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\ko\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\nl\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\pt\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\ru\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\tr-TR\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\zh-CHS\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\zh-CHT\AjaxControlToolkit.resources.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.dll
+C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.pdb
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.dll
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.pdb
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.dll
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.pdb
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Debug\ResolveAssemblyReference.cache
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.dll
+C:\JOB\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.pdb
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.dll
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.pdb
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.dll
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.pdb
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Debug\ResolveAssemblyReference.cache
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.dll
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.pdb

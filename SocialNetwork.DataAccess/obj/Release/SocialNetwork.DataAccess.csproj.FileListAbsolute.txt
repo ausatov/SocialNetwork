@@ -1,0 +1,6 @@
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Release\SocialNetwork.DataAccess.dll.config
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Release\SocialNetwork.DataAccess.dll
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Release\SocialNetwork.DataAccess.pdb
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Release\ResolveAssemblyReference.cache
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Release\SocialNetwork.DataAccess.dll
+E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Release\SocialNetwork.DataAccess.pdb
