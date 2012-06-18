@@ -162,6 +162,8 @@ public partial class Login : System.Web.UI.Page
 
     protected void btnLogin_Click(object sender, ImageClickEventArgs e)
     {
+        //чтобы не загромождать обработчик события нажатия кнопки
+        //этот код будет вынесен в отдельный cs файл
         //тут все тестовое на данный момент (без реализации для БД )
         bool _exist = false;
         bool _admin = false;
