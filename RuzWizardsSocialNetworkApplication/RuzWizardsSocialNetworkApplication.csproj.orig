@@ -162,6 +162,8 @@
     <Content Include="UserProfile.aspx" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -169,6 +171,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+>>>>>>> a0f54cd7b10ac0c7510fc83137ad51a7ac452115
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
