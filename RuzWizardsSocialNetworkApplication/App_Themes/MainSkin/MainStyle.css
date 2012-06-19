@@ -177,18 +177,21 @@ input {
     color: #9a9aff;
 }
 
+textarea {
+    resize: none;
+}
 
 .innerContainer {
-width: 100%;
-height: 100%;
-margin-left: auto;
-margin-right: auto;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 .specialSidebar {
-float: left;
-width: 30%;
+    float: left;
+    width: 30%;
 }
 .mainSidebar {
-float: right;
-width: 65%;
+    float: right;
+    width: 65%;
 }

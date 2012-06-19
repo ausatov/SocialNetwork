@@ -1,7 +1,0 @@
-C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataModel\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataModel\bin\Debug\SocialNetwork.DataModel.dll
-C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataModel\bin\Debug\SocialNetwork.DataModel.pdb
-C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataModel\obj\Debug\SocialNetwork.DataModel.dll
-C:\Documents and Settings\Admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataModel\obj\Debug\SocialNetwork.DataModel.pdb
-C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataModel\bin\Debug\SocialNetwork.DataAccess.dll
-C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataModel\bin\Debug\SocialNetwork.DataAccess.pdb

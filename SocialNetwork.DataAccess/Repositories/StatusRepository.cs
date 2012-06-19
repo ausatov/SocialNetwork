@@ -7,15 +7,15 @@
     using SocialNetwork.DataAccess.Enums;
 
     /// <summary>
-    /// 
+    /// Work with dbo.Status.
     /// </summary>
-    public static class StatusRepository// : IStatusRepository
+    public static class StatusRepository
     {
         /// <summary>
-        /// Получить текущее установленное статус-сообщение
+        /// Get current status message.
         /// </summary>
-        /// <param name="UserID"></param>
-        /// <returns></returns>
+        /// <param name="userID">User identificator.</param>
+        /// <returns>String with status message.</returns>
         public static String GetStatusMessage(Guid userID)
         {
             String status = String.Empty;
@@ -23,7 +23,7 @@
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 statusMessage = record.Status
-                    .Where(x => x.UserID == userID && x.IsSet && !x.IsDeleted)
+                    .Where(x => x.UserID.Equals(userID) && x.IsSet && !x.IsDeleted)
                     .Select(x => x.StatusMessage)
                     .FirstOrDefault();
             }
@@ -31,45 +31,47 @@
         }
 
         /// <summary>
-        /// Получить текущий статус
+        /// Get current status name.
         /// </summary>
-        /// <param name="userID"></param>
-        /// <returns></returns>
+        /// <param name="userID">User identificator.</param>
+        /// <returns>String with status name.</returns>
         public static String GetStatusName(Guid userID)
         {
             Int32 statusID = Int32.MinValue;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 statusID = record.Status
-                    .Where(x => x.UserID == userID && x.IsSet && !x.IsDeleted)
-                    .Select(x => x.StatusID).FirstOrDefault();
+                    .Where(x => x.UserID.Equals(userID) && x.IsSet && !x.IsDeleted)
+                    .Select(x => x.StatusID)
+                    .FirstOrDefault();
             }
             return EnumsHelper.ToString((UserStatus)statusID);
         }
 
         /// <summary>
-        ///
+        /// Get current status identificator.
         /// </summary>
-        /// <param name="userID"></param>
-        /// <returns></returns>
+        /// <param name="userID">User identificator.</param>
+        /// <returns>Status code.</returns>
         public static Int32 GetStatusID(Guid userID)
         {
             Int32 statusID = Int32.MinValue;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 statusID = record.Status
-                    .Where(x => x.UserID == userID && x.IsSet && !x.IsDeleted)
-                    .Select(x => x.StatusID).FirstOrDefault();
+                    .Where(x => x.UserID.Equals(userID) && x.IsSet && !x.IsDeleted)
+                    .Select(x => x.StatusID)
+                    .FirstOrDefault();
             }
             return statusID;
         }
 
         /// <summary>
-        /// 
+        /// Set new status message.
         /// </summary>
-        /// <param name="userID"></param>
-        /// <param name="message"></param>
-        /// <param name="status"></param>
+        /// <param name="userID">User identificator.</param>
+        /// <param name="message">Message content.</param>
+        /// <param name="status">Type of status.</param>
         public static void SetStatusMessage(Guid userID, String message, UserStatus status)
         {
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())

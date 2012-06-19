@@ -1,7 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="true" Inherits="UserProfile" Codebehind="UserProfile.aspx.cs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHead" Runat="Server">
+    <script type="text/javascript">
+
+        function ConfirmDeleteWallBoardItem() {
+            return confirm('Вы действительно хотите удалить запись?');
+        }
     
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" Runat="Server">
@@ -47,7 +53,6 @@
                     <%----------------------------------- --%>
 
                     <div class="mainSidebar">
-                        <%-- Последнии фотографии (сейчас не реализуем) --%>
                         <div>
                             <span style="font-family: MS Sans Serif; font-weight: 900; font-size: 14px;">
                                 <asp:Label ID="lblUserName" runat="server" Text="Label">
@@ -56,28 +61,28 @@
                         </div>
                         <div>
                             <br />
-                            <asp:LinkButton ID="btnStatusMessage" runat="server" OnClick="btnStatusMessage_Click"
+                            <asp:LinkButton ID="btnStatusMessage" runat="server" OnClick="OnStatusMessageClick"
                                 Text=""></asp:LinkButton>
                             <asp:Panel ID="pnlStatusMessage" runat="server" Visible="false">
-                                <asp:DropDownList ID="ddlStatus" runat="server" OnDataBinding="ddlStatus_DataBinding">
+                                <asp:DropDownList ID="ddlStatus" runat="server" OnDataBinding="OnStatusDataBinding">
                                 </asp:DropDownList>
                                 <br />
                                 <asp:TextBox ID="tbxStatusMessage" MaxLength="50" Width="100px" runat="server" Text="">
                                 </asp:TextBox>
                                 <br />
                                 <asp:ImageButton ID="btnSaveStatusMessage" runat="server" ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_save.png"
-                                    OnClick="btnSaveStatusMessage_Click" />
+                                    OnClick="OnSaveStatusMessageClick" />
                             </asp:Panel>
                         </div>
 
                         <hr />
 
                         <div>
-                        <%--DataKeyNames="ID" DataSourceID="edsPersonalInfo" убрать источник--%> 
-                            <asp:DetailsView ID="dtlUserInfo" runat="server" Height="50px" Width="98%" 
+                       
+                            <asp:DetailsView ID="dvUserInfo" runat="server" Height="50px" Width="98%" 
                                 AutoGenerateRows="false"
-                                DataKeyNames="ID" DataSourceID="edsPersonalInfo"
-                                ondatabound="dtlUserInfo_DataBound" GridLines="None">
+                                DataKeyNames="ID" DataSourceID="dsPersonalInfo"
+                                ondatabound="OnUserInfoDataBound" GridLines="None">
                                 <Fields>
                                     <asp:TemplateField HeaderText="Birthday:" SortExpression="Birthday">
                                         <ItemTemplate>
@@ -130,7 +135,7 @@
                                     </asp:TemplateField>
                                 </Fields>
                             </asp:DetailsView>
-                            <asp:EntityDataSource ID="edsPersonalInfo" runat="server" 
+                            <asp:EntityDataSource ID="dsPersonalInfo" runat="server" 
                                 ConnectionString="name=SocialNetworkDBEntities" 
                                 DefaultContainerName="SocialNetworkDBEntities" 
                                 EnableFlattening="False" 
@@ -147,46 +152,26 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                         <asp:DetailsView ID="dtlWall" runat="server" Height="50px" Width="100%" 
-                                             AutoGenerateRows="False" DataKeyNames="ID" DataSourceID="edsWall" 
-                                             DefaultMode="Insert">
-                                             <Fields>
-
-                                                 <asp:TemplateField HeaderText="Special" Visible="False">
-                                                     <InsertItemTemplate>
-
-                                                         <asp:Label ID="lblFromID" runat="server" Text='<%# Bind("FromID") %>'></asp:Label>
-                                                         <asp:Label ID="lblToID" runat="server" Text='<%# Bind("ToID") %>'></asp:Label>
-                                                     
-                                                     </InsertItemTemplate>
-                                                     
-                                                 </asp:TemplateField>
-
-                                                 <asp:TemplateField HeaderText="Message" SortExpression="Message">
-                                                     <InsertItemTemplate>
-                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("ContentTypeID") %>'></asp:TextBox>
-                                                        <%-- <asp:DropDownList ID="ddlWallItemContentType" runat="server">
-                                                         </asp:DropDownList>--%>
+                                        <asp:FormView ID="fvWall" runat="server" DataKeyNames="ID" 
+                                            DataSourceID="dsWall" DefaultMode="Insert" Width="100%" 
+                                            onitemcommand="OnWallItemCommand">
+                                            <InsertItemTemplate>
+                                                <asp:DropDownList ID="ddlWallItemContentType" SelectedValue='<%# Bind("ContentTypeID") %>' runat="server">
+                                                         </asp:DropDownList>
                                                         <br />
-                                                         <asp:TextBox ID="tbxMessage" runat="server" Text='<%# Bind("Message") %>'></asp:TextBox>
-                                                     </InsertItemTemplate>
-                                                 </asp:TemplateField>
-                                                 <asp:TemplateField ShowHeader="False">
-                                                     <InsertItemTemplate>
-                                                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" 
-                                                             CommandName="Insert" Text="Insert"></asp:LinkButton>
-                                                         &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" 
-                                                             CommandName="Cancel" Text="Cancel"></asp:LinkButton>
-                                                     </InsertItemTemplate>
-                                                 </asp:TemplateField>
-                                             </Fields>
-                                        </asp:DetailsView>  
-                                        
-                                         
+                                                         <asp:TextBox ID="tbxMessage" TextMode="MultiLine" MaxLength="4000" Width="98%" runat="server" Text='<%# Bind("Message") %>'></asp:TextBox>
+                                                <br />
+                                                <asp:ImageButton ID="btnSendWallMessage" 
+                                                    CommandName="SendWallMessage" runat="server"
+                                                    ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_send.png" />
+                                            </InsertItemTemplate>
+                                        </asp:FormView>
+
                                          <asp:GridView ID="grdWall" runat="server" Width="100%" AllowPaging="True" 
-                                            AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="edsWall" 
+                                            AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="dsWall" 
                                             ShowHeader="False" BorderColor="#E3D5FF" BorderStyle="None" 
-                                            BorderWidth="0px" onrowdatabound="grdWall_RowDataBound">
+                                            BorderWidth="0px" onrowdatabound="OnWallRowDataBound" 
+                                             onrowdeleting="OnWallRowDeleting">
                                             <Columns>
                                                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
                                                     SortExpression="ID" Visible="False" />
@@ -199,10 +184,6 @@
                                                         <asp:Label ID="lblSendDate" runat="server" Text='<%# Bind("SendDate") %>'></asp:Label>
                                                     </EditItemTemplate>
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblBindFromID" runat="server" 
-                                                            Text='<%# Bind("FromID") %>' Visible="false">
-                                                        </asp:Label>
-
                                                         <table width="100%">
                                                             <tr style="width:98%;">
                                                                 <td>
@@ -216,7 +197,7 @@
                                                                     <div class="txtDescriptive" style="float:right;">
                                                                         <asp:ImageButton ID="btnDelete" runat="server" 
                                                                         CommandName="Delete" CommandArgument='<%# Bind("ID") %>'
-                                                                        OnClientClick=<%# "javascript:return confirm('Вы действительно хотите удалить запись?')" %> 
+                                                                        OnClientClick="JavaScript: return ConfirmDeleteWallBoardItem();" 
                                                                         Height="16px" Width="16px" ImageAlign="Top" 
                                                                         ImageUrl="~/App_Themes/MainSkin/img/icons/delete-icon.png" />
                                                                     </div>
@@ -247,90 +228,32 @@
                                             </Columns>
                                         </asp:GridView>
 
-
                                          <%-- Источник данных--%> 
-                                        <asp:EntityDataSource ID="edsWall" runat="server" 
+                                        <asp:EntityDataSource ID="dsWall" runat="server" 
                                             ConnectionString="name=SocialNetworkDBEntities" 
                                             DefaultContainerName="SocialNetworkDBEntities" EnableDelete="True" 
                                             EnableFlattening="False" EnableInsert="True" EnableUpdate="True" 
                                             EntitySetName="WallBoardItems">
                                         </asp:EntityDataSource>
+
+                                        <%--<asp:GridView ID="GridView1" runat="server" DataSourceID="ObjectDataSource1">
+                                        </asp:GridView>
                                         
-                        
-                        
+                                        <asp:ObjectDataSource 
+                                            ID="ObjectDataSource1" runat="server" SelectMethod="SelectAllItems"
+                                            TypeName="SocialNetwork.DataAccess">
+                                        </asp:ObjectDataSource>--%>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                        
-                       </div>
-
-
-
-
-
-
                     </div>
-                
+                </div>
             </td>
         </tr>
     </table>
-
-
-
-    <table width="100%">
-    <tr>
-    <td style="width:210px;">
-
-        
-        
-
-    </td>
-    <td>
-
-        
-
-        
-    </td>
-    </tr>
-</table>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="cphLeftSideBar" Runat="Server">
-    <asp:Menu ID="Menu1" runat="server" StaticSubMenuIndent="10px" 
-        BackColor="#FFFFFF" DynamicHorizontalOffset="2" Font-Names="Verdana" 
-        Font-Size="0.8em" ForeColor="#284E98" StaticSelectedStyle-Width="100px" StaticMenuItemStyle-Width="100px">
-        <DynamicHoverStyle BackColor="#284E98" ForeColor="White" />
-        <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
-        <DynamicMenuStyle BackColor="#B5C7DE" />
-        <DynamicSelectedStyle BackColor="#507CD1" />
-        <Items>
-            <asp:MenuItem Text="My Page" Value="My Page">
-            </asp:MenuItem>
-            <asp:MenuItem Text="Friends" Value="Friends">
-            </asp:MenuItem>
-            <%-- 
-            <asp:MenuItem Enabled="False" Text="Photo" Value="Photo">
-            </asp:MenuItem>
-            <asp:MenuItem Enabled="False" Text="Video" Value="Video">
-            </asp:MenuItem>
-            <asp:MenuItem Enabled="False" Text="Audio" Value="Audio">
-            </asp:MenuItem>
-            <asp:MenuItem Enabled="False" Text="News" Value="News">
-            </asp:MenuItem>
-            <asp:MenuItem Enabled="False" Text="Applications" Value="Applications">
-            </asp:MenuItem>
-            --%>
-            <asp:MenuItem Text="Messages" Value="Messages">
-            </asp:MenuItem>
-            <asp:MenuItem Text="Settings" Value="Settings">
-            </asp:MenuItem>
-        </Items>
-    
-        <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
-        <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
-        <StaticSelectedStyle BackColor="#e3d5ff" />
-    
-    </asp:Menu>
 </asp:Content>
 

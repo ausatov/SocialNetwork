@@ -1,114 +1,117 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="SocialNetworkDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+<Schema Namespace="RusWizardsSocialNetworkDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
   <EntityContainer Name="SocialNetworkDBEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Addresses" EntityType="SocialNetworkDBModel.Address" />
-    <EntitySet Name="Bans" EntityType="SocialNetworkDBModel.Ban" />
-    <EntitySet Name="Cities" EntityType="SocialNetworkDBModel.City" />
-    <EntitySet Name="Countries" EntityType="SocialNetworkDBModel.Country" />
-    <EntitySet Name="FriendInvitations" EntityType="SocialNetworkDBModel.FriendInvitation" />
-    <EntitySet Name="Friends" EntityType="SocialNetworkDBModel.Friend" />
-    <EntitySet Name="Messages" EntityType="SocialNetworkDBModel.Message" />
-    <EntitySet Name="Status" EntityType="SocialNetworkDBModel.Status" />
-    <EntitySet Name="sysdiagrams" EntityType="SocialNetworkDBModel.sysdiagram" />
-    <EntitySet Name="UserRoles" EntityType="SocialNetworkDBModel.UserRole" />
-    <EntitySet Name="Users" EntityType="SocialNetworkDBModel.User" />
-    <EntitySet Name="UsersXUserRoles" EntityType="SocialNetworkDBModel.UsersXUserRole" />
-    <EntitySet Name="WallBoardItems" EntityType="SocialNetworkDBModel.WallBoardItem" />
-    <AssociationSet Name="FK_Address_Cities" Association="SocialNetworkDBModel.FK_Address_Cities">
+    <EntitySet Name="Addresses" EntityType="RusWizardsSocialNetworkDBModel.Address" />
+    <EntitySet Name="Bans" EntityType="RusWizardsSocialNetworkDBModel.Ban" />
+    <EntitySet Name="Cities" EntityType="RusWizardsSocialNetworkDBModel.City" />
+    <EntitySet Name="Countries" EntityType="RusWizardsSocialNetworkDBModel.Country" />
+    <EntitySet Name="FriendInvitations" EntityType="RusWizardsSocialNetworkDBModel.FriendInvitation" />
+    <EntitySet Name="Friends" EntityType="RusWizardsSocialNetworkDBModel.Friend" />
+    <EntitySet Name="Messages" EntityType="RusWizardsSocialNetworkDBModel.Message" />
+    <EntitySet Name="PersonalInfoes" EntityType="RusWizardsSocialNetworkDBModel.PersonalInfo" />
+    <EntitySet Name="Status" EntityType="RusWizardsSocialNetworkDBModel.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="RusWizardsSocialNetworkDBModel.sysdiagram" />
+    <EntitySet Name="UserRoles" EntityType="RusWizardsSocialNetworkDBModel.UserRole" />
+    <EntitySet Name="Users" EntityType="RusWizardsSocialNetworkDBModel.User" />
+    <EntitySet Name="UsersXUserRoles" EntityType="RusWizardsSocialNetworkDBModel.UsersXUserRole" />
+    <EntitySet Name="WallBoardItems" EntityType="RusWizardsSocialNetworkDBModel.WallBoardItem" />
+    <AssociationSet Name="FK_Address_Cities" Association="RusWizardsSocialNetworkDBModel.FK_Address_Cities">
       <End Role="Cities" EntitySet="Cities" />
       <End Role="Address" EntitySet="Addresses" />
     </AssociationSet>
-    <AssociationSet Name="FK_Address_Countries" Association="SocialNetworkDBModel.FK_Address_Countries">
+    <AssociationSet Name="FK_Address_Countries" Association="RusWizardsSocialNetworkDBModel.FK_Address_Countries">
       <End Role="Countries" EntitySet="Countries" />
       <End Role="Address" EntitySet="Addresses" />
     </AssociationSet>
-    <AssociationSet Name="FK_Bans_Users" Association="SocialNetworkDBModel.FK_Bans_Users">
+    <AssociationSet Name="FK_Address_PersonalInfo" Association="RusWizardsSocialNetworkDBModel.FK_Address_PersonalInfo">
+      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bans_Users" Association="RusWizardsSocialNetworkDBModel.FK_Bans_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Bans" EntitySet="Bans" />
     </AssociationSet>
-    <AssociationSet Name="FK_Bans_Users1" Association="SocialNetworkDBModel.FK_Bans_Users1">
+    <AssociationSet Name="FK_Bans_Users1" Association="RusWizardsSocialNetworkDBModel.FK_Bans_Users1">
       <End Role="Users" EntitySet="Users" />
       <End Role="Bans" EntitySet="Bans" />
     </AssociationSet>
-    <AssociationSet Name="FK_Cities_Countries" Association="SocialNetworkDBModel.FK_Cities_Countries">
+    <AssociationSet Name="FK_Cities_Countries" Association="RusWizardsSocialNetworkDBModel.FK_Cities_Countries">
       <End Role="Countries" EntitySet="Countries" />
       <End Role="Cities" EntitySet="Cities" />
     </AssociationSet>
-    <AssociationSet Name="FK_FriendInvitations_Users" Association="SocialNetworkDBModel.FK_FriendInvitations_Users">
+    <AssociationSet Name="FK_FriendInvitations_Users" Association="RusWizardsSocialNetworkDBModel.FK_FriendInvitations_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="FriendInvitations" EntitySet="FriendInvitations" />
     </AssociationSet>
-    <AssociationSet Name="FK_FriendInvitations_Users1" Association="SocialNetworkDBModel.FK_FriendInvitations_Users1">
+    <AssociationSet Name="FK_FriendInvitations_Users1" Association="RusWizardsSocialNetworkDBModel.FK_FriendInvitations_Users1">
       <End Role="Users" EntitySet="Users" />
       <End Role="FriendInvitations" EntitySet="FriendInvitations" />
     </AssociationSet>
-    <AssociationSet Name="FK_Friends_Users" Association="SocialNetworkDBModel.FK_Friends_Users">
+    <AssociationSet Name="FK_Friends_Users" Association="RusWizardsSocialNetworkDBModel.FK_Friends_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Friends" EntitySet="Friends" />
     </AssociationSet>
-    <AssociationSet Name="FK_Friends_Users1" Association="SocialNetworkDBModel.FK_Friends_Users1">
+    <AssociationSet Name="FK_Friends_Users1" Association="RusWizardsSocialNetworkDBModel.FK_Friends_Users1">
       <End Role="Users" EntitySet="Users" />
       <End Role="Friends" EntitySet="Friends" />
     </AssociationSet>
-    <AssociationSet Name="FK_Messages_Users" Association="SocialNetworkDBModel.FK_Messages_Users">
+    <AssociationSet Name="FK_Messages_Users" Association="RusWizardsSocialNetworkDBModel.FK_Messages_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Messages" EntitySet="Messages" />
     </AssociationSet>
-    <AssociationSet Name="FK_Messages_Users1" Association="SocialNetworkDBModel.FK_Messages_Users1">
+    <AssociationSet Name="FK_Messages_Users1" Association="RusWizardsSocialNetworkDBModel.FK_Messages_Users1">
       <End Role="Users" EntitySet="Users" />
       <End Role="Messages" EntitySet="Messages" />
     </AssociationSet>
-    <AssociationSet Name="FK_Status_Users" Association="SocialNetworkDBModel.FK_Status_Users">
+    <AssociationSet Name="FK_PersonalInfo_Users" Association="RusWizardsSocialNetworkDBModel.FK_PersonalInfo_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Status_Users" Association="RusWizardsSocialNetworkDBModel.FK_Status_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Status" EntitySet="Status" />
     </AssociationSet>
-    <AssociationSet Name="FK_UsersXUserRoles_UserRoles" Association="SocialNetworkDBModel.FK_UsersXUserRoles_UserRoles">
+    <AssociationSet Name="FK_UsersXUserRoles_UserRoles" Association="RusWizardsSocialNetworkDBModel.FK_UsersXUserRoles_UserRoles">
       <End Role="UserRoles" EntitySet="UserRoles" />
       <End Role="UsersXUserRoles" EntitySet="UsersXUserRoles" />
     </AssociationSet>
-    <AssociationSet Name="FK_UsersXUserRoles_Users" Association="SocialNetworkDBModel.FK_UsersXUserRoles_Users">
+    <AssociationSet Name="FK_UsersXUserRoles_Users" Association="RusWizardsSocialNetworkDBModel.FK_UsersXUserRoles_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="UsersXUserRoles" EntitySet="UsersXUserRoles" />
     </AssociationSet>
-    <AssociationSet Name="FK_WallBoardItems_Users" Association="SocialNetworkDBModel.FK_WallBoardItems_Users">
+    <AssociationSet Name="FK_WallBoardItems_Users" Association="RusWizardsSocialNetworkDBModel.FK_WallBoardItems_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="WallBoardItems" EntitySet="WallBoardItems" />
     </AssociationSet>
-    <AssociationSet Name="FK_WallBoardItems_Users1" Association="SocialNetworkDBModel.FK_WallBoardItems_Users1">
+    <AssociationSet Name="FK_WallBoardItems_Users1" Association="RusWizardsSocialNetworkDBModel.FK_WallBoardItems_Users1">
       <End Role="Users" EntitySet="Users" />
       <End Role="WallBoardItems" EntitySet="WallBoardItems" />
     </AssociationSet>
+    <FunctionImport Name="spDelWallBoardItem">
+      <Parameter Name="ItemID" Mode="In" Type="Guid" />
+    </FunctionImport>
     <FunctionImport Name="spInsStatus">
       <Parameter Name="UserID" Mode="In" Type="Guid" />
       <Parameter Name="Message" Mode="In" Type="String" />
       <Parameter Name="StatusID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <EntitySet Name="PersonalInfoes" EntityType="SocialNetworkDBModel.PersonalInfo" />
-    <AssociationSet Name="FK_Address_PersonalInfo" Association="SocialNetworkDBModel.FK_Address_PersonalInfo">
-      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
-      <End Role="Address" EntitySet="Addresses" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PersonalInfo_Users" Association="SocialNetworkDBModel.FK_PersonalInfo_Users">
-      <End Role="User" EntitySet="Users" />
-      <End Role="PersonalInfo" EntitySet="PersonalInfoes" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Address">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="Guid" Nullable="false" />
     <Property Name="UserInfoID" Type="Guid" Nullable="false" />
-    <Property Name="CountryID" Type="Int32" />
-    <Property Name="CityID" Type="Int32" />
+    <Property Name="CountryID" Type="Guid" />
+    <Property Name="CityID" Type="Guid" />
     <Property Name="Area" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="Street" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="Home" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="Apartment" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="City" Relationship="SocialNetworkDBModel.FK_Address_Cities" FromRole="Address" ToRole="Cities" />
-    <NavigationProperty Name="Country" Relationship="SocialNetworkDBModel.FK_Address_Countries" FromRole="Address" ToRole="Countries" />
-    <NavigationProperty Name="PersonalInfo" Relationship="SocialNetworkDBModel.FK_Address_PersonalInfo" FromRole="Address" ToRole="PersonalInfo" />
+    <NavigationProperty Name="City" Relationship="RusWizardsSocialNetworkDBModel.FK_Address_Cities" FromRole="Address" ToRole="Cities" />
+    <NavigationProperty Name="Country" Relationship="RusWizardsSocialNetworkDBModel.FK_Address_Countries" FromRole="Address" ToRole="Countries" />
+    <NavigationProperty Name="PersonalInfo" Relationship="RusWizardsSocialNetworkDBModel.FK_Address_PersonalInfo" FromRole="Address" ToRole="PersonalInfo" />
   </EntityType>
   <EntityType Name="Ban">
     <Key>
@@ -121,27 +124,27 @@
     <Property Name="FromDate" Type="DateTime" Nullable="false" />
     <Property Name="ToDate" Type="DateTime" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_Bans_Users" FromRole="Bans" ToRole="Users" />
-    <NavigationProperty Name="User1" Relationship="SocialNetworkDBModel.FK_Bans_Users1" FromRole="Bans" ToRole="Users" />
+    <NavigationProperty Name="User" Relationship="RusWizardsSocialNetworkDBModel.FK_Bans_Users" FromRole="Bans" ToRole="Users" />
+    <NavigationProperty Name="User1" Relationship="RusWizardsSocialNetworkDBModel.FK_Bans_Users1" FromRole="Bans" ToRole="Users" />
   </EntityType>
   <EntityType Name="City">
     <Key>
       <PropertyRef Name="CityID" />
     </Key>
-    <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CountryID" Type="Int32" Nullable="false" />
+    <Property Name="CityID" Type="Guid" Nullable="false" />
+    <Property Name="CountryID" Type="Guid" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
-    <NavigationProperty Name="Addresses" Relationship="SocialNetworkDBModel.FK_Address_Cities" FromRole="Cities" ToRole="Address" />
-    <NavigationProperty Name="Country" Relationship="SocialNetworkDBModel.FK_Cities_Countries" FromRole="Cities" ToRole="Countries" />
+    <NavigationProperty Name="Addresses" Relationship="RusWizardsSocialNetworkDBModel.FK_Address_Cities" FromRole="Cities" ToRole="Address" />
+    <NavigationProperty Name="Country" Relationship="RusWizardsSocialNetworkDBModel.FK_Cities_Countries" FromRole="Cities" ToRole="Countries" />
   </EntityType>
   <EntityType Name="Country">
     <Key>
       <PropertyRef Name="CountryID" />
     </Key>
-    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryID" Type="Guid" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
-    <NavigationProperty Name="Addresses" Relationship="SocialNetworkDBModel.FK_Address_Countries" FromRole="Countries" ToRole="Address" />
-    <NavigationProperty Name="Cities" Relationship="SocialNetworkDBModel.FK_Cities_Countries" FromRole="Countries" ToRole="Cities" />
+    <NavigationProperty Name="Addresses" Relationship="RusWizardsSocialNetworkDBModel.FK_Address_Countries" FromRole="Countries" ToRole="Address" />
+    <NavigationProperty Name="Cities" Relationship="RusWizardsSocialNetworkDBModel.FK_Cities_Countries" FromRole="Countries" ToRole="Cities" />
   </EntityType>
   <EntityType Name="FriendInvitation">
     <Key>
@@ -153,8 +156,8 @@
     <Property Name="Message" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
     <Property Name="CreateDate" Type="DateTime" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_FriendInvitations_Users" FromRole="FriendInvitations" ToRole="Users" />
-    <NavigationProperty Name="User1" Relationship="SocialNetworkDBModel.FK_FriendInvitations_Users1" FromRole="FriendInvitations" ToRole="Users" />
+    <NavigationProperty Name="User" Relationship="RusWizardsSocialNetworkDBModel.FK_FriendInvitations_Users" FromRole="FriendInvitations" ToRole="Users" />
+    <NavigationProperty Name="User1" Relationship="RusWizardsSocialNetworkDBModel.FK_FriendInvitations_Users1" FromRole="FriendInvitations" ToRole="Users" />
   </EntityType>
   <EntityType Name="Friend">
     <Key>
@@ -165,8 +168,8 @@
     <Property Name="FriendID" Type="Guid" Nullable="false" />
     <Property Name="FriendshipDate" Type="DateTime" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_Friends_Users" FromRole="Friends" ToRole="Users" />
-    <NavigationProperty Name="User1" Relationship="SocialNetworkDBModel.FK_Friends_Users1" FromRole="Friends" ToRole="Users" />
+    <NavigationProperty Name="User" Relationship="RusWizardsSocialNetworkDBModel.FK_Friends_Users" FromRole="Friends" ToRole="Users" />
+    <NavigationProperty Name="User1" Relationship="RusWizardsSocialNetworkDBModel.FK_Friends_Users1" FromRole="Friends" ToRole="Users" />
   </EntityType>
   <EntityType Name="Message">
     <Key>
@@ -180,21 +183,39 @@
     <Property Name="Text" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
     <Property Name="Status" Type="Boolean" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_Messages_Users" FromRole="Messages" ToRole="Users" />
-    <NavigationProperty Name="User1" Relationship="SocialNetworkDBModel.FK_Messages_Users1" FromRole="Messages" ToRole="Users" />
+    <NavigationProperty Name="User" Relationship="RusWizardsSocialNetworkDBModel.FK_Messages_Users" FromRole="Messages" ToRole="Users" />
+    <NavigationProperty Name="User1" Relationship="RusWizardsSocialNetworkDBModel.FK_Messages_Users1" FromRole="Messages" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="PersonalInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="NickName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Sex" Type="Byte" />
+    <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Birthday" Type="DateTime" />
+    <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="80" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Addresses" Relationship="RusWizardsSocialNetworkDBModel.FK_Address_PersonalInfo" FromRole="PersonalInfo" ToRole="Address" />
+    <NavigationProperty Name="User" Relationship="RusWizardsSocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="PersonalInfo" ToRole="Users" />
   </EntityType>
   <EntityType Name="Status">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID" Type="Guid" Nullable="false" />
     <Property Name="StatusID" Type="Int32" Nullable="false" />
     <Property Name="UserID" Type="Guid" Nullable="false" />
     <Property Name="StatusMessage" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="SetTime" Type="DateTime" Nullable="false" />
     <Property Name="IsSet" Type="Boolean" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_Status_Users" FromRole="Status" ToRole="Users" />
+    <NavigationProperty Name="User" Relationship="RusWizardsSocialNetworkDBModel.FK_Status_Users" FromRole="Status" ToRole="Users" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -210,10 +231,10 @@
     <Key>
       <PropertyRef Name="UserRoleID" />
     </Key>
-    <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserRoleID" Type="Guid" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="36" Unicode="true" FixedLength="false" />
     <Property Name="PrivilegeMask" Type="Byte" Nullable="false" />
-    <NavigationProperty Name="UsersXUserRoles" Relationship="SocialNetworkDBModel.FK_UsersXUserRoles_UserRoles" FromRole="UserRoles" ToRole="UsersXUserRoles" />
+    <NavigationProperty Name="UsersXUserRoles" Relationship="RusWizardsSocialNetworkDBModel.FK_UsersXUserRoles_UserRoles" FromRole="UserRoles" ToRole="UsersXUserRoles" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -227,29 +248,29 @@
     <Property Name="RegistrationDate" Type="DateTime" Nullable="false" />
     <Property Name="LastLoginDate" Type="DateTime" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Bans" Relationship="SocialNetworkDBModel.FK_Bans_Users" FromRole="Users" ToRole="Bans" />
-    <NavigationProperty Name="Bans1" Relationship="SocialNetworkDBModel.FK_Bans_Users1" FromRole="Users" ToRole="Bans" />
-    <NavigationProperty Name="FriendInvitations" Relationship="SocialNetworkDBModel.FK_FriendInvitations_Users" FromRole="Users" ToRole="FriendInvitations" />
-    <NavigationProperty Name="FriendInvitations1" Relationship="SocialNetworkDBModel.FK_FriendInvitations_Users1" FromRole="Users" ToRole="FriendInvitations" />
-    <NavigationProperty Name="Friends" Relationship="SocialNetworkDBModel.FK_Friends_Users" FromRole="Users" ToRole="Friends" />
-    <NavigationProperty Name="Friends1" Relationship="SocialNetworkDBModel.FK_Friends_Users1" FromRole="Users" ToRole="Friends" />
-    <NavigationProperty Name="Messages" Relationship="SocialNetworkDBModel.FK_Messages_Users" FromRole="Users" ToRole="Messages" />
-    <NavigationProperty Name="Messages1" Relationship="SocialNetworkDBModel.FK_Messages_Users1" FromRole="Users" ToRole="Messages" />
-    <NavigationProperty Name="Status" Relationship="SocialNetworkDBModel.FK_Status_Users" FromRole="Users" ToRole="Status" />
-    <NavigationProperty Name="UsersXUserRoles" Relationship="SocialNetworkDBModel.FK_UsersXUserRoles_Users" FromRole="Users" ToRole="UsersXUserRoles" />
-    <NavigationProperty Name="WallBoardItems" Relationship="SocialNetworkDBModel.FK_WallBoardItems_Users" FromRole="Users" ToRole="WallBoardItems" />
-    <NavigationProperty Name="WallBoardItems1" Relationship="SocialNetworkDBModel.FK_WallBoardItems_Users1" FromRole="Users" ToRole="WallBoardItems" />
-    <NavigationProperty Name="PersonalInfoes" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="User" ToRole="PersonalInfo" />
+    <NavigationProperty Name="Bans" Relationship="RusWizardsSocialNetworkDBModel.FK_Bans_Users" FromRole="Users" ToRole="Bans" />
+    <NavigationProperty Name="Bans1" Relationship="RusWizardsSocialNetworkDBModel.FK_Bans_Users1" FromRole="Users" ToRole="Bans" />
+    <NavigationProperty Name="FriendInvitations" Relationship="RusWizardsSocialNetworkDBModel.FK_FriendInvitations_Users" FromRole="Users" ToRole="FriendInvitations" />
+    <NavigationProperty Name="FriendInvitations1" Relationship="RusWizardsSocialNetworkDBModel.FK_FriendInvitations_Users1" FromRole="Users" ToRole="FriendInvitations" />
+    <NavigationProperty Name="Friends" Relationship="RusWizardsSocialNetworkDBModel.FK_Friends_Users" FromRole="Users" ToRole="Friends" />
+    <NavigationProperty Name="Friends1" Relationship="RusWizardsSocialNetworkDBModel.FK_Friends_Users1" FromRole="Users" ToRole="Friends" />
+    <NavigationProperty Name="Messages" Relationship="RusWizardsSocialNetworkDBModel.FK_Messages_Users" FromRole="Users" ToRole="Messages" />
+    <NavigationProperty Name="Messages1" Relationship="RusWizardsSocialNetworkDBModel.FK_Messages_Users1" FromRole="Users" ToRole="Messages" />
+    <NavigationProperty Name="PersonalInfoes" Relationship="RusWizardsSocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="Users" ToRole="PersonalInfo" />
+    <NavigationProperty Name="Status" Relationship="RusWizardsSocialNetworkDBModel.FK_Status_Users" FromRole="Users" ToRole="Status" />
+    <NavigationProperty Name="UsersXUserRoles" Relationship="RusWizardsSocialNetworkDBModel.FK_UsersXUserRoles_Users" FromRole="Users" ToRole="UsersXUserRoles" />
+    <NavigationProperty Name="WallBoardItems" Relationship="RusWizardsSocialNetworkDBModel.FK_WallBoardItems_Users" FromRole="Users" ToRole="WallBoardItems" />
+    <NavigationProperty Name="WallBoardItems1" Relationship="RusWizardsSocialNetworkDBModel.FK_WallBoardItems_Users1" FromRole="Users" ToRole="WallBoardItems" />
   </EntityType>
   <EntityType Name="UsersXUserRole">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserID" Type="Guid" Nullable="false" />
-    <Property Name="UserRoleID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="UserRole" Relationship="SocialNetworkDBModel.FK_UsersXUserRoles_UserRoles" FromRole="UsersXUserRoles" ToRole="UserRoles" />
-    <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_UsersXUserRoles_Users" FromRole="UsersXUserRoles" ToRole="Users" />
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="UserID" Type="Guid" />
+    <Property Name="UserRoleID" Type="Guid" />
+    <NavigationProperty Name="UserRole" Relationship="RusWizardsSocialNetworkDBModel.FK_UsersXUserRoles_UserRoles" FromRole="UsersXUserRoles" ToRole="UserRoles" />
+    <NavigationProperty Name="User" Relationship="RusWizardsSocialNetworkDBModel.FK_UsersXUserRoles_Users" FromRole="UsersXUserRoles" ToRole="Users" />
   </EntityType>
   <EntityType Name="WallBoardItem">
     <Key>
@@ -263,12 +284,12 @@
     <Property Name="Message" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="NullLink" Type="Int32" />
-    <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_WallBoardItems_Users" FromRole="WallBoardItems" ToRole="Users" />
-    <NavigationProperty Name="User1" Relationship="SocialNetworkDBModel.FK_WallBoardItems_Users1" FromRole="WallBoardItems" ToRole="Users" />
+    <NavigationProperty Name="User" Relationship="RusWizardsSocialNetworkDBModel.FK_WallBoardItems_Users" FromRole="WallBoardItems" ToRole="Users" />
+    <NavigationProperty Name="User1" Relationship="RusWizardsSocialNetworkDBModel.FK_WallBoardItems_Users1" FromRole="WallBoardItems" ToRole="Users" />
   </EntityType>
   <Association Name="FK_Address_Cities">
-    <End Role="Cities" Type="SocialNetworkDBModel.City" Multiplicity="0..1" />
-    <End Role="Address" Type="SocialNetworkDBModel.Address" Multiplicity="*" />
+    <End Role="Cities" Type="RusWizardsSocialNetworkDBModel.City" Multiplicity="0..1" />
+    <End Role="Address" Type="RusWizardsSocialNetworkDBModel.Address" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Cities">
         <PropertyRef Name="CityID" />
@@ -279,8 +300,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Address_Countries">
-    <End Role="Countries" Type="SocialNetworkDBModel.Country" Multiplicity="0..1" />
-    <End Role="Address" Type="SocialNetworkDBModel.Address" Multiplicity="*" />
+    <End Role="Countries" Type="RusWizardsSocialNetworkDBModel.Country" Multiplicity="0..1" />
+    <End Role="Address" Type="RusWizardsSocialNetworkDBModel.Address" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Countries">
         <PropertyRef Name="CountryID" />
@@ -290,9 +311,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Address_PersonalInfo">
+    <End Role="PersonalInfo" Type="RusWizardsSocialNetworkDBModel.PersonalInfo" Multiplicity="1" />
+    <End Role="Address" Type="RusWizardsSocialNetworkDBModel.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonalInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="UserInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Bans_Users">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="Bans" Type="SocialNetworkDBModel.Ban" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="Bans" Type="RusWizardsSocialNetworkDBModel.Ban" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -303,8 +336,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Bans_Users1">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="Bans" Type="SocialNetworkDBModel.Ban" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="Bans" Type="RusWizardsSocialNetworkDBModel.Ban" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -315,10 +348,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Cities_Countries">
-    <End Role="Countries" Type="SocialNetworkDBModel.Country" Multiplicity="1">
+    <End Role="Countries" Type="RusWizardsSocialNetworkDBModel.Country" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="Cities" Type="SocialNetworkDBModel.City" Multiplicity="*" />
+    <End Role="Cities" Type="RusWizardsSocialNetworkDBModel.City" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Countries">
         <PropertyRef Name="CountryID" />
@@ -329,8 +362,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_FriendInvitations_Users">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="FriendInvitations" Type="SocialNetworkDBModel.FriendInvitation" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="FriendInvitations" Type="RusWizardsSocialNetworkDBModel.FriendInvitation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -341,8 +374,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_FriendInvitations_Users1">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="FriendInvitations" Type="SocialNetworkDBModel.FriendInvitation" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="FriendInvitations" Type="RusWizardsSocialNetworkDBModel.FriendInvitation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -353,8 +386,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Friends_Users">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="Friends" Type="SocialNetworkDBModel.Friend" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="Friends" Type="RusWizardsSocialNetworkDBModel.Friend" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -365,8 +398,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Friends_Users1">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="Friends" Type="SocialNetworkDBModel.Friend" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="Friends" Type="RusWizardsSocialNetworkDBModel.Friend" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -377,8 +410,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Messages_Users">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="Messages" Type="SocialNetworkDBModel.Message" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="Messages" Type="RusWizardsSocialNetworkDBModel.Message" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -389,8 +422,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Messages_Users1">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="Messages" Type="SocialNetworkDBModel.Message" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="Messages" Type="RusWizardsSocialNetworkDBModel.Message" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -400,9 +433,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PersonalInfo_Users">
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="PersonalInfo" Type="RusWizardsSocialNetworkDBModel.PersonalInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="PersonalInfo">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Status_Users">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="Status" Type="SocialNetworkDBModel.Status" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="Status" Type="RusWizardsSocialNetworkDBModel.Status" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -413,8 +458,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UsersXUserRoles_UserRoles">
-    <End Role="UserRoles" Type="SocialNetworkDBModel.UserRole" Multiplicity="1" />
-    <End Role="UsersXUserRoles" Type="SocialNetworkDBModel.UsersXUserRole" Multiplicity="*" />
+    <End Role="UserRoles" Type="RusWizardsSocialNetworkDBModel.UserRole" Multiplicity="0..1" />
+    <End Role="UsersXUserRoles" Type="RusWizardsSocialNetworkDBModel.UsersXUserRole" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserRoles">
         <PropertyRef Name="UserRoleID" />
@@ -425,8 +470,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UsersXUserRoles_Users">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="UsersXUserRoles" Type="SocialNetworkDBModel.UsersXUserRole" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="0..1" />
+    <End Role="UsersXUserRoles" Type="RusWizardsSocialNetworkDBModel.UsersXUserRole" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -437,8 +482,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_WallBoardItems_Users">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="WallBoardItems" Type="SocialNetworkDBModel.WallBoardItem" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="WallBoardItems" Type="RusWizardsSocialNetworkDBModel.WallBoardItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
@@ -449,56 +494,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_WallBoardItems_Users1">
-    <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-    <End Role="WallBoardItems" Type="SocialNetworkDBModel.WallBoardItem" Multiplicity="*" />
+    <End Role="Users" Type="RusWizardsSocialNetworkDBModel.User" Multiplicity="1" />
+    <End Role="WallBoardItems" Type="RusWizardsSocialNetworkDBModel.WallBoardItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="UserID" />
       </Principal>
       <Dependent Role="WallBoardItems">
         <PropertyRef Name="FromID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="PersonalInfo">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Type="Guid" Name="ID" Nullable="false" />
-    <Property Type="Guid" Name="UserID" Nullable="false" />
-    <Property Type="String" Name="NickName" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="Byte" Name="Sex" />
-    <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="DateTime" Name="Birthday" />
-    <Property Type="String" Name="ImagePath" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Addresses" Relationship="SocialNetworkDBModel.FK_Address_PersonalInfo" FromRole="PersonalInfo" ToRole="Address" />
-    <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="PersonalInfo" ToRole="User" />
-  </EntityType>
-  <Association Name="FK_Address_PersonalInfo">
-    <End Type="SocialNetworkDBModel.PersonalInfo" Role="PersonalInfo" Multiplicity="1" />
-    <End Type="SocialNetworkDBModel.Address" Role="Address" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PersonalInfo">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Address">
-        <PropertyRef Name="UserInfoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PersonalInfo_Users">
-    <End Type="SocialNetworkDBModel.User" Role="User" Multiplicity="1" />
-    <End Type="SocialNetworkDBModel.PersonalInfo" Role="PersonalInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserID" />
-      </Principal>
-      <Dependent Role="PersonalInfo">
-        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

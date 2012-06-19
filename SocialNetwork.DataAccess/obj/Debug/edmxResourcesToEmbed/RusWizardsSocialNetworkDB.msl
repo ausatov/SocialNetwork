@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="SocialNetworkDBModelStoreContainer" CdmEntityContainer="SocialNetworkDBEntities">
+  <EntityContainerMapping StorageEntityContainer="RusWizardsSocialNetworkDBModelStoreContainer" CdmEntityContainer="SocialNetworkDBEntities">
     <EntitySetMapping Name="Addresses">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.Address">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.Address">
         <MappingFragment StoreEntitySet="Address">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="UserInfoID" ColumnName="UserInfoID" />
@@ -17,7 +17,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Bans">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.Ban">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.Ban">
         <MappingFragment StoreEntitySet="Bans">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -30,7 +30,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Cities">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.City">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.City">
         <MappingFragment StoreEntitySet="Cities">
           <ScalarProperty Name="CityID" ColumnName="CityID" />
           <ScalarProperty Name="CountryID" ColumnName="CountryID" />
@@ -39,7 +39,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Countries">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.Country">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.Country">
         <MappingFragment StoreEntitySet="Countries">
           <ScalarProperty Name="CountryID" ColumnName="CountryID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -47,7 +47,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FriendInvitations">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.FriendInvitation">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.FriendInvitation">
         <MappingFragment StoreEntitySet="FriendInvitations">
           <ScalarProperty Name="InvitationID" ColumnName="InvitationID" />
           <ScalarProperty Name="FromID" ColumnName="FromID" />
@@ -59,7 +59,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Friends">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.Friend">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.Friend">
         <MappingFragment StoreEntitySet="Friends">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -70,7 +70,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Messages">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.Message">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.Message">
         <MappingFragment StoreEntitySet="Messages">
           <ScalarProperty Name="MessageID" ColumnName="MessageID" />
           <ScalarProperty Name="FromID" ColumnName="FromID" />
@@ -83,8 +83,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PersonalInfoes">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.PersonalInfo">
+        <MappingFragment StoreEntitySet="PersonalInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Status">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.Status">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.Status">
         <MappingFragment StoreEntitySet="Status">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="StatusID" ColumnName="StatusID" />
@@ -97,7 +114,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.sysdiagram">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -108,7 +125,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserRoles">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.UserRole">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.UserRole">
         <MappingFragment StoreEntitySet="UserRoles">
           <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -117,7 +134,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.User">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.User">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="Password" ColumnName="Password" />
@@ -131,7 +148,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UsersXUserRoles">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.UsersXUserRole">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.UsersXUserRole">
         <MappingFragment StoreEntitySet="UsersXUserRoles">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -140,7 +157,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="WallBoardItems">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.WallBoardItem">
+      <EntityTypeMapping TypeName="RusWizardsSocialNetworkDBModel.WallBoardItem">
         <MappingFragment StoreEntitySet="WallBoardItems">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ContentTypeID" ColumnName="ContentTypeID" />
@@ -153,23 +170,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="spInsStatus" FunctionName="SocialNetworkDBModel.Store.spInsStatus" />
-    <EntitySetMapping Name="PersonalInfoes">
-      <EntityTypeMapping TypeName="SocialNetworkDBModel.PersonalInfo">
-        <MappingFragment StoreEntitySet="PersonalInfo">
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
-          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Sex" ColumnName="Sex" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="NickName" ColumnName="NickName" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spDelWallBoardItem" FunctionName="RusWizardsSocialNetworkDBModel.Store.spDelWallBoardItem" />
+    <FunctionImportMapping FunctionImportName="spInsStatus" FunctionName="RusWizardsSocialNetworkDBModel.Store.spInsStatus" />
   </EntityContainerMapping>
 </Mapping>

@@ -93,31 +93,31 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.ImageButton btnSaveStatusMessage;
     
     /// <summary>
-    /// dtlUserInfo control.
+    /// dvUserInfo control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DetailsView dtlUserInfo;
+    protected global::System.Web.UI.WebControls.DetailsView dvUserInfo;
     
     /// <summary>
-    /// edsPersonalInfo control.
+    /// dsPersonalInfo control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.EntityDataSource edsPersonalInfo;
+    protected global::System.Web.UI.WebControls.EntityDataSource dsPersonalInfo;
     
     /// <summary>
-    /// dtlWall control.
+    /// fvWall control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.DetailsView dtlWall;
+    protected global::System.Web.UI.WebControls.FormView fvWall;
     
     /// <summary>
     /// grdWall control.
@@ -129,20 +129,11 @@ public partial class UserProfile {
     protected global::System.Web.UI.WebControls.GridView grdWall;
     
     /// <summary>
-    /// edsWall control.
+    /// dsWall control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.EntityDataSource edsWall;
-    
-    /// <summary>
-    /// Menu1 control.
-    /// </summary>
-    /// <remarks>
-    /// Auto-generated field.
-    /// To modify move field declaration from designer file to code-behind file.
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Menu Menu1;
+    protected global::System.Web.UI.WebControls.EntityDataSource dsWall;
 }
