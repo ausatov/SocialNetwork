@@ -9,6 +9,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using SocialNetwork.DataAccess;
+<<<<<<< HEAD
+using RuzWizardsSocialNetworkApplication.App_Code;
+=======
+>>>>>>> a0f54cd7b10ac0c7510fc83137ad51a7ac452115
 
 /// <summary>
 /// Усатов
@@ -146,6 +150,7 @@ public partial class Login : System.Web.UI.Page
             sqlCommand.ExecuteNonQuery();
         }
         catch (SqlException ex)
+<<<<<<< HEAD
         {
             //Label1.Text = ex.InnerException.Message;
         }
@@ -153,19 +158,53 @@ public partial class Login : System.Web.UI.Page
         {
             //Label1.Text = ex.Message;
         }
+        finally
+=======
+>>>>>>> a0f54cd7b10ac0c7510fc83137ad51a7ac452115
         {
             //Label1.Text = ex.InnerException.Message;
         }
+<<<<<<< HEAD
+    }
 
+    protected void btnLogin_Click(object sender, ImageClickEventArgs e)
+    {
         //чтобы не загромождать обработчик события нажатия кнопки
         //этот код будет вынесен в отдельный cs файл
+        //тут все тестовое на данный момент (без реализации для БД )
+        bool _exist = false;
+        bool _admin = false;
+        HttpCookie _exCookie = Request.Cookies["EmailCookie"];
+        if (_exCookie != null)
+=======
+        catch (Exception ex)
+>>>>>>> a0f54cd7b10ac0c7510fc83137ad51a7ac452115
         {
             //Label1.Text = ex.Message;
         }
-        finally
+<<<<<<< HEAD
+        //идет проверка на существование пользователя с такими введенными данными в БД
 
+        if (_exist)
+=======
+        finally
+>>>>>>> a0f54cd7b10ac0c7510fc83137ad51a7ac452115
         {
             sqlConnection.Close();
         }
+<<<<<<< HEAD
+        //пока что помещаем в куки и перенаправляем на личную страницу в любом случае
+        //куки для логина
+        HttpCookie _emailCookie = new HttpCookie("EmailCookie");
+        //куки будет храниться в течение одного месяца (можно поменять)
+        _emailCookie.Expires = DateTime.Now.AddMonths(1);
+        //заносим в куки введенный Email
+        _emailCookie["Email"] = tbxEmail.Text;
+        //добавляем куки в браузер пользователя
+        Response.Cookies.Add(_emailCookie);
+        //после id идет айди определенный по email и passward из базы
+        Response.Redirect("~/UserProfile.aspx?id=" + "...");
+=======
+>>>>>>> a0f54cd7b10ac0c7510fc83137ad51a7ac452115
     }
 }
