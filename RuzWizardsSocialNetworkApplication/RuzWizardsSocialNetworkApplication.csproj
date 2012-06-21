@@ -13,6 +13,7 @@
     <RootNamespace>RuzWizardsSocialNetworkApplication</RootNamespace>
     <AssemblyName>RuzWizardsSocialNetworkApplication</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -76,6 +77,8 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administration\Bans.aspx" />
+    <Content Include="Administration\Welcome.aspx" />
     <Content Include="App_Themes\MainSkin\img\actions-arrow-down.png" />
     <Content Include="App_Themes\MainSkin\img\actions-arrow-up.png" />
     <Content Include="App_Themes\MainSkin\img\bg\snw_footer_gradient.png" />
@@ -158,6 +161,9 @@
     <Content Include="Bin\zh-CHT\AjaxControlToolkit.resources.dll" />
     <Content Include="Login.aspx" />
     <Content Include="Messages.aspx" />
+    <Content Include="Scripts\ajaxfunc.js" />
+    <Content Include="Scripts\jquery-1.7.2.js" />
+    <Content Include="Scripts\LoginValidate.js" />
     <Content Include="Styles\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -165,8 +171,31 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Uploads\Photo\no_photo.jpg" />
     <Content Include="UserProfile.aspx" />
+    <Content Include="WebServices\SocialNetworkService.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\Bans.aspx.cs">
+      <DependentUpon>Bans.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Bans.aspx.designer.cs">
+      <DependentUpon>Bans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Welcome.aspx.cs">
+      <DependentUpon>Welcome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Welcome.aspx.designer.cs">
+      <DependentUpon>Welcome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPage.Master.cs">
+      <DependentUpon>AdminPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPage.Master.designer.cs">
+      <DependentUpon>AdminPage.Master</DependentUpon>
+    </Compile>
+    <Content Include="App_Code\SessionHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,7 +221,6 @@
       <DependentUpon>Messages.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="App_Code\SessionHelper.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -214,6 +242,10 @@
     <Compile Include="UserProfile.aspx.designer.cs">
       <DependentUpon>UserProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebServices\SocialNetworkService.asmx.cs">
+      <DependentUpon>SocialNetworkService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />
@@ -221,6 +253,7 @@
   <ItemGroup>
     <Content Include="App_Themes\LoginPage\LoginPage.skin" />
     <Content Include="App_Themes\MainSkin\MainSkin.skin" />
+    <Content Include="AdminPage.Master" />
     <None Include="Bin\AjaxControlToolkit.dll.refresh" />
     <None Include="Bin\AntiXSSLibrary.dll.refresh" />
     <None Include="Bin\HtmlSanitizationLibrary.dll.refresh" />
@@ -241,7 +274,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Account\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
