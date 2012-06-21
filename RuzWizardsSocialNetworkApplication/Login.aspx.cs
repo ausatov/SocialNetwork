@@ -9,42 +9,48 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using SocialNetwork.DataAccess;
+using RuzWizardsSocialNetworkApplication.App_Code;
 
 /// <summary>
-/// Усатов
+/// Login page class.
 /// </summary>
 public partial class Login : System.Web.UI.Page
 {
-    protected void Page_Load(object sender, EventArgs e)
+    /// <summary>
+    /// Page load event.
+    /// </summary>
+    /// <param name="sender">Object sender.</param>
+    /// <param name="e">Eventargs e.</param>
+    protected void Page_Load(Object sender, EventArgs e)
     {
         if (Request.QueryString["reg"] != null)
         {
             pnlLogin.Visible = false;
             pnlRegistrtion.Visible = true;
-            btnRegistration.ImageUrl = "~/App_Themes/MainSkin/img/buttons/snw_button_registration_disabled.png";
+            //btnRegistration.ImageUrl = "~/App_Themes/MainSkin/img/buttons/snw_button_registration_disabled.png";
             btnRegistration.Enabled = false;
         }
         else
         {
             pnlLogin.Visible = true;
             pnlRegistrtion.Visible = false;
-            btnRegistration.ImageUrl = "~/App_Themes/MainSkin/img/buttons/snw_button_registration.png";
-            btnRegistration.Enabled = true; 
+            //btnRegistration.ImageUrl = "~/App_Themes/MainSkin/img/buttons/snw_button_registration.png";
+            btnRegistration.Enabled = true;
         }
     }
 
     /// <summary>
-    /// Переход на станицу регистрации
+    /// Go to the registration page.
     /// </summary>
-    protected void btnRegistration_Click(object sender, ImageClickEventArgs e)
+    protected void OnbtnRegistration_Click(Object sender, ImageClickEventArgs e)
     {
         Response.Redirect("Login.aspx?Reg=1");
     }
 
     /// <summary>
-    /// Установить выбор городов в соотвествии с выбранной страной
+    /// Set cities changes.
     /// </summary>
-    protected void ddlCountry_SelectedIndexChanged(object sender, EventArgs e)
+    protected void OnddlCountry_SelectedIndexChanged(Object sender, EventArgs e)
     {
         // если выбрано значение отличное от "not defined" (по умолчанию : index = 0)
         // устанавливаем условие фильтрации в edsCity
@@ -52,7 +58,7 @@ public partial class Login : System.Web.UI.Page
         if (ddlCountry.SelectedIndex > 0)
         {
             trCity.Visible = true;
-            edsCity.Where = string.Format("it.[CountryID] = {0}", ddlCountry.SelectedValue); 
+            edsCity.Where = string.Format("it.[CountryID] = {0}", ddlCountry.SelectedValue);
         }
         // иначе скрываем поле с выбором города
         else
@@ -66,104 +72,124 @@ public partial class Login : System.Web.UI.Page
     }
 
     /// <summary>
-    /// Загрузка фотографии
+    /// Load photo.
     /// </summary>
-    protected void fuPhoto_UploadedComplete(object sender, AjaxControlToolkit.AsyncFileUploadEventArgs e)
+    /// <param name="sender">Object sender.</param>
+    /// <param name="e">Eventargs e.</param>
+    protected void OnfuPhoto_UploadedComplete(Object sender, AjaxControlToolkit.AsyncFileUploadEventArgs e)
     {
 
     }
 
     /// <summary>
-    /// Подтверждение регистрации
+    /// Regisration.
     /// </summary>
-    protected void btnRegCompleteRegistration_Click(object sender, ImageClickEventArgs e)
+    /// <param name="sender">Object sender.</param>
+    /// <param name="e">Eventargs e.</param>
+    protected void OnbtnRegCompleteRegistration_Click(Object sender, ImageClickEventArgs e)
     {
-        // это все будет сделано с помощью хранимой процедуры
-        SqlConnection sqlConnection = new SqlConnection();
-        sqlConnection.ConnectionString = 
-            ConfigurationManager.ConnectionStrings["RusWizardsSocialNetworkDBConnectionString"]
-            .ConnectionString;
-        SqlCommand sqlCommand = new SqlCommand();
-        sqlCommand.CommandType = CommandType.StoredProcedure;
-        sqlCommand.Connection = sqlConnection;
-        sqlCommand.CommandText = "spInsUser";
-        sqlCommand.Parameters.Add("@Email", SqlDbType.VarChar, 40);
-        sqlCommand.Parameters["@Email"].Value = tbxRegEmail.Text;
-        sqlCommand.Parameters.Add("@Password", SqlDbType.VarChar, 32);
-        sqlCommand.Parameters["@Password"].Value = tbxRegPassword1.Text;
-        sqlCommand.Parameters.Add("@FirstName", SqlDbType.VarChar, 24);
-        sqlCommand.Parameters["@FirstName"].Value = tbxFirstName.Text;
-        sqlCommand.Parameters.Add("@SecondName", SqlDbType.VarChar, 24);
-        sqlCommand.Parameters["@SecondName"].Value = tbxSecondName.Text;
-        sqlCommand.Parameters.Add("@FatherName", SqlDbType.VarChar, 24);
-        sqlCommand.Parameters["@FatherName"].Value = tbxFatherName.Text;
-        sqlCommand.Parameters.Add("@NickName", SqlDbType.VarChar, 36);
-        sqlCommand.Parameters["@NickName"].Value = tbxNickName.Text;
-        sqlCommand.Parameters.Add("@Sex", SqlDbType.Bit);
-        switch (ddlSex.SelectedValue)
-        {
-            // Вариант не доступен для выбора, но возможен
-            case "-1":
-                {
-                    sqlCommand.Parameters["@Sex"].Value = DBNull.Value;
-                } break;
-            // Мужской пол
-            case "0":
-                {
-                    sqlCommand.Parameters["@Sex"].Value = 1;
-                } break;
-            // Женский пол
-            case "1":
-                {
-                    sqlCommand.Parameters["@Sex"].Value = 0;
-                } break;
-        }
-        sqlCommand.Parameters.Add("@Phone", SqlDbType.VarChar, 24);
-        sqlCommand.Parameters["@Phone"].Value =  tbxPhone.Text;
-        sqlCommand.Parameters.Add("@Country", SqlDbType.Int);
-        if (ddlCountry.SelectedIndex > 0)
-        {
-            sqlCommand.Parameters["@Country"].Value = ddlCountry.SelectedIndex;
-        }
-        else
-        {
-            sqlCommand.Parameters["@Country"].Value = DBNull.Value;
-        }
-        sqlCommand.Parameters.Add("@City", SqlDbType.Int);
-        if (ddlCity.SelectedIndex > 0 && ddlCountry.SelectedIndex > 0)
-        {
-            sqlCommand.Parameters["@City"].Value = ddlCountry.SelectedIndex;
-        }
-        else
-        {
-            sqlCommand.Parameters["@City"].Value = DBNull.Value;
-        }
-        sqlCommand.Parameters.Add("@Photo", SqlDbType.VarChar, 80);
-        sqlCommand.Parameters["@Photo"].Value = "nophoto";
-        try
-        {
-            sqlConnection.Open();
-            sqlCommand.ExecuteNonQuery();
-        }
-        catch (SqlException ex)
-        {
-            //Label1.Text = ex.InnerException.Message;
-        }
-        catch (Exception ex)
-        {
-            //Label1.Text = ex.Message;
-        }
-        
-
-        ////чтобы не загромождать обработчик события нажатия кнопки
-        ////этот код будет вынесен в отдельный cs файл
+        //Int16? _sex;
+        //Guid? _country;
+        //Guid? _city;
+        //switch (ddlSex.SelectedValue)
         //{
-        //    //Label1.Text = ex.Message;
+        //    // Вариант не доступен для выбора, но возможен
+        //    case "-1":
+        //        {
+        //            _sex = null;
+        //        } break;
+        //    // Мужской пол
+        //    case "0":
+        //        {
+        //            _sex = 1;
+        //        } break;
+        //    // Женский пол
+        //    case "1":
+        //        {
+        //            _sex = 0;
+        //        } break;
         //}
-        finally
 
+        //if (ddlCountry.SelectedIndex > 0)
+        //{
+        //    _country = ddlCountry.SelectedIndex;
+        //}
+        //else
+        //{
+        //    _country = DBNull.Value;
+        //}
+        //if (ddlCity.SelectedIndex > 0 && ddlCountry.SelectedIndex > 0)
+        //{
+        //    _city = ddlCountry.SelectedIndex;
+        //}
+        //else
+        //{
+        //    _city = DBNull.Value;
+        //}
+
+        //using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+        //{
+        //    record.spInsUser(tbxRegEmail.Text, tbxRegPassword1.Text, tbxFirstName.Text, tbxSecondName.Text, tbxFatherName.Text
+        //      , tbxNickName.Text, tbxPhone.Text, _sex, _country, _city, "nophoto");
+        //}
+    }
+
+    /// <summary>
+    /// User's log in.
+    /// </summary>
+    /// <param name="sender">Object sender.</param>
+    /// <param name="e">Eventargs e.</param>
+    protected void OnbtnLogin_Click(Object sender, ImageClickEventArgs e)
+    {
+        bool _exist = false;
+        bool _admin = false;
+        HttpCookie _exCookie = Request.Cookies["EmailCookie"];
+        if (_exCookie != null)
         {
-            sqlConnection.Close();
+            tbxEmail.Text = _exCookie["Email"].ToString();
         }
+        //идет проверка на существование пользователя с такими введенными данными в БД
+        Guid _userId;
+        using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+        {
+            _userId = record.Users
+                .Where(x => x.Email.Equals(tbxEmail.Text) && x.Password.Equals(tbxPassword.Text))
+                .Select(x => x.UserID)
+                .FirstOrDefault();
+        }
+        if (_userId != null)
+        {
+            //SessionHelper.UserID = _userId;
+            //_exist = true;
+            System.Nullable<int> _privelegeMask=0;
+            //// Int32? _privelegeMask = 0;
+            //using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+            //{
+            //    _privelegeMask = record.spSelectMask(_userId).SingleOrDefault();
+
+            //}
+            if (_privelegeMask >= 254)
+            {
+                _admin = true;
+            }
+        }
+        if (_exist)
+        {
+            SessionHelper.IsAuthenticated = true;
+            if (_admin)
+            {
+                SessionHelper.IsAdmin = true;
+            }
+        }
+        //куки для логина
+        HttpCookie _emailCookie = new HttpCookie("EmailCookie");
+        //куки будет храниться в течение одного месяца (можно поменять)
+        _emailCookie.Expires = DateTime.Now.AddMonths(1);
+        //заносим в куки введенный Email
+        _emailCookie["Email"] = tbxEmail.Text;
+        //добавляем куки в браузер пользователя
+        Response.Cookies.Add(_emailCookie);
+        //после id идет айди определенный по email и passward из базы
+        Response.Redirect("~/UserProfile.aspx?id=" + _userId);
     }
 }

@@ -1,11 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LoginPage.master" AutoEventWireup="true"
-    Inherits="Login" Theme="LoginPage" CodeBehind="Login.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LoginPage.master" AutoEventWireup="true" Inherits="Login" Theme="LoginPage" Codebehind="Login.aspx.cs" %>
+<%@ Register TagPrefix="aspajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit"%>
 
-<%@ Register TagPrefix="aspajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
+
 <%-- Усатов --%>
-<asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="Server">
+
+<asp:Content ID="Content1" ContentPlaceHolderID="cphHead" Runat="Server">
     <script src="Scripts/LoginValidate.js" type="text/javascript"></script>
 </asp:Content>
+
+
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" runat="Server">
     <asp:UpdatePanel ID="upContent" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
@@ -25,7 +28,8 @@
             <%-- Registration content --%>
             <center>
                 <asp:Panel ID="pnlRegistrtion" runat="server" Visible="false" HorizontalAlign="Center">
-                    <table width="98%" cellpadding="2px" cellspacing="0" class="tblSideBorders" style="margin-top: -1px;">
+                    <table width="98%" cellpadding="2px" cellspacing="0" 
+                        class="tblSideBorders" style="margin-top: -1px;">
                         <tr>
                             <td colspan="2" class="tblHeaderRow">
                                 <span class="tblHeaderFont">Registration</span>
@@ -38,8 +42,10 @@
                             <td>
                                 <asp:TextBox ID="tbxRegEmail" runat="server" MaxLength="40">
                                 </asp:TextBox>
-                                <asp:CustomValidator ID="csvRegEmail" runat="server" ClientValidationFunction="vfIsValidRegEmail"
-                                    ControlToValidate="tbxRegEmail" Display="Dynamic" SetFocusOnError="True" ValidateEmptyText="True">
+                                <asp:CustomValidator ID="csvRegEmail" runat="server" 
+                                    ClientValidationFunction="vfIsValidRegEmail"
+                                    ControlToValidate="tbxRegEmail" Display="Dynamic" 
+                                    SetFocusOnError="True" ValidateEmptyText="True">
                                     <span class="errTextMessage">
                                         *<br />Incorrect email address
                                     </span>
@@ -51,10 +57,13 @@
                                 Password
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxRegPassword1" runat="server" MaxLength="32" TextMode="Password">
+                                <asp:TextBox ID="tbxRegPassword1" runat="server" 
+                                    MaxLength="32" TextMode="Password">
                                 </asp:TextBox>
-                                <asp:CustomValidator ID="csvRegPassword1" runat="server" ClientValidationFunction="vfIsValidRegPassword"
-                                    ControlToValidate="tbxRegPassword1" Display="Dynamic" SetFocusOnError="False"
+                                <asp:CustomValidator ID="csvRegPassword1" runat="server" 
+                                    ClientValidationFunction="vfIsValidRegPassword"
+                                    ControlToValidate="tbxRegPassword1" Display="Dynamic" 
+                                    SetFocusOnError="False"
                                     ValidateEmptyText="True">
                                     <span class="errTextMessage">
                                         *<br />Password must be longer then 4 chars
@@ -67,10 +76,13 @@
                                 Repeat Password
                             </td>
                             <td>
-                                <asp:TextBox ID="tbxRegPassword2" runat="server" MaxLength="32" TextMode="Password">
+                                <asp:TextBox ID="tbxRegPassword2" runat="server" 
+                                    MaxLength="32" TextMode="Password">
                                 </asp:TextBox>
-                                <asp:CompareValidator ID="cmvRegPassword2" runat="server" ControlToCompare="tbxRegPassword1"
-                                    ControlToValidate="tbxRegPassword2" Display="Dynamic" ErrorMessage="CompareValidator"
+                                <asp:CompareValidator ID="cmvRegPassword2" runat="server" 
+                                    ControlToCompare="tbxRegPassword1"
+                                    ControlToValidate="tbxRegPassword2" Display="Dynamic" 
+                                    ErrorMessage="CompareValidator"
                                     SetFocusOnError="True">
                                     <span class="errTextMessage">
                                         *<br />Passwords not compare
@@ -85,8 +97,10 @@
                             <td>
                                 <asp:TextBox ID="tbxFirstName" runat="server" MaxLength="24">
                                 </asp:TextBox>
-                                <asp:RequiredFieldValidator ID="rfvFirstName" runat="server" ControlToValidate="tbxFirstName"
-                                    Display="Dynamic" ErrorMessage="RequiredFieldValidator" SetFocusOnError="True">
+                                <asp:RequiredFieldValidator ID="rfvFirstName" 
+                                    runat="server" ControlToValidate="tbxFirstName"
+                                    Display="Dynamic" ErrorMessage="RequiredFieldValidator" 
+                                    SetFocusOnError="True">
                                     <span class="errTextMessage">
                                         *
                                     </span>
@@ -100,8 +114,10 @@
                             <td>
                                 <asp:TextBox ID="tbxSecondName" runat="server" MaxLength="24">
                                 </asp:TextBox>
-                                <asp:RequiredFieldValidator ID="rfvSecondName" runat="server" ControlToValidate="tbxSecondName"
-                                    Display="Dynamic" ErrorMessage="RequiredFieldValidator" SetFocusOnError="True">
+                                <asp:RequiredFieldValidator ID="rfvSecondName" 
+                                    runat="server" ControlToValidate="tbxSecondName"
+                                    Display="Dynamic" ErrorMessage="RequiredFieldValidator" 
+                                    SetFocusOnError="True">
                                     <span class="errTextMessage">
                                         *
                                     </span>
@@ -144,16 +160,20 @@
                             <td>
                                 <asp:TextBox ID="tbxPhone" runat="server" MaxLength="24">
                                 </asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator_Ins_Phone" runat="server"
-                                    ControlToValidate="tbxPhone" Display="Dynamic" ErrorMessage="RequiredFieldValidator"
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator_Ins_Phone" 
+                                    runat="server"
+                                    ControlToValidate="tbxPhone" Display="Dynamic" 
+                                    ErrorMessage="RequiredFieldValidator"
                                     SetFocusOnError="True">
                                     <span class="errTextMessage">
                                         *
                                     </span>
                                 </asp:RequiredFieldValidator>
                                 <%-- Провекрка на корректный номер телефона (регулярное выражение) --%>
-                                <asp:RegularExpressionValidator ID="revPhone" runat="server" ControlToValidate="tbxPhone"
-                                    Display="Dynamic" ErrorMessage="RegularExpressionValidator" SetFocusOnError="True"
+                                <asp:RegularExpressionValidator ID="revPhone" runat="server" 
+                                    ControlToValidate="tbxPhone"
+                                    Display="Dynamic" ErrorMessage="RegularExpressionValidator" 
+                                    SetFocusOnError="True"
                                     ValidationExpression="([+]?\d{1,3})?(([(]\d{2}[)])|(\d{2}))?\d{6,7}">
                                     <span class="errTextMessage">
                                         *
@@ -167,15 +187,21 @@
                                 Country
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlCountry" runat="server" AppendDataBoundItems="True" AutoPostBack="True"
-                                    DataSourceID="edsCountry" DataTextField="Name" DataValueField="CountryID" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged">
+                                <asp:DropDownList ID="ddlCountry" runat="server" 
+                                    AppendDataBoundItems="True" AutoPostBack="True"
+                                    DataSourceID="edsCountry" DataTextField="Name" 
+                                    DataValueField="CountryID" 
+                                    OnSelectedIndexChanged="OnddlCountry_SelectedIndexChanged">
                                     <asp:ListItem Selected="True" Value="0">
                                         Not defined
                                     </asp:ListItem>
                                 </asp:DropDownList>
-                                <asp:EntityDataSource ID="edsCountry" runat="server" ConnectionString="name=RusWizardsSocialNetworkDBEntities"
-                                    DefaultContainerName="RusWizardsSocialNetworkDBEntities" EnableFlattening="False"
-                                    EntitySetName="Countries" OrderBy="it.[Name]" Select="it.[CountryID], it.[Name]">
+                                <asp:EntityDataSource ID="edsCountry" runat="server" 
+                                    ConnectionString="name=RusWizardsSocialNetworkDBEntities"
+                                    DefaultContainerName="RusWizardsSocialNetworkDBEntities" 
+                                    EnableFlattening="False"
+                                    EntitySetName="Countries" OrderBy="it.[Name]" 
+                                    Select="it.[CountryID], it.[Name]">
                                 </asp:EntityDataSource>
                             </td>
                         </tr>
@@ -184,15 +210,19 @@
                                 City
                             </td>
                             <td>
-                                <asp:DropDownList ID="ddlCity" runat="server" AppendDataBoundItems="True" DataSourceID="edsCity"
+                                <asp:DropDownList ID="ddlCity" runat="server" 
+                                    AppendDataBoundItems="True" DataSourceID="edsCity"
                                     DataTextField="Name" DataValueField="CityID">
                                     <asp:ListItem Selected="True" Value="0">
                                         Not defined
                                     </asp:ListItem>
                                 </asp:DropDownList>
-                                <asp:EntityDataSource ID="edsCity" runat="server" ConnectionString="name=RusWizardsSocialNetworkDBEntities"
-                                    DefaultContainerName="RusWizardsSocialNetworkDBEntities" EnableFlattening="False"
-                                    EntitySetName="Cities" OrderBy="it.[Name]" Where="it.[CountryID] = 0">
+                                <asp:EntityDataSource ID="edsCity" runat="server" 
+                                    ConnectionString="name=RusWizardsSocialNetworkDBEntities"
+                                    DefaultContainerName="RusWizardsSocialNetworkDBEntities" 
+                                    EnableFlattening="False"
+                                    EntitySetName="Cities" OrderBy="it.[Name]" 
+                                    Where="it.[CountryID] = 0">
                                 </asp:EntityDataSource>
                             </td>
                         </tr>
@@ -203,7 +233,8 @@
                             <td>
                                 <center>
                                     <asp:Panel ID="Panel1" runat="server">
-                                        <aspajax:AsyncFileUpload ID="fuPhoto" runat="server" OnUploadedComplete="fuPhoto_UploadedComplete"
+                                        <aspajax:AsyncFileUpload ID="fuPhoto" runat="server" 
+                                            OnUploadedComplete="OnfuPhoto_UploadedComplete"
                                             UploaderStyle="Modern" Width="180px" />
                                     </asp:Panel>
                                 </center>
@@ -212,8 +243,9 @@
                         <tr>
                             <td colspan="2">
                                 <br />
-                                <asp:ImageButton ID="btnRegCompleteRegistration" runat="server" ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_complete.png"
-                                    OnClick="btnRegCompleteRegistration_Click" />
+                                <asp:ImageButton ID="btnRegCompleteRegistration" runat="server" 
+                                    ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_complete.png"
+                                    OnClick="OnbtnRegCompleteRegistration_Click" />
                             </td>
                         </tr>
                     </table>
@@ -226,14 +258,16 @@
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="cphLeftSideBar" runat="Server">
+
+<asp:Content ID="Content3" ContentPlaceHolderID="cphLeftSideBar" Runat="Server">
     <asp:UpdatePanel ID="upLeftSideBar" runat="server">
         <ContentTemplate>
             <div>
                 <p>
                     <%-- Email --%>
                     <asp:Literal ID="ltrEmail" runat="server">Email:</asp:Literal><br />
-                    <asp:TextBox ID="tbxEmail" runat="server" MaxLength="40" ValidationGroup="vg1">
+                    <asp:TextBox ID="tbxEmail" runat="server" MaxLength="40" 
+                        ValidationGroup="vg1">
                     </asp:TextBox>
                     <%-- 
                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" 
@@ -246,34 +280,42 @@
                         ValidationExpression="\b[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b" 
                         SetFocusOnError="True">*</asp:RegularExpressionValidator>
                     --%>
-                    <asp:CustomValidator ID="csvEmail" runat="server" ClientValidationFunction="vfIsValidEmail"
-                        ControlToValidate="tbxEmail" Display="None" ValidationGroup="vg1" SetFocusOnError="True"
-                        ValidateEmptyText="True">*
+                    <asp:CustomValidator ID="csvEmail" runat="server" 
+                        ClientValidationFunction="vfIsValidEmail" 
+                        ControlToValidate="tbxEmail" Display="None" ValidationGroup="vg1" 
+                        SetFocusOnError="True" ValidateEmptyText="True">*
                     </asp:CustomValidator>
                     <%-- Password --%>
                     <asp:Literal ID="ltrPassword" runat="server">Password:</asp:Literal><br />
-                    <asp:TextBox ID="tbxPassword" runat="server" MaxLength="32" ValidationGroup="vg1"
-                        TextMode="Password">
+                    <asp:TextBox ID="tbxPassword" runat="server" MaxLength="32" 
+                        ValidationGroup="vg1" TextMode="Password">
                     </asp:TextBox>
-                    <asp:CustomValidator ID="csvPassword" runat="server" ClientValidationFunction="vfIsValidPassword"
-                        ControlToValidate="tbxPassword" Display="None" ValidationGroup="vg1" SetFocusOnError="True"
-                        ValidateEmptyText="True">*
+                    <asp:CustomValidator ID="csvPassword" runat="server" 
+                        ClientValidationFunction="vfIsValidPassword" 
+                        ControlToValidate="tbxPassword" Display="None" ValidationGroup="vg1" 
+                        SetFocusOnError="True" ValidateEmptyText="True">*
                     </asp:CustomValidator>
                 </p>
                 <p>
-                    <asp:ImageButton ID="btnLogin" runat="server" ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_login.png"
-                        ValidationGroup="vg1" />
+                    <asp:ImageButton ID="btnLogin" runat="server" 
+                        ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_login.png" 
+                        ValidationGroup="vg1" onclick="OnbtnLogin_Click" />
                 </p>
                 <p>
-                    <asp:ImageButton ID="btnRegistration" runat="server" ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_registration.png"
-                        OnClick="btnRegistration_Click" ValidationGroup="vg9" />
+                    <asp:ImageButton ID="btnRegistration" runat="server" 
+                        ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_registration.png" 
+                        onclick="OnbtnRegistration_Click" ValidationGroup="vg9" />
                 </p>
-                <p style="text-align: center; margin-left: -10px;">
-                    <asp:LinkButton ID="btnLostPassword" runat="server" ValidationGroup="vg10">
+                <p style="text-align:center; margin-left:-10px;">
+                    <asp:LinkButton ID="btnLostPassword" 
+                        runat="server" ValidationGroup="vg10">
                         Lost Password?
-                    </asp:LinkButton>
+                    </asp:LinkButton>    
                 </p>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
+
+    
 </asp:Content>
+

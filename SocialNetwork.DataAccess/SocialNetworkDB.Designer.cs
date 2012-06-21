@@ -46,7 +46,7 @@ namespace SocialNetwork.DataAccess
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    internal partial class SocialNetworkDBEntities : ObjectContext
+    public partial class SocialNetworkDBEntities : ObjectContext
     {
         #region Constructors
     

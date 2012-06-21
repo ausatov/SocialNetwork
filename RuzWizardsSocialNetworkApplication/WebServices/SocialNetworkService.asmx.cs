@@ -8,39 +8,43 @@
     using SocialNetwork.DataAccess;
     using System.Web.Script.Services;
     using System.Web.Script.Serialization;
+
     /// <summary>
-    ///  SocialNetworkService
+    ///  SocialNetworkService.
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
+
+    /// <summary>
+    ///  Class for SocialNetworkService.
+    /// </summary>
     public class SocialNetworkService : System.Web.Services.WebService
     {
         [ScriptIgnore]
         List<Ban> _banList;
         /// <summary>
-        /// Get all user's bans
+        /// Get all user's bans.
         /// </summary>
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        
         public List<KeyValuePair<Guid, DateTime>> GetAllBans(Guid userID)
         {
             _banList = new List<Ban>();
             //using (
-            SocialNetworkDBEntities record = new SocialNetworkDB();
+            SocialNetworkDBEntities record = new SocialNetworkDBEntities();
             //)
             {
                 _banList = record.Bans
                     .Where(x => x.UserID.Equals(userID)).ToList<Ban>();
-                return _banList.Select(s=>new KeyValuePair<Guid, DateTime>(s.ID, s.FromDate)).ToList();
+                return _banList.Select(s => new KeyValuePair<Guid, DateTime>(s.ID, s.FromDate)).ToList();
             }
         }
 
         /// <summary>
-        /// All friends of current user
+        /// All friends of current user.
         /// </summary>
         [WebMethod]
         public List<Friend> GetAllFriends(Guid userID)
@@ -70,7 +74,7 @@
         }
 
         /// <summary>
-        /// Get user's object
+        /// Get user's object.
         /// </summary>
         [WebMethod]
         public User GetUser(Guid userID)
@@ -85,7 +89,7 @@
         }
 
         /// <summary>
-        /// Get all user's friends
+        /// Get all user's friends.
         /// </summary>
         [WebMethod]
         public List<Friend> GetFriends(Guid userID)
@@ -100,7 +104,7 @@
         }
 
         /// <summary>
-        /// Get all user's friend invitations
+        /// Get all user's friend invitations.
         /// </summary>
         [WebMethod]
         public List<FriendInvitation> GetFriendInvitations(Guid userID)
@@ -115,7 +119,7 @@
         }
 
         /// <summary>
-        /// Get all user's messages
+        /// Get all user's messages.
         /// </summary>
         [WebMethod]
         public List<Message> GetMessages(Guid userID)

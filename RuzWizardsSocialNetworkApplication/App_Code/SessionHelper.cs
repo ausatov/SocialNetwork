@@ -1,5 +1,4 @@
-﻿
-namespace RuzWizardsSocialNetworkApplication.App_Code
+﻿namespace RuzWizardsSocialNetworkApplication.App_Code
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +17,7 @@ namespace RuzWizardsSocialNetworkApplication.App_Code
             get { return (bool)HttpContext.Current.Session["Authenticated"]; }
             set { HttpContext.Current.Session["Authenticated"] = value; }
         }
-        
+
         /// <summary>
         /// Check admin role.
         /// </summary>
