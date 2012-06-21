@@ -11,8 +11,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" Runat="Server">
-    <table width="98%" class="tblSideBorders" cellpadding="2px" cellspacing="0">
-        <tr>
+    <table width="100%" class="" cellpadding="2px" cellspacing="0">
+        <tr style="width:1000px;">
             <td class="tblHeaderRow">
                 <div style="float: left; padding-left: 10px;">
                     <asp:Label ID="lblHeadUserName" runat="server" Text="">
@@ -153,13 +153,13 @@
                                 <tr>
                                     <td>
                                         <asp:FormView ID="fvWall" runat="server" DataKeyNames="ID" 
-                                            DataSourceID="dsWall" DefaultMode="Insert" Width="100%" 
+                                            DefaultMode="Insert" Width="100%" 
                                             onitemcommand="OnWallItemCommand">
                                             <InsertItemTemplate>
                                                 <asp:DropDownList ID="ddlWallItemContentType" SelectedValue='<%# Bind("ContentTypeID") %>' runat="server">
                                                          </asp:DropDownList>
                                                         <br />
-                                                         <asp:TextBox ID="tbxMessage" TextMode="MultiLine" MaxLength="4000" Width="98%" runat="server" Text='<%# Bind("Message") %>'></asp:TextBox>
+                                                         <asp:TextBox ID="tbxMessage" TextMode="MultiLine" Height="60px" MaxLength="4000" Width="98%" runat="server" Text='<%# Bind("Message") %>'></asp:TextBox>
                                                 <br />
                                                 <asp:ImageButton ID="btnSendWallMessage" 
                                                     CommandName="SendWallMessage" runat="server"
@@ -168,10 +168,10 @@
                                         </asp:FormView>
 
                                          <asp:GridView ID="grdWall" runat="server" Width="100%" AllowPaging="True" 
-                                            AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="dsWall" 
+                                            AutoGenerateColumns="False" DataKeyNames="ID" 
                                             ShowHeader="False" BorderColor="#E3D5FF" BorderStyle="None" 
                                             BorderWidth="0px" onrowdatabound="OnWallRowDataBound" 
-                                             onrowdeleting="OnWallRowDeleting">
+                                            onrowdeleting="OnWallRowDeleting">
                                             <Columns>
                                                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
                                                     SortExpression="ID" Visible="False" />
@@ -228,21 +228,26 @@
                                             </Columns>
                                         </asp:GridView>
 
-                                         <%-- Источник данных--%> 
+                                        <%--Источник данных 
                                         <asp:EntityDataSource ID="dsWall" runat="server" 
                                             ConnectionString="name=SocialNetworkDBEntities" 
                                             DefaultContainerName="SocialNetworkDBEntities" EnableDelete="True" 
                                             EnableFlattening="False" EnableInsert="True" EnableUpdate="True" 
                                             EntitySetName="WallBoardItems">
-                                        </asp:EntityDataSource>
+                                        </asp:EntityDataSource>--%>
 
                                         <%--<asp:GridView ID="GridView1" runat="server" DataSourceID="ObjectDataSource1">
                                         </asp:GridView>
                                         
                                         <asp:ObjectDataSource 
                                             ID="ObjectDataSource1" runat="server" SelectMethod="SelectAllItems"
-                                            TypeName="SocialNetwork.DataAccess">
-                                        </asp:ObjectDataSource>--%>
+                                            TypeName="SocialNetwork.DataAccess.Repositories.WallBoardItemRepository">
+                                        </asp:ObjectDataSource>
+
+
+                                        
+                                        
+                                        --%>
                                     </td>
                                 </tr>
                             </table>

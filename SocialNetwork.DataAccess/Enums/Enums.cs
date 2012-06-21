@@ -41,4 +41,23 @@
         User = 0,
         God = 1
     }
+
+    /// <summary>
+    /// Type of select filter.
+    /// </summary>
+    public enum MessageSelectType
+    {
+        All = 0,
+        OnlyNew = 1,
+        OnlyOld = 2
+    }
+
+    /// <summary>
+    /// Type of.
+    /// </summary>
+    public enum MessageType
+    {
+        Posted = 0,
+        Received = 1
+    }
 }

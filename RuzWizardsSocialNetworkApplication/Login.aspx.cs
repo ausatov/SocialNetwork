@@ -153,15 +153,13 @@ public partial class Login : System.Web.UI.Page
         {
             //Label1.Text = ex.Message;
         }
-        {
-            //Label1.Text = ex.InnerException.Message;
-        }
+        
 
-        //чтобы не загромождать обработчик события нажатия кнопки
-        //этот код будет вынесен в отдельный cs файл
-        {
-            //Label1.Text = ex.Message;
-        }
+        ////чтобы не загромождать обработчик события нажатия кнопки
+        ////этот код будет вынесен в отдельный cs файл
+        //{
+        //    //Label1.Text = ex.Message;
+        //}
         finally
 
         {

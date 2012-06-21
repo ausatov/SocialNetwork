@@ -58,6 +58,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Address.cs" />
+    <Compile Include="Entity\Ban.cs" />
+    <Compile Include="Entity\City.cs" />
+    <Compile Include="Entity\Country.cs" />
+    <Compile Include="Entity\Friend.cs" />
+    <Compile Include="Entity\FriendInvitation.cs" />
+    <Compile Include="Entity\Message.cs" />
+    <Compile Include="Entity\PersonalInfo.cs" />
+    <Compile Include="Entity\Status.cs" />
+    <Compile Include="Entity\User.cs" />
+    <Compile Include="Entity\UserRole.cs" />
+    <Compile Include="Entity\UserXUserRoles.cs" />
+    <Compile Include="Entity\WallBoardItem.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Enums\EnumsHelper.cs" />
     <Compile Include="IStatusRepository.cs" />
@@ -113,7 +126,6 @@
       <LastGenOutput>SocialNetworkDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

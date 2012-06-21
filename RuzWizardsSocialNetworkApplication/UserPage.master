@@ -11,7 +11,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" style="height:100%; min-height:100%;">
         <form id="form1" runat="server" enctype="multipart/form-data" method="post">
         <center>
             <div id="header">
@@ -23,15 +23,21 @@
                 <div id="content">
                    <%--  <asp:ScriptManager ID="smLogin" runat="server">
                     </asp:ScriptManager>--%>
-                    <asp:ContentPlaceHolder ID="cphMainContent" runat="server">
-                    </asp:ContentPlaceHolder>
+
+                    <div class="tblSideBorders" id="divMainBorder" style="margin-right:20px;">
+
+                        <asp:ContentPlaceHolder ID="cphMainContent" runat="server">
+                        </asp:ContentPlaceHolder>
+
+                    </div>
+
                 </div>
                 <!-- #content-->
             </div>
             <!-- #container-->
             <div class="sidebar" id="sideLeft">
 
-                <asp:Menu ID="Menu1" runat="server" StaticSubMenuIndent="10px" 
+                <asp:Menu ID="mnuLeftMenuBar" runat="server" StaticSubMenuIndent="10px" 
                     BackColor="#FFFFFF" DynamicHorizontalOffset="2" Font-Names="Verdana" 
                     Font-Size="0.8em" ForeColor="#284E98" StaticSelectedStyle-Width="100px" StaticMenuItemStyle-Width="100px">
                     <DynamicHoverStyle BackColor="#284E98" ForeColor="White" />

@@ -81,9 +81,16 @@
     <Content Include="App_Themes\MainSkin\img\bg\snw_footer_gradient.png" />
     <Content Include="App_Themes\MainSkin\img\bg\snw_headerrow_gradient.png" />
     <Content Include="App_Themes\MainSkin\img\bg\snw_login_header.png" />
+    <Content Include="App_Themes\MainSkin\img\btn_find.png" />
     <Content Include="App_Themes\MainSkin\img\bt_remove.ico" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_complete.png" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_delete.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_login.png" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_posted.png" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_posted_passive.png" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_read.png" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_received.png" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_received_passive.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_registration.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_registration_disabled.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_save.png" />
@@ -115,6 +122,7 @@
     <Content Include="App_Themes\MainSkin\img\menu-buttons\menuitem-round-staff.png" />
     <Content Include="App_Themes\MainSkin\img\menu-buttons\menuitem-round-store.png" />
     <Content Include="App_Themes\MainSkin\img\menu-buttons\menuitem-round-suppliers.png" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_new.png" />
     <Content Include="App_Themes\MainSkin\img\ok.gif" />
     <Content Include="App_Themes\MainSkin\img\reload.png" />
     <Content Include="App_Themes\MainSkin\img\restaurant-header.jpg" />
@@ -234,7 +242,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Account\" />
-    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -245,7 +252,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2666</DevelopmentServerPort>
+          <DevelopmentServerPort>13475</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

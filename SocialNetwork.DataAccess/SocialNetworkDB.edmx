@@ -501,7 +501,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SocialNetworkDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="SocialNetworkDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SocialNetworkDBEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <EntitySet Name="Addresses" EntityType="SocialNetworkDBModel.Address" />
           <EntitySet Name="Bans" EntityType="SocialNetworkDBModel.Ban" />
           <EntitySet Name="Cities" EntityType="SocialNetworkDBModel.City" />

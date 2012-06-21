@@ -4,7 +4,6 @@
 }*/
 html {
 	height: 100%;
-	
 }
 body {
 	font: 14px/16px 'MS Sans Serif', 'Times New Roman', Times, serif, Arial;
@@ -24,7 +23,6 @@ a:hover {
 	text-decoration: none;
 }
 
-
 p {
 	margin: 0 0 12px
 }
@@ -40,9 +38,11 @@ pre {
 img {
 	border: none;
 }
+
 input {
 	vertical-align: middle;
 }
+
 #wrapper {
 	width: 791px;
 	margin: 0 auto;
@@ -114,6 +114,8 @@ input {
 	background-repeat: repeat-x;
 }
 
+
+
 .tbxSelected
 {
     border: 1px solid #ff0000;
@@ -177,6 +179,18 @@ input {
     color: #9a9aff;
 }
 
+.txtDescriptiveDate
+{
+    font-size: 10px;
+    color: #c7c7c7;
+}
+
+.txtDescriptiveName
+{
+    font-size: 11px;
+    color: #7c5efe;
+}
+
 textarea {
     resize: none;
 }
@@ -195,3 +209,80 @@ textarea {
     float: right;
     width: 65%;
 }
+
+.floatbarLeft
+{
+    float: left;
+}
+
+.floatbarRight
+{
+    float: right;
+}
+
+
+/* -- Messages.aspx : buttons -- */
+.btnPostedActive
+{
+    background-image: url('img/buttons/snw_button_posted.png');
+    width: 123px;
+    height: 25px;
+}
+
+.btnPostedPassive
+{
+    background-image: url('img/buttons/snw_button_posted_passive.png');
+    width: 123px;
+    height: 25px;
+}
+
+.btnReceivedActive
+{
+    background-image: url('img/buttons/snw_button_received.png');
+    width: 123px;
+    height: 25px;
+}
+
+.btnReceivedPassive
+{
+    background-image: url('img/buttons/snw_button_received_passive.png');
+    width: 123px;
+    height: 25px;
+}
+
+.btnNew
+{
+    background-image: url('img/buttons/snw_button_new.png');
+    width: 123px;
+    height: 25px;
+}
+
+.btnRead
+{
+    background-image: url('img/buttons/snw_button_read.png');
+    width: 123px;
+    height: 25px;
+}
+
+.btnDelete
+{
+    background-image: url('img/buttons/snw_button_delete.png');
+    width: 123px;
+    height: 25px;
+}
+/* ---- */
+
+.pnlTopButtonsPanel
+{
+    height: 100%;
+    height: 30px;
+    padding: 5px 0 5px 100px;
+}
+
+.specialRowStyle
+{
+    background-color: #e4d5fc;
+    padding-left: 20px; 
+	padding-right: 20px; 
+}
+

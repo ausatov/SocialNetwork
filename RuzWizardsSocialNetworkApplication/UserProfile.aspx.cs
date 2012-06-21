@@ -1,4 +1,4 @@
-﻿using SocialNetwork.DataAccess;
+﻿using SocialNetwork.DataAccess.Entity;
 using SocialNetwork.DataAccess.Enums;
 using SocialNetwork.DataAccess.Repositories;
 using System;
@@ -35,7 +35,8 @@ public partial class UserProfile : System.Web.UI.Page
 
         if (!Page.IsPostBack)
         {
-            // Записать имя и статус пользователя в заголовочные поля страницы (шапка таблицы в основной колонке)
+            // RU: Записать имя и статус пользователя в заголовочные поля страницы (шапка таблицы в основной колонке).
+            // EN: Set user name and status on the top of table.
             PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
             if (personalInfo != null)
             {
@@ -43,13 +44,8 @@ public partial class UserProfile : System.Web.UI.Page
                     "{0} {1}", personalInfo.FirstName, personalInfo.LastName);
                 lblHeadUserStatus.Text = StatusRepository.GetStatusName(this._userID);
 
-                // Записать значения в дроплист статусов.
-                ddlStatus.DataBind();
-
-                // Записать данные о пользователе в таблицу детальной информации.
-                dvUserInfo.DataBind();
-
-                // Записать полное имя пользователя и текущее статус-сообщение.
+                // RU: Записать полное имя пользователя и текущее статус-сообщение.
+                // EN: Set user full name an status message.
                 lblUserName.Text = String.Format(
                     "{0} {1} {2} {3}",
                     personalInfo.FirstName, 
@@ -62,6 +58,15 @@ public partial class UserProfile : System.Web.UI.Page
                     btnStatusMessage.Text = "Not set";
                 }
             }
+
+            // RU: Привязка данных к стене.
+            // EN: Bind data to wallboard.
+            IEnumerable<WallBoardItem> dsWallBoardItem = WallBoardItemRepository.GetUserWallboardItems(this._userID);
+            fvWall.DataSource = dsWallBoardItem;
+            grdWall.DataSource = dsWallBoardItem;
+
+            // EN: Bind all page data elements.
+            Page.DataBind();
         }
 
         if (Page.IsPostBack)
@@ -71,7 +76,7 @@ public partial class UserProfile : System.Web.UI.Page
         }
 
         // Вывести на стену сообщения, адресованные текущему пользователю
-        dsWall.Where = String.Format("it.ToID = GUID '{0}' AND it.IsDeleted = {1}", this._userID, false);
+        //dsWall.Where = String.Format("it.ToID = GUID '{0}' AND it.IsDeleted = {1}", this._userID, false);
         dsPersonalInfo.Where = String.Format("it.UserID = GUID '{0}'", this._userID);
     }
 
@@ -83,7 +88,12 @@ public partial class UserProfile : System.Web.UI.Page
     /// <param name="e">EventArgs e.</param>
     protected void OnUserInfoDataBound(Object sender, EventArgs e)
     {
-        Address address = AddressRepository.GetUserAddress(this._userID);
+        //Address address = null;// AddressRepository.GetUserAddress(this._userID);
+        IEnumerable<Address> addressList = AddressRepository.GetUserAddress(this._userID);
+
+        //Пусть у нас будет только один возможный адрес у каждого пользователя.
+        Address address = addressList.FirstOrDefault();
+
         PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
         #region // Получение ссылок на элементы dvUserInfo
         Label lblBirthday = dvUserInfo.FindControl("lblBirthday") as Label;
@@ -157,8 +167,8 @@ public partial class UserProfile : System.Web.UI.Page
 
     /// <summary>
     /// Button event.
-    /// Действие по нажатию на кнопку изменения статус-сообщения.
-    /// Button StatusMessage_Click: 
+    /// RU: Действие по нажатию на кнопку изменения статус-сообщения.
+    /// EN: Button StatusMessage_Click: 
     /// 1. get current status message;
     /// 2. enable 'edit mode' in pnlStatusMessage.
     /// </summary>
@@ -173,8 +183,8 @@ public partial class UserProfile : System.Web.UI.Page
 
     /// <summary>
     /// Button event.
-    /// Действие по нажатию на кнопку сохранения статус-сообщения.
-    /// OnSaveStatusMessageClick:
+    /// RU: Действие по нажатию на кнопку сохранения статус-сообщения.
+    /// EN: OnSaveStatusMessageClick:
     /// 1. set text value in btnStatusMessage;
     /// 2. insert new status message to bd;
     /// 3. disable 'edit mode' in pnlStatusMessage.
@@ -195,8 +205,8 @@ public partial class UserProfile : System.Web.UI.Page
 
     /// <summary>
     /// GridView event.
-    /// Привязка данных к стене.
-    /// Bind data to wallboard.
+    /// RU: Привязка данных к стене.
+    /// EN: Bind data to wallboard.
     /// </summary>
     /// <param name="sender">Object sender.</param>
     /// <param name="e">EventArgs e.</param>
@@ -204,7 +214,8 @@ public partial class UserProfile : System.Web.UI.Page
     {
         GridViewRow grdRowItem = e.Row;
 
-        // По идентификаторам выводить имена пользователей оставивших сообщения.
+        // RU: По идентификаторам выводить имена пользователей оставивших сообщения.
+        // EN: Get user names on wallboard by id.
         Label lblFromID = grdRowItem.FindControl("lblFromID") as Label;
         PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
         if (lblFromID != null && personalInfo != null)
@@ -235,7 +246,8 @@ public partial class UserProfile : System.Web.UI.Page
     }
 
     /// <summary>
-    /// Установка состояния редактирования для панели изменения статуса. 
+    /// RU: Установка состояния редактирования для панели изменения статуса. 
+    /// EN: Set or unset 'edit mode' to status-edit panel.
     /// </summary>
     /// <param name="enabled">Type of status panel 'edit mode'.</param>
     protected void StatusPanelEditMode(Boolean enabled)
@@ -254,7 +266,7 @@ public partial class UserProfile : System.Web.UI.Page
 
     /// <summary>
     /// GridView event.
-    /// Delete row from user wallboard.
+    /// EN: Delete row from user wallboard.
     /// </summary>
     /// <param name="sender">Object sender.</param>
     /// <param name="e">EventArgs e.</param>

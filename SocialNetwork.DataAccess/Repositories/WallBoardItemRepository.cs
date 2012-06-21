@@ -4,8 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using SocialNetwork.DataAccess.Entity;
     using SocialNetwork.DataAccess.Enums;
-
+    
     /// <summary>
     /// Work with dbo.WallBoardItem.
     /// </summary>
@@ -14,7 +15,7 @@
         /// <summary>
         /// Delete item from wallboard by item identificator.
         /// </summary>
-        /// <param name="id">Item identificator <see cref="?"/></param>
+        /// <param name="id">Item identificator.</param>
         public static void DeleteItem(Guid id)
         {
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
@@ -59,16 +60,58 @@
             }
         }
 
-        public static IQueryable<WallBoardItem> SelectAllItems()
+        /// <summary>
+        /// Select list of wallboars items.
+        /// </summary>
+        /// <returns>List of wallboars items.</returns>
+        public static IEnumerable<WallBoardItem> SelectAllItems()
         {
-            IQueryable<WallBoardItem> list;
+            IEnumerable<WallBoardItem> list = null;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                list = from w in record.WallBoardItems
-                       select w;
-                   
+                list = record.WallBoardItems
+                    .OrderByDescending(x => x.SendDate)
+                    .Select(x => new WallBoardItem
+                        {
+                            ID = x.ID,
+                            ContentTypeID = x.ContentTypeID,
+                            FromID = x.FromID,
+                            ToID = x.ToID,
+                            SendDate = x.SendDate,
+                            Message = x.Message,
+                            IsDeleted = x.IsDeleted,
+                            NullLink = x.NullLink
+                        }).ToList();
             }
             return list;
+        }
+
+
+        /// <summary>
+        /// Select list of current user wallboars items.
+        /// </summary>
+        /// <returns>List of wallboars items.</returns>
+        public static IEnumerable<WallBoardItem> GetUserWallboardItems(Guid UserID)
+        {
+            IEnumerable<WallBoardItem> recordList = null;
+            using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+            {
+                recordList = record.WallBoardItems
+                    .Where(x => x.ToID == UserID && !x.IsDeleted)
+                    .OrderByDescending(x => x.SendDate)
+                    .Select(x => new WallBoardItem
+                    {
+                        ID = x.ID,
+                        ContentTypeID = x.ContentTypeID,
+                        FromID = x.FromID,
+                        ToID = x.ToID,
+                        SendDate = x.SendDate,
+                        Message = x.Message,
+                        IsDeleted = x.IsDeleted,
+                        NullLink = x.NullLink
+                    }).ToList();
+            }
+            return recordList;
         }
     }
 }

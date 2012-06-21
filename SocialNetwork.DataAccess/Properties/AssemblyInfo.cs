@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SocialNetwork.DataAccess")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("z53")]
+[assembly: AssemblyCompany("RusWizards")]
 [assembly: AssemblyProduct("SocialNetwork.DataAccess")]
-[assembly: AssemblyCopyright("Copyright © z53 2012")]
+[assembly: AssemblyCopyright("Copyright © RusWizards 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
