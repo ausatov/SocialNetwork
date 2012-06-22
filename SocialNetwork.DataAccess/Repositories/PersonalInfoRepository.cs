@@ -24,6 +24,7 @@
                 //userInfo = record.PersonalInfoes
                 //    .FirstOrDefault(x => x.UserID.Equals(userID));
                 userInfo = record.PersonalInfoes
+                    .Where(x=> x.UserID.Equals(userID))
                     .Select(x => new PersonalInfo
                         {
                             ID = x.ID,

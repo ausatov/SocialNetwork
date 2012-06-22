@@ -14,8 +14,26 @@
         /// </summary>
         public static Boolean IsAuthenticated
         {
-            get { return (bool)HttpContext.Current.Session["Authenticated"]; }
-            set { HttpContext.Current.Session["Authenticated"] = value; }
+            get
+            {
+                if (HttpContext.Current != null &&
+                     HttpContext.Current.Session["Authenticated"] != null &&
+                        HttpContext.Current.Session["Authenticated"] is Boolean)
+                {
+                    return (Boolean)HttpContext.Current.Session["Authenticated"];
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set
+            {
+                if (HttpContext.Current != null &&
+                    HttpContext.Current.Session["Authenticated"] != null &&
+                       HttpContext.Current.Session["Authenticated"] is Boolean)
+                    HttpContext.Current.Session["Authenticated"] = value;
+            }
         }
 
         /// <summary>
@@ -23,8 +41,26 @@
         /// </summary>
         public static Boolean IsAdmin
         {
-            get { return (Boolean)HttpContext.Current.Session["Admin"]; }
-            set { HttpContext.Current.Session["Admin"] = value; }
+            get
+            {
+                if (HttpContext.Current != null &&
+                     HttpContext.Current.Session["Admin"] != null &&
+                        HttpContext.Current.Session["Admin"] is Boolean)
+                {
+                    return (Boolean)HttpContext.Current.Session["Admin"];
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set
+            {
+                if (HttpContext.Current != null &&
+                    HttpContext.Current.Session["Admin"] != null &&
+                       HttpContext.Current.Session["Admin"] is Boolean)
+                    HttpContext.Current.Session["Admin"] = value;
+            }
         }
 
         /// <summary>
@@ -32,8 +68,26 @@
         /// </summary>
         public static Guid UserID
         {
-            get { return (Guid)HttpContext.Current.Session["UserID"]; }
-            set { HttpContext.Current.Session["UserID"] = value; }
+            get
+            {
+                if (HttpContext.Current != null &&
+                     HttpContext.Current.Session["UserID"] != null &&
+                        HttpContext.Current.Session["UserID"] is Guid)
+                {
+                    return (Guid)HttpContext.Current.Session["UserID"];
+                }
+                else
+                {
+                    return Guid.Empty;
+                }
+            }
+            set
+            {
+                if (HttpContext.Current != null &&
+                    HttpContext.Current.Session["UserID"] != null &&
+                       HttpContext.Current.Session["UserID"] is Guid)
+                    HttpContext.Current.Session["UserID"] = value;
+            }
         }
 
     }

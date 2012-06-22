@@ -74,6 +74,9 @@
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Enums\EnumsHelper.cs" />
     <Compile Include="IStatusRepository.cs" />
+    <Compile Include="Repositories\BanRepository.cs" />
+    <Compile Include="Repositories\FriendInvitationsRepository.cs" />
+    <Compile Include="Repositories\FriendRepository.cs" />
     <Compile Include="Repositories\StatusRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\WallBoardItemRepository.cs" />

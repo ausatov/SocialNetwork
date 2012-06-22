@@ -47,3 +47,9 @@ D:\GitRepositories\SocialNetwork\RuzWizardsSocialNetworkApplication\obj\Debug\Re
 D:\GitRepositories\SocialNetwork\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.dll
 D:\GitRepositories\SocialNetwork\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.pdb
 c:\JOB\Repo\RuzWizardsSocialNetworkApplication\obj\Debug\ResolveAssemblyReference.cache
+c:\JOB\Repo\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.dll
+c:\JOB\Repo\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.pdb
+c:\JOB\Repo\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.dll
+c:\JOB\Repo\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.pdb
+c:\JOB\Repo\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.dll
+c:\JOB\Repo\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.pdb

@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using SocialNetwork.DataAccess;
+using SocialNetwork.DataAccess.Repositories;
 using RuzWizardsSocialNetworkApplication.App_Code;
 
 /// <summary>
@@ -141,55 +142,57 @@ public partial class Login : System.Web.UI.Page
     /// <param name="e">Eventargs e.</param>
     protected void OnbtnLogin_Click(Object sender, ImageClickEventArgs e)
     {
-        bool _exist = false;
-        bool _admin = false;
-        HttpCookie _exCookie = Request.Cookies["EmailCookie"];
-        if (_exCookie != null)
+        bool exist = false;
+        bool admin = false;
+        HttpCookie exCookie = Request.Cookies["EmailCookie"];
+        if (exCookie != null)
         {
-            tbxEmail.Text = _exCookie["Email"].ToString();
+            tbxEmail.Text = exCookie["Email"].ToString();
         }
         //идет проверка на существование пользователя с такими введенными данными в БД
-        Guid _userId;
-        using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
-        {
-            _userId = record.Users
-                .Where(x => x.Email.Equals(tbxEmail.Text) && x.Password.Equals(tbxPassword.Text))
-                .Select(x => x.UserID)
-                .FirstOrDefault();
-        }
-        if (_userId != null)
+        Guid userId;
+
+        //using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+        //{
+        //    _userId = record.Users
+        //        .Where(x => x.Email.Equals(tbxEmail.Text) && x.Password.Equals(tbxPassword.Text))
+        //        .Select(x => x.UserID)
+        //        .FirstOrDefault();
+        //}
+        userId = UserRepository.GetUserID(tbxEmail.Text,tbxPassword.Text);
+        if (userId != null)
         {
             //SessionHelper.UserID = _userId;
             //_exist = true;
-            System.Nullable<int> _privelegeMask=0;
+            System.Nullable<int> privelegeMask=0;
             //// Int32? _privelegeMask = 0;
             //using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             //{
             //    _privelegeMask = record.spSelectMask(_userId).SingleOrDefault();
 
             //}
-            if (_privelegeMask >= 254)
+            if (privelegeMask >= 254)
             {
-                _admin = true;
+                admin = true;
             }
         }
-        if (_exist)
+        if (exist)
         {
             SessionHelper.IsAuthenticated = true;
-            if (_admin)
+            if (admin)
             {
                 SessionHelper.IsAdmin = true;
             }
         }
         //куки для логина
-        HttpCookie _emailCookie = new HttpCookie("EmailCookie");
+        HttpCookie emailCookie = new HttpCookie("EmailCookie");
         //куки будет храниться в течение одного месяца (можно поменять)
-        _emailCookie.Expires = DateTime.Now.AddMonths(1);
+        emailCookie.Expires = DateTime.Now.AddMonths(1);
         //заносим в куки введенный Email
-        _emailCookie["Email"] = tbxEmail.Text;
+        emailCookie["Email"] = tbxEmail.Text;
         //добавляем куки в браузер пользователя
-        Response.Cookies.Add(_emailCookie);
+        Response.Cookies.Add(emailCookie);
         //после id идет айди определенный по email и passward из базы
-        Response.Redirect("~/UserProfile.aspx?id=" + _userId);
+        Response.Redirect("~/UserProfile.aspx?id=" + userId);
     }
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using RuzWizardsSocialNetworkApplication.App_Code;
 
 /// <summary>
 /// Class UserProfile.
@@ -28,6 +29,11 @@ public partial class UserProfile : System.Web.UI.Page
     /// <param name="e">EventArgs e.</param>
     protected void Page_Load(Object sender, EventArgs e)
     {
+        if (!SessionHelper.IsAuthenticated)
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+       
         // Тут должен быть идентификатор текущего пользователя
         if (Guid.TryParse("e80cd2ac-8517-4e95-8321-3f4593d2106a", out this._userID))
         {

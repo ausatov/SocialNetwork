@@ -39,13 +39,22 @@ public partial class UserPage {
     protected global::System.Web.UI.WebControls.ContentPlaceHolder cphMainContent;
     
     /// <summary>
-    /// mnuLeftMenuBar control.
+    /// btnAdmin control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Menu mnuLeftMenuBar;
+    protected global::System.Web.UI.WebControls.Button btnAdmin;
+    
+    /// <summary>
+    /// mnuUser control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Menu mnuUser;
     
     /// <summary>
     /// cphLeftSideBar control.
