@@ -35,7 +35,7 @@
                                 case MessageSelectType.All:
                                     {
                                         recordList = record.Messages
-                                            .Where(x => x.FromID.Equals(UserID) && !x.IsDeleted)
+                                            .Where(x => x.FromID == UserID && !x.IsDeleted)
                                             .OrderByDescending(x => x.SendDate)
                                             .Select(x => new Message
                                             {

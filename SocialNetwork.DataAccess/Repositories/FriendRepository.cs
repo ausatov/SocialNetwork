@@ -1,11 +1,12 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="FriendRepository.cs" company="">
+// <copyright file="FriendRepository.cs" company="z53">
 // TODO: Update copyright text.
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace SocialNetwork.DataAccess.Repositories
 {
+    using SocialNetwork.DataAccess.Entity;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -14,23 +15,25 @@ namespace SocialNetwork.DataAccess.Repositories
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class FriendRepository
+    public static class FriendRepository
     {
-        public static IEnumerable<Entity.Friend> GetUserFriends(Guid userID)
+        public static IEnumerable<Friend> GetUserFriends(Guid UserID)
         {
-            IEnumerable<Entity.Friend> friendList = null;
+            IEnumerable<Friend> recordList = null;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                friendList = record.Bans
-                    .Where(x => x.UserID.Equals(userID) && !x.IsDeleted)
-                    .Select(x => new Entity.Friend
-                    {
-                        ID = x.ID,
-                        UserID = x.UserID,
-                       
-                    }).ToList();
+                recordList = record.Friends
+                    .Where(x => x.UserID == UserID && !x.IsDeleted)
+                    .Select(x => new Friend
+                        {
+                            ID = x.ID,
+                            UserID = x.UserID,
+                            FriendID = x.FriendID,
+                            FriendshipDate = x.FriendshipDate,
+                            IsDeleted = x.IsDeleted
+                        }).ToList();
             }
-            return friendList;
+            return null;
         }
     }
 }
