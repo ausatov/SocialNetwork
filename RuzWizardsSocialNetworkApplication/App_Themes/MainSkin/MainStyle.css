@@ -286,3 +286,47 @@ textarea {
 	padding-right: 20px; 
 }
 
+
+/**/
+.AsyncFileUploadControl
+{
+    float: left;
+    clear: both;
+    top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 123px;
+    height: 25px;
+    border:thick;
+    margin:0px;
+    background: url('img/buttons/snw_button_upload.png') no-repeat 100% 1px;
+    position:absolute; 
+    left:-20px; 
+    z-index:2;
+    opacity:0; 
+    filter:alpha(opacity=0);
+}
+
+.AsyncFileUploadControlButton
+{
+    position:absolute; 
+    top:0px; 
+    left:0px; 
+    z-index:1;
+}
+
+.AsyncFileUploadControlPanel
+{
+    position: relative; 
+    overflow: hidden; 
+    width: 123px; 
+    height: 25px; 
+    cursor: pointer;
+}
+
+.imgAvatar
+{
+    max-width: 200px;
+    max-height: 500px;
+}
+

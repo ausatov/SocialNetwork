@@ -42,5 +42,19 @@
             }
             return recordList;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="imagePath"></param>
+        public static void UpdAvatar(Guid userID, String imagePath)
+        {
+            using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+            {
+                //record.spUpdAvatar(userID, imagePath);
+                //record.SaveChanges();
+            }
+        }
     }
 }

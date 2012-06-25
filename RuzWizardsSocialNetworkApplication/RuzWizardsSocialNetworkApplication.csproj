@@ -95,6 +95,7 @@
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_registration_disabled.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_save.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_send.png" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_upload.png" />
     <Content Include="App_Themes\MainSkin\img\err.gif" />
     <Content Include="App_Themes\MainSkin\img\file_edit.ico" />
     <Content Include="App_Themes\MainSkin\img\icons\delete-icon.png" />
@@ -136,6 +137,7 @@
     <Content Include="App_Themes\MainSkin\MainStyle.css" />
     <Content Include="App_Themes\MainSkin\SpecialStyles.css" />
     <Content Include="EditProfile.aspx" />
+    <Content Include="Scripts\jquery.MultiFile.pack.js" />
     <Content Include="Styles\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Styles\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Styles\images\ui-bg_flat_100_f6f6f6_40x100.png" />
