@@ -16,15 +16,15 @@
         /// </summary>
         /// <param name="userID">Current user identificator.</param>
         /// <returns>PersonalInfo item.</returns>
-        public static PersonalInfo GetUserInfo(Guid userID)
+        public static IEnumerable<PersonalInfo> GetUserInfo(Guid userID)
         {
-            PersonalInfo userInfo;// = new PersonalInfo();
+            IEnumerable<PersonalInfo> recordList = null;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 //userInfo = record.PersonalInfoes
                 //    .FirstOrDefault(x => x.UserID.Equals(userID));
-                userInfo = record.PersonalInfoes
-                    .Where(x=> x.UserID.Equals(userID))
+                recordList = record.PersonalInfoes
+                    .Where(x => x.UserID.Equals(userID))
                     .Select(x => new PersonalInfo
                         {
                             ID = x.ID,
@@ -38,9 +38,9 @@
                             Birthday = x.Birthday,
                             ImagePath = x.ImagePath,
                             Description = x.Description
-                        }).FirstOrDefault();
+                        }).ToList();
             }
-            return userInfo;
+            return recordList;
         }
     }
 }

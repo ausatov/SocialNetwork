@@ -81,7 +81,7 @@
                        
                             <asp:DetailsView ID="dvUserInfo" runat="server" Height="50px" Width="98%" 
                                 AutoGenerateRows="false"
-                                DataKeyNames="ID" DataSourceID="dsPersonalInfo"
+                                DataKeyNames="ID"
                                 ondatabound="OnUserInfoDataBound" GridLines="None">
                                 <Fields>
                                     <asp:TemplateField HeaderText="Birthday:" SortExpression="Birthday">
@@ -135,12 +135,6 @@
                                     </asp:TemplateField>
                                 </Fields>
                             </asp:DetailsView>
-                            <asp:EntityDataSource ID="dsPersonalInfo" runat="server" 
-                                ConnectionString="name=SocialNetworkDBEntities" 
-                                DefaultContainerName="SocialNetworkDBEntities" 
-                                EnableFlattening="False" 
-                                EntitySetName="PersonalInfoes">
-                            </asp:EntityDataSource>
                         </div>
                                       
                         <div style="padding-top:10px;">

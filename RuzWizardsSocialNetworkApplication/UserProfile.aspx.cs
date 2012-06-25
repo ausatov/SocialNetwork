@@ -10,7 +10,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using RuzWizardsSocialNetworkApplication.App_Code;
 
 /// <summary>
 /// Class UserProfile.
@@ -29,23 +28,22 @@ public partial class UserProfile : System.Web.UI.Page
     /// <param name="e">EventArgs e.</param>
     protected void Page_Load(Object sender, EventArgs e)
     {
-        if (!SessionHelper.IsAuthenticated)
-        {
-            Response.Redirect("~/Login.aspx");
-        }
-       
         // Тут должен быть идентификатор текущего пользователя
         if (Guid.TryParse("e80cd2ac-8517-4e95-8321-3f4593d2106a", out this._userID))
         {
+            
         }
 
         if (!Page.IsPostBack)
         {
             // RU: Записать имя и статус пользователя в заголовочные поля страницы (шапка таблицы в основной колонке).
             // EN: Set user name and status on the top of table.
-            PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
+            IEnumerable<PersonalInfo> personalInfoList = PersonalInfoRepository.GetUserInfo(this._userID);
+            PersonalInfo personalInfo = personalInfoList.First();
             if (personalInfo != null)
             {
+
+                dvUserInfo.DataSource = personalInfoList;
                 lblHeadUserName.Text = String.Format(
                     "{0} {1}", personalInfo.FirstName, personalInfo.LastName);
                 lblHeadUserStatus.Text = StatusRepository.GetStatusName(this._userID);
@@ -83,7 +81,7 @@ public partial class UserProfile : System.Web.UI.Page
 
         // Вывести на стену сообщения, адресованные текущему пользователю
         //dsWall.Where = String.Format("it.ToID = GUID '{0}' AND it.IsDeleted = {1}", this._userID, false);
-        dsPersonalInfo.Where = String.Format("it.UserID = GUID '{0}'", this._userID);
+        //dsPersonalInfo.Where = String.Format("it.UserID = GUID '{0}'", this._userID);
     }
 
     /// <summary>
@@ -100,7 +98,7 @@ public partial class UserProfile : System.Web.UI.Page
         //Пусть у нас будет только один возможный адрес у каждого пользователя.
         Address address = addressList.FirstOrDefault();
 
-        PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
+        PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID).First();
         #region // Получение ссылок на элементы dvUserInfo
         Label lblBirthday = dvUserInfo.FindControl("lblBirthday") as Label;
         Label lblPhone = dvUserInfo.FindControl("lblPhone") as Label;
@@ -115,14 +113,12 @@ public partial class UserProfile : System.Web.UI.Page
         // Записываем в таблицу адресные данные пользователя, если они существуют
         if (address != null && !address.IsDeleted)
         {
-            if (this.SetValueOrInvisible(
-                this.dvUserInfo, 
-                0, 
-                lblBirthday, 
-                personalInfo.Birthday.ToString()))
-            {
-                lblBirthday.Text = lblBirthday.Text.Split()[0];
-            }
+            this.SetValueOrInvisible(
+                this.dvUserInfo,
+                0,
+                lblBirthday,
+                String.Format("{0:MM/dd/yyyy}", personalInfo.Birthday));
+            
             if (this.SetValueOrInvisible(this.dvUserInfo, 1, lblSex, personalInfo.Sex.ToString()))
             {
                 lblSex.Text = EnumsHelper.ToString((Sex)Convert.ToInt32(lblSex.Text));
@@ -223,7 +219,7 @@ public partial class UserProfile : System.Web.UI.Page
         // RU: По идентификаторам выводить имена пользователей оставивших сообщения.
         // EN: Get user names on wallboard by id.
         Label lblFromID = grdRowItem.FindControl("lblFromID") as Label;
-        PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
+        PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID).First();
         if (lblFromID != null && personalInfo != null)
         {
             Guid fromID = Guid.Parse(lblFromID.Text);
