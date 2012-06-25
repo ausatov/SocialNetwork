@@ -1,7 +1,0 @@
-E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.dll
-E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.pdb
-E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.dll
-E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.pdb
-E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Release\ResolveAssemblyReference.cache
-E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Release\RuzWizardsSocialNetworkApplication.dll
-E:\olool\16.02.2012\RuzWizardsSocialNetworkApplication\RuzWizardsSocialNetworkApplication\obj\Release\RuzWizardsSocialNetworkApplication.pdb

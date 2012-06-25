@@ -76,6 +76,8 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administration\RolesPage.aspx" />
+    <Content Include="App_Themes\BanPage\ban.css" />
     <Content Include="App_Themes\MainSkin\img\actions-arrow-down.png" />
     <Content Include="App_Themes\MainSkin\img\actions-arrow-up.png" />
     <Content Include="App_Themes\MainSkin\img\bg\snw_footer_gradient.png" />
@@ -83,8 +85,11 @@
     <Content Include="App_Themes\MainSkin\img\bg\snw_login_header.png" />
     <Content Include="App_Themes\MainSkin\img\btn_find.png" />
     <Content Include="App_Themes\MainSkin\img\bt_remove.ico" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_cancel.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_complete.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_delete.png" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_edit.png" />
+    <Content Include="App_Themes\MainSkin\img\buttons\snw_button_getbans.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_login.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_posted.png" />
     <Content Include="App_Themes\MainSkin\img\buttons\snw_button_posted_passive.png" />
@@ -133,7 +138,6 @@
     <Content Include="App_Themes\MainSkin\img\Settings-50x50.png" />
     <Content Include="App_Themes\MainSkin\img\snw_logo.png" />
     <Content Include="App_Themes\MainSkin\img\winbg.png" />
-    <Content Include="App_Themes\MainSkin\LeftSidebar.css" />
     <Content Include="App_Themes\MainSkin\MainStyle.css" />
     <Content Include="App_Themes\MainSkin\SpecialStyles.css" />
     <Content Include="EditProfile.aspx" />
@@ -390,9 +394,16 @@
     <Compile Include="EditProfile.aspx.designer.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administration\RolesPage.aspx.cs">
+      <DependentUpon>RolesPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+      </Compile>
     <Compile Include="WebServices\AutocompleteService.asmx.cs">
       <DependentUpon>AutocompleteService.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Administration\RolesPage.aspx.designer.cs">
+      <DependentUpon>RolesPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -458,7 +469,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\LoginPage\LoginPage.skin" />
-    <Content Include="App_Themes\MainSkin\MainSkin.skin" />
     <None Include="Bin\AjaxControlToolkit.dll.refresh" />
     <None Include="Bin\AntiXSSLibrary.dll.refresh" />
     <None Include="Bin\HtmlSanitizationLibrary.dll.refresh" />

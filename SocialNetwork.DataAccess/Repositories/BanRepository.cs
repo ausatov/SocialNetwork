@@ -27,15 +27,15 @@ namespace SocialNetwork.DataAccess.Repositories
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 ban = record.Bans
-                    .Where(x => x.UserID.Equals(userID) && !x.IsDeleted)
-                    .Select(x => new Entity.Ban
+                    .Where(w => w.UserID.Equals(userID) && !w.IsDeleted)
+                    .Select(s => new Entity.Ban
                     {
-                        ID = x.ID,
-                        UserID = x.UserID,
-                        AdminID = x.AdminID,
-                        FromDate = x.FromDate,
-                        ToDate = x.ToDate,
-                        Reason = x.Reason
+                        ID = s.ID,
+                        UserID = s.UserID,
+                        AdminID = s.AdminID,
+                        FromDate = s.FromDate,
+                        ToDate = s.ToDate,
+                        Reason = s.Reason
                     }).ToList();
             }
             return ban;
@@ -47,18 +47,42 @@ namespace SocialNetwork.DataAccess.Repositories
         /// <returns></returns>
         public static Entity.Ban GetBanInfo(Guid banID)
         {
-            Entity.Ban userInfo;
+            Entity.Ban banInfo;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                userInfo = record.Bans
-                   .Where(x => x.ID.Equals(banID))
-                   .Select(x => new Entity.Ban
+
+                banInfo = record.Bans
+                   .Where(w => w.ID.Equals(banID))
+                   .Select(s => new Entity.Ban
                    {
-                       UserID = x.UserID
+                       ID = s.ID,
+                       UserID = s.UserID,
+                       AdminID = s.AdminID,
+                       FromDate = s.FromDate,
+                       ToDate = s.ToDate,
+                       Reason = s.Reason
 
                    }).FirstOrDefault();
             }
-            return userInfo;
+            return banInfo;
+        }
+        public static void UpdateBan(String banReason, DateTime toDate, Guid banId)
+        {
+            using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+            {
+                record.spUpdBan(banId, banReason, toDate);
+                record.SaveChanges();
+            }
+        }
+
+        public static void DeleteBan(Guid banId)
+        {
+            using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+            {
+                record.spDelBan(banId);
+                record.SaveChanges();
+
+            }
         }
     }
 }

@@ -11,4 +11,9 @@ public partial class UserPage : System.Web.UI.MasterPage
     {
 
     }
+
+    protected void OnbtnAdmin_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Administration/Welcome.aspx");
+    }
 }

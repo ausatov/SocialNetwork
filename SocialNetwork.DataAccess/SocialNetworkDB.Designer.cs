@@ -540,6 +540,104 @@ namespace SocialNetwork.DataAccess
     
             return base.ExecuteFunction("spInsStatus", userIDParameter, messageParameter, statusIDParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="itemID">No Metadata Documentation available.</param>
+        public int spDelBanItem(Nullable<global::System.Guid> itemID)
+        {
+            ObjectParameter itemIDParameter;
+            if (itemID.HasValue)
+            {
+                itemIDParameter = new ObjectParameter("ItemID", itemID);
+            }
+            else
+            {
+                itemIDParameter = new ObjectParameter("ItemID", typeof(global::System.Guid));
+            }
+    
+            return base.ExecuteFunction("spDelBanItem", itemIDParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="userID">No Metadata Documentation available.</param>
+        public ObjectResult<Nullable<global::System.Int32>> spSelectRole(Nullable<global::System.Guid> userID)
+        {
+            ObjectParameter userIDParameter;
+            if (userID.HasValue)
+            {
+                userIDParameter = new ObjectParameter("userID", userID);
+            }
+            else
+            {
+                userIDParameter = new ObjectParameter("userID", typeof(global::System.Guid));
+            }
+    
+            return base.ExecuteFunction<Nullable<global::System.Int32>>("spSelectRole", userIDParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="banID">No Metadata Documentation available.</param>
+        /// <param name="reason">No Metadata Documentation available.</param>
+        /// <param name="todate">No Metadata Documentation available.</param>
+        public int spUpdBan(Nullable<global::System.Guid> banID, global::System.String reason, Nullable<global::System.DateTime> todate)
+        {
+            ObjectParameter banIDParameter;
+            if (banID.HasValue)
+            {
+                banIDParameter = new ObjectParameter("banID", banID);
+            }
+            else
+            {
+                banIDParameter = new ObjectParameter("banID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter reasonParameter;
+            if (reason != null)
+            {
+                reasonParameter = new ObjectParameter("reason", reason);
+            }
+            else
+            {
+                reasonParameter = new ObjectParameter("reason", typeof(global::System.String));
+            }
+    
+            ObjectParameter todateParameter;
+            if (todate.HasValue)
+            {
+                todateParameter = new ObjectParameter("todate", todate);
+            }
+            else
+            {
+                todateParameter = new ObjectParameter("todate", typeof(global::System.DateTime));
+            }
+    
+            return base.ExecuteFunction("spUpdBan", banIDParameter, reasonParameter, todateParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="banID">No Metadata Documentation available.</param>
+        public int spDelBan(Nullable<global::System.Guid> banID)
+        {
+            ObjectParameter banIDParameter;
+            if (banID.HasValue)
+            {
+                banIDParameter = new ObjectParameter("banID", banID);
+            }
+            else
+            {
+                banIDParameter = new ObjectParameter("banID", typeof(global::System.Guid));
+            }
+    
+            return base.ExecuteFunction("spDelBan", banIDParameter);
+        }
 
         #endregion
     }
