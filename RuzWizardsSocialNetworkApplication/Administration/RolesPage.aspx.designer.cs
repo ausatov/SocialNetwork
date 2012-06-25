@@ -10,16 +10,52 @@
 namespace RuzWizardsSocialNetworkApplication.Administration {
     
     
-    public partial class Bans {
+    public partial class RolesPage {
         
         /// <summary>
-        /// tbUserMail control.
+        /// imgBtnNewRole control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbUserMail;
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnNewRole;
+        
+        /// <summary>
+        /// imgBtnEditRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnEditRole;
+        
+        /// <summary>
+        /// imgBtnDeleteRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnDeleteRole;
+        
+        /// <summary>
+        /// imgBtnGetRoles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnGetRoles;
+        
+        /// <summary>
+        /// imgBtnCheckRole control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnCheckRole;
         
         /// <summary>
         /// tbAuto control.
@@ -31,75 +67,12 @@ namespace RuzWizardsSocialNetworkApplication.Administration {
         protected global::System.Web.UI.WebControls.TextBox tbAuto;
         
         /// <summary>
-        /// imgBtnBans control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnBans;
-        
-        /// <summary>
-        /// ddlBans control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBans;
-        
-        /// <summary>
-        /// tbReason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbReason;
-        
-        /// <summary>
-        /// tbToDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbToDate;
-        
-        /// <summary>
-        /// imgBtnDeleteBan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnDeleteBan;
-        
-        /// <summary>
-        /// imgBtnEditBan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnEditBan;
-        
-        /// <summary>
-        /// imgBtnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnSave;
-        
-        /// <summary>
-        /// imgBtnCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnCancel;
+        protected global::System.Web.UI.WebControls.Label Label1;
     }
 }

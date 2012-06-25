@@ -79,6 +79,7 @@
     <Compile Include="Repositories\FriendRepository.cs" />
     <Compile Include="Repositories\StatusRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\UserRoleRepository.cs" />
     <Compile Include="Repositories\WallBoardItemRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />

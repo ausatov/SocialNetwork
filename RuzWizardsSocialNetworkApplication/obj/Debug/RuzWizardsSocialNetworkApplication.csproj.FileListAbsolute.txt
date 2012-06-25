@@ -53,3 +53,17 @@ c:\JOB\Repo\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.dll
 c:\JOB\Repo\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.pdb
 c:\JOB\Repo\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.dll
 c:\JOB\Repo\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.pdb
+c:\JOB\mdaaa\Repo\RuzWizardsSocialNetworkApplication\obj\Debug\ResolveAssemblyReference.cache
+c:\JOB\mdaaa\Repo\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.dll
+c:\JOB\mdaaa\Repo\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.pdb
+c:\JOB\mdaaa\Repo\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.dll
+c:\JOB\mdaaa\Repo\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.pdb
+c:\JOB\mdaaa\Repo\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.dll
+c:\JOB\mdaaa\Repo\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.pdb
+c:\JOB\Repository\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.dll
+c:\JOB\Repository\RuzWizardsSocialNetworkApplication\bin\RuzWizardsSocialNetworkApplication.pdb
+c:\JOB\Repository\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.dll
+c:\JOB\Repository\RuzWizardsSocialNetworkApplication\bin\SocialNetwork.DataAccess.pdb
+c:\JOB\Repository\RuzWizardsSocialNetworkApplication\obj\Debug\ResolveAssemblyReference.cache
+c:\JOB\Repository\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.dll
+c:\JOB\Repository\RuzWizardsSocialNetworkApplication\obj\Debug\RuzWizardsSocialNetworkApplication.pdb

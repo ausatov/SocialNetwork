@@ -28,14 +28,12 @@ public partial class Login : System.Web.UI.Page
         {
             pnlLogin.Visible = false;
             pnlRegistrtion.Visible = true;
-            //btnRegistration.ImageUrl = "~/App_Themes/MainSkin/img/buttons/snw_button_registration_disabled.png";
             btnRegistration.Enabled = false;
         }
         else
         {
             pnlLogin.Visible = true;
             pnlRegistrtion.Visible = false;
-            //btnRegistration.ImageUrl = "~/App_Themes/MainSkin/img/buttons/snw_button_registration.png";
             btnRegistration.Enabled = true;
         }
     }
@@ -149,31 +147,27 @@ public partial class Login : System.Web.UI.Page
         {
             tbxEmail.Text = exCookie["Email"].ToString();
         }
-        //идет проверка на существование пользователя с такими введенными данными в БД
+
         Guid userId;
 
-        //using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
-        //{
-        //    _userId = record.Users
-        //        .Where(x => x.Email.Equals(tbxEmail.Text) && x.Password.Equals(tbxPassword.Text))
-        //        .Select(x => x.UserID)
-        //        .FirstOrDefault();
-        //}
-        userId = UserRepository.GetUserID(tbxEmail.Text,tbxPassword.Text);
+        userId = UserRepository.GetUserID(tbxEmail.Text, tbxPassword.Text);
         if (userId != null)
         {
-            //SessionHelper.UserID = _userId;
-            //_exist = true;
-            System.Nullable<int> privelegeMask=0;
+            SessionHelper.UserID = userId;
+            exist = true;
+            System.Nullable<int> privelegeMask = 0;
             //// Int32? _privelegeMask = 0;
-            //using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
-            //{
-            //    _privelegeMask = record.spSelectMask(_userId).SingleOrDefault();
-
-            //}
-            if (privelegeMask >= 254)
+            using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                admin = true;
+                privelegeMask = record.spSelectRole(userId).FirstOrDefault();
+
+            }
+            if (privelegeMask.HasValue)
+            {
+                if (privelegeMask >= 254)
+                {
+                    admin = true;
+                }
             }
         }
         if (exist)

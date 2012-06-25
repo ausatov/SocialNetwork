@@ -24,15 +24,41 @@
     /// </summary>
     public class SocialNetworkService : System.Web.Services.WebService
     {
+        [WebMethod]
+        public void UpdateBan(String banReason,DateTime toDate,Guid banId)
+        {
+            BanRepository.UpdateBan(banReason,toDate,banId);
+        }
+
+        [WebMethod]
+        public void DeleteBan(Guid banId)
+        {
+            BanRepository.DeleteBan(banId);
+
+        }
+
+
+        [WebMethod]
+        public List<SocialNetwork.DataAccess.Entity.User> FetchEmailList(String mail)
+        {
+            
+            var fetchEmail = UserRepository.GetAllUsers()
+            .Where(m => m.Email.ToLower().StartsWith(mail.ToLower()));
+            return fetchEmail.ToList();
+        }    
+
         /// <summary>
         /// Get all user's bans.
         /// </summary>
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<KeyValuePair<Guid, DateTime>> GetAllBans(Guid userID)
+        public List<KeyValuePair<Guid, String>> GetAllBans(String userMail)
         {
+            Guid userID = UserRepository.GetUserID(userMail);
             var banList = BanRepository.GetUserBans(userID);
-            return banList.Select(s => new KeyValuePair<Guid, DateTime>(s.ID, s.FromDate)).ToList();
+            return banList.Select(s => new KeyValuePair<Guid, String>
+                (s.ID, (s.FromDate.ToShortDateString()+ "-"+s.ToDate.ToShortDateString())
+                .ToString())).ToList();
 
         }
 
@@ -50,11 +76,20 @@
         /// <summary>
         /// Get ban's object
         /// </summary>
+        //[WebMethod]
+        //public KeyValuePair<Guid, String> GetBan(Guid banId)
+        //{
+
+        //    SocialNetwork.DataAccess.Entity.Ban banObj = BanRepository.GetBanInfo(banId);
+        //    return (new KeyValuePair<Guid, String>(banObj.ID, (banObj.FromDate + "-" + banObj.ToDate).ToString()));
+        //}
+
         [WebMethod]
-        public KeyValuePair<Guid, DateTime> GetBan(Guid banID)
+        public SocialNetwork.DataAccess.Entity.Ban GetBan(Guid banId)
         {
-            var ban = BanRepository.GetBanInfo(banID);
-            return (new KeyValuePair<Guid, DateTime>(ban.ID, ban.ToDate));
+
+            var ban = BanRepository.GetBanInfo(banId);
+            return ban;
         }
 
         /// <summary>

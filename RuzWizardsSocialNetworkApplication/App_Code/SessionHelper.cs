@@ -29,9 +29,9 @@
             }
             set
             {
-                if (HttpContext.Current != null &&
-                    HttpContext.Current.Session["Authenticated"] != null &&
-                       HttpContext.Current.Session["Authenticated"] is Boolean)
+               // if (HttpContext.Current != null &&
+                  //  HttpContext.Current.Session["Authenticated"] != null &&
+                   //    HttpContext.Current.Session["Authenticated"] is Boolean)
                     HttpContext.Current.Session["Authenticated"] = value;
             }
         }
@@ -56,9 +56,9 @@
             }
             set
             {
-                if (HttpContext.Current != null &&
-                    HttpContext.Current.Session["Admin"] != null &&
-                       HttpContext.Current.Session["Admin"] is Boolean)
+               // if (HttpContext.Current != null &&
+                  //  HttpContext.Current.Session["Admin"] != null &&
+                     //  HttpContext.Current.Session["Admin"] is Boolean)
                     HttpContext.Current.Session["Admin"] = value;
             }
         }
@@ -83,9 +83,9 @@
             }
             set
             {
-                if (HttpContext.Current != null &&
-                    HttpContext.Current.Session["UserID"] != null &&
-                       HttpContext.Current.Session["UserID"] is Guid)
+               // if (HttpContext.Current != null &&
+                    //HttpContext.Current.Session["UserID"] != null &&
+                      // HttpContext.Current.Session["UserID"] is Guid)
                     HttpContext.Current.Session["UserID"] = value;
             }
         }

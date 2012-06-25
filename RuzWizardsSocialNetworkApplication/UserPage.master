@@ -31,7 +31,8 @@
             </div>
             <!-- #container-->
             <div class="sidebar" id="sideLeft">
-                <asp:Button ID="btnAdmin" runat="server" Text="Administration" />
+                <asp:Button ID="btnAdmin" runat="server" Text="Administration" 
+                    onclick="OnbtnAdmin_Click" />
                 <asp:Menu ID="mnuUser" runat="server" StaticSubMenuIndent="10px" BackColor="#FFFFFF"
                     DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#284E98"
                     StaticSelectedStyle-Width="100px" StaticMenuItemStyle-Width="100px" OnMenuItemClick="mnuUser_MenuItemClick">
