@@ -11,31 +11,44 @@
     /// <summary>
     /// Summary description for FillItemsService.
     /// </summary>
-    //[WebService(Namespace = "http://tempuri.org/")]
-    //[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
     public class FillItemsService : System.Web.Services.WebService
     {
+        /// <summary>
+        /// Name of default 'noimage' photo.
+        /// </summary>
+        private const String _defaultAvatarImage = "no_photo.jpg";
+
         /// <summary>
         /// Return List of cities of the current country.
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
         [WebMethod]
-        public List<City> GetAllCountryCities(Guid countryID)
+        public List<KeyValuePair<Guid, String>> GetAllCountryCities(Guid countryID)
         {
-            return AddressRepository.GetAllCountryCities(countryID).ToList();
+            return AddressRepository.GetAllCountryCities(countryID)
+                .Select(s => new KeyValuePair<Guid, String>(s.CityID, s.Name))
+                .ToList();
         }
 
-        /// <summary>
-        /// Return List of countries.
-        /// </summary>
-        /// <returns></returns>
-        [WebMethod]
-        public List<Country> GetAllCountries()
+        [WebMethod(EnableSession = true)] 
+        public String GetUploadedAvatarImage()
         {
-            return AddressRepository.GetAllCountries().ToList();
+            HttpContext.Current.Session["_userID"] = "e80cd2ac-8517-4e95-8321-3f4593d2106a";
+
+            Guid userID = Guid.Empty;
+
+            if (Guid.TryParse((String)Session["_userID"], out userID))
+            {
+                if (userID != Guid.Empty)
+                {
+                    return PersonalInfoRepository.GetUserInfo(userID)
+                        .Select(s => s.ImagePath).FirstOrDefault();
+                }
+            }
+            
+            return _defaultAvatarImage;
         }
     }
 }

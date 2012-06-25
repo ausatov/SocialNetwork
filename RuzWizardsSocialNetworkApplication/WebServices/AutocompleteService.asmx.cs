@@ -23,8 +23,6 @@
             IEnumerable<Friend> friendsList = FriendRepository.GetUserFriends(userID);
             List<String> friends = friendsList
                 .Select(x => x.ID.ToString()).ToList();
-
-
             return friends;
             
         }

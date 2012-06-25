@@ -12,13 +12,13 @@
 public partial class EditProfile {
     
     /// <summary>
-    /// Panel2 control.
+    /// pnlMain control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Panel Panel2;
+    protected global::System.Web.UI.WebControls.Panel pnlMain;
     
     /// <summary>
     /// fvMain control.
@@ -30,13 +30,13 @@ public partial class EditProfile {
     protected global::System.Web.UI.WebControls.FormView fvMain;
     
     /// <summary>
-    /// Panel1 control.
+    /// pnlAddress control.
     /// </summary>
     /// <remarks>
     /// Auto-generated field.
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
-    protected global::System.Web.UI.WebControls.Panel Panel1;
+    protected global::System.Web.UI.WebControls.Panel pnlAddress;
     
     /// <summary>
     /// fvAddress control.
@@ -46,4 +46,58 @@ public partial class EditProfile {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.FormView fvAddress;
+    
+    /// <summary>
+    /// ccScriptManager control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::AjaxControlToolkit.ToolkitScriptManager ccScriptManager;
+    
+    /// <summary>
+    /// pnlAvatar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel pnlAvatar;
+    
+    /// <summary>
+    /// imgAvatar control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Image imgAvatar;
+    
+    /// <summary>
+    /// pnlAsyncFileUpload control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Panel pnlAsyncFileUpload;
+    
+    /// <summary>
+    /// ccAsyncFileUpload control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::AjaxControlToolkit.AsyncFileUpload ccAsyncFileUpload;
+    
+    /// <summary>
+    /// btnAsyncFileUpload control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.ImageButton btnAsyncFileUpload;
 }

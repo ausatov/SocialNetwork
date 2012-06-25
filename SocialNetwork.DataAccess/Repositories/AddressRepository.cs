@@ -59,6 +59,7 @@
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 recordList = record.Countries
+                    .OrderBy(o => o.Name)
                     .Select(s => new Country
                     {
                         CountryID = s.CountryID,
@@ -79,6 +80,7 @@
             {
                 recordList = record.Cities
                     .Where(w => w.CountryID.Equals(countryID))
+                    .OrderBy(o => o.Name)
                     .Select(s => new City
                     {
                         CityID = s.CityID,
