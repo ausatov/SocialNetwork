@@ -13,6 +13,7 @@
     <RootNamespace>RuzWizardsSocialNetworkApplication</RootNamespace>
     <AssemblyName>RuzWizardsSocialNetworkApplication</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -76,7 +77,9 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administration\Bans.aspx" />
     <Content Include="Administration\RolesPage.aspx" />
+    <Content Include="Administration\Welcome.aspx" />
     <Content Include="App_Themes\BanPage\ban.css" />
     <Content Include="App_Themes\MainSkin\img\actions-arrow-down.png" />
     <Content Include="App_Themes\MainSkin\img\actions-arrow-up.png" />
@@ -385,6 +388,27 @@
     <Content Include="WebServices\FillItemsService.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\Bans.aspx.cs">
+      <DependentUpon>Bans.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Bans.aspx.designer.cs">
+      <DependentUpon>Bans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Welcome.aspx.cs">
+      <DependentUpon>Welcome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Welcome.aspx.designer.cs">
+      <DependentUpon>Welcome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPage.Master.cs">
+      <DependentUpon>AdminPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPage.Master.designer.cs">
+      <DependentUpon>AdminPage.Master</DependentUpon>
+    </Compile>
     <Compile Include="EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -395,7 +419,7 @@
     <Compile Include="Administration\RolesPage.aspx.cs">
       <DependentUpon>RolesPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-      </Compile>
+    </Compile>
     <Compile Include="WebServices\AutocompleteService.asmx.cs">
       <DependentUpon>AutocompleteService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -467,6 +491,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\LoginPage\LoginPage.skin" />
+    <Content Include="AdminPage.Master" />
     <None Include="Bin\AjaxControlToolkit.dll.refresh" />
     <None Include="Bin\AntiXSSLibrary.dll.refresh" />
     <None Include="Bin\HtmlSanitizationLibrary.dll.refresh" />
