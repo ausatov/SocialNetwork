@@ -112,25 +112,49 @@
 
     // Function executed after the file successfully uploaded.
     function OnAsyncUploadComplete(sender, args) {
-        var pageUrl = '<%=ResolveUrl("~/WebServices/FillItemsService.asmx")%>';
-        $.ajax({
-            type: "POST",
-            url: pageUrl + "/GetUploadedAvatarImage",
-            data: '{}',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (msg) {
-                BindAvatarImage(msg.d)
-            }
-        });
+
+        var fileName = args.get_fileName();
+        var extensionPointIndex = fileName.lastIndexOf('.');
+        var fileExtension = '-1';
+        if (extensionPointIndex != -1) {
+            fileExtension = fileName.substring(extensionPointIndex).toLowerCase();
+        }
+
+        var fileLength = parseInt(args.get_length());
+        var defaultUploadLimit = 5242880;
+
+        if (fileLength > defaultUploadLimit) {
+            alert("Error. File size too big.");
+            return;
+        }
+
+        if (fileExtension != '-1' 
+            && (fileExtension == '.jpg' || fileExtension == '.png' || fileExtension == '.jpeg')) {
+
+            var pageUrl = '<%=ResolveUrl("~/WebServices/FillItemsService.asmx")%>';
+            $.ajax({
+                type: "POST",
+                url: pageUrl + "/GetUploadedAvatarImage",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    BindAvatarImage(msg.d)
+                }
+            });
+        }
+        else {
+            alert("Error. Incorrect file format. Upload only: jpg, jpeg, png.");
+            return;
+        }
     }
 
+    // Change image without reload.
     function BindAvatarImage(msg) {
         var imagePath = "Uploads/Photo/";
-        $("[name $= 'imgAvatar']").attr('src', imagePath + msg);
-        alert(msg);
-            
         
+        $("img[id$='imgAvatar']").attr("src", imagePath + msg + "?" + Math.random());
+
     }
 
     // Executed if the file uploading failed.

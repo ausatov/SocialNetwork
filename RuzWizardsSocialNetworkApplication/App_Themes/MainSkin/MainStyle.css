@@ -305,6 +305,7 @@ textarea {
     z-index:2;
     opacity:0; 
     filter:alpha(opacity=0);
+    cursor:pointer;
 }
 
 .AsyncFileUploadControlButton
@@ -313,6 +314,7 @@ textarea {
     top:0px; 
     left:0px; 
     z-index:1;
+    cursor:pointer;
 }
 
 .AsyncFileUploadControlPanel

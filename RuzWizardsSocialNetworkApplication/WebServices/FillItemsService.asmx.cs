@@ -32,6 +32,10 @@
                 .ToList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [WebMethod(EnableSession = true)] 
         public String GetUploadedAvatarImage()
         {

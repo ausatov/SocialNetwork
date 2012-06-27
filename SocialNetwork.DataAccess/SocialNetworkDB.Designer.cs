@@ -638,6 +638,36 @@ namespace SocialNetwork.DataAccess
     
             return base.ExecuteFunction("spDelBan", banIDParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="userID">No Metadata Documentation available.</param>
+        /// <param name="imagePath">No Metadata Documentation available.</param>
+        public int spUpdAvatar(Nullable<global::System.Guid> userID, global::System.String imagePath)
+        {
+            ObjectParameter userIDParameter;
+            if (userID.HasValue)
+            {
+                userIDParameter = new ObjectParameter("UserID", userID);
+            }
+            else
+            {
+                userIDParameter = new ObjectParameter("UserID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter imagePathParameter;
+            if (imagePath != null)
+            {
+                imagePathParameter = new ObjectParameter("ImagePath", imagePath);
+            }
+            else
+            {
+                imagePathParameter = new ObjectParameter("ImagePath", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("spUpdAvatar", userIDParameter, imagePathParameter);
+        }
 
         #endregion
     }

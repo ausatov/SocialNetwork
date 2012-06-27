@@ -32,6 +32,11 @@ public partial class EditProfile : System.Web.UI.Page
     private const String _defaultAvatarImage = "no_photo.jpg";
 
     /// <summary>
+    /// Default date format.
+    /// </summary>
+    private const String _dateFormat = "MM/dd/yyyy";
+
+    /// <summary>
     /// Max byte sise of uploaded file.
     /// </summary>
     private const Int32 _defaultUploadLimit = 5242880;
@@ -55,11 +60,11 @@ public partial class EditProfile : System.Web.UI.Page
         imgAvatar.ImageUrl = personalInfo.Select(s => s.ImagePath).FirstOrDefault();
         if (imgAvatar.ImageUrl == _defaultAvatarImage)
         {
-            imgAvatar.ImageUrl = String.Join("", _defaultUploadPhotoPath, _defaultAvatarImage);
+            imgAvatar.ImageUrl = String.Concat(_defaultUploadPhotoPath, _defaultAvatarImage);
         }
         else
         {
-            imgAvatar.ImageUrl = String.Join("", _defaultUploadPhotoPath, imgAvatar.ImageUrl);
+            imgAvatar.ImageUrl = String.Concat(_defaultUploadPhotoPath, imgAvatar.ImageUrl);
         }
         Page.DataBind();
     }
@@ -77,7 +82,7 @@ public partial class EditProfile : System.Web.UI.Page
             DateTime birthday = new DateTime();
             if (DateTime.TryParse(tbxBirthday.Text, out birthday))
             {
-                tbxBirthday.Text = birthday.ToString("MM/dd/yyyy");
+                tbxBirthday.Text = birthday.ToString(_dateFormat);
             }
             else
             {

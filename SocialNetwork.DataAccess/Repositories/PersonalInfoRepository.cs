@@ -52,8 +52,8 @@
         {
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                //record.spUpdAvatar(userID, imagePath);
-                //record.SaveChanges();
+                record.spUpdAvatar(userID, imagePath);
+                record.SaveChanges();
             }
         }
     }

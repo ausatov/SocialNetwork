@@ -16,22 +16,22 @@
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 userList = record.Users
-                   
+
                     .Select(x => new Entity.User
                     {
                         UserID = x.UserID,
-                        Email=x.Email,
-                        Password=x.Password
-                 
-                       
+                        Email = x.Email,
+                        Password = x.Password
+
+
                     }).ToList();
             }
             return userList;
         }
 
-        }
 
-               /// <summary>
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="userEmail"></param>
@@ -49,5 +49,6 @@
             }
             return userId;
 
+        }
     }
 }

@@ -170,13 +170,6 @@
                                                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
                                                     SortExpression="ID" Visible="False" />
                                                 <asp:TemplateField HeaderText="Message" SortExpression="Message">
-                                                    <EditItemTemplate>
-
-                                                        <asp:Label ID="lblFromID" runat="server" Text='<%# Bind("FromID") %>'></asp:Label>
-                                        
-                                                        <asp:TextBox ID="lblMessage" runat="server" Text='<%# Bind("Message") %>'></asp:TextBox>
-                                                        <asp:Label ID="lblSendDate" runat="server" Text='<%# Bind("SendDate") %>'></asp:Label>
-                                                    </EditItemTemplate>
                                                     <ItemTemplate>
                                                         <table width="100%">
                                                             <tr style="width:98%;">
