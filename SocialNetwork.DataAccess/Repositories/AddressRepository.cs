@@ -12,39 +12,81 @@
     public static class AddressRepository
     {
         /// <summary>
+        /// Default name of country.
+        /// </summary>
+        private const String _defaultCountryName = "-- not select country --";
+
+        /// <summary>
+        /// Default name of city.
+        /// </summary>
+        private const String _defaultCityName = "-- not select city --";
+
+        /// <summary>
         /// Get Address of current user.
         /// </summary>
         /// <param name="userID">User identificator.</param>
         /// <returns>Object Address.</returns>
-        //public static Address GetUserAddress(Guid userID)
-        //{
-        //    Address address = null;
-        //    using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
-        //    {
-        //        address = record.Addresses
-        //            .FirstOrDefault(x => x.PersonalInfo.UserID.Equals(userID) && !x.IsDeleted);
-        //    }
-        //    return address;
-        //}
         public static IEnumerable<Address> GetUserAddress(Guid userID)
         {
             IEnumerable<Address> recordList = null;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 recordList = record.Addresses
-                    .Where(x => x.PersonalInfo.UserID.Equals(userID) && !x.IsDeleted)
-                    .Select(x => new Address
+                    .Where(w => w.PersonalInfo.UserID.Equals(userID) && !w.IsDeleted)
+                    .Select(s => new Address
                         {
-                            ID = x.ID,
-                            UserInfoID = x.UserInfoID,
-                            CountryID = x.CountryID,
-                            CityID = x.CityID,
-                            Area = x.Area,
-                            Street = x.Street,
-                            Home = x.Home,
-                            Apartment = x.Apartment,
-                            IsDeleted = x.IsDeleted
+                            ID = s.ID,
+                            UserInfoID = s.UserInfoID,
+                            CountryID = s.CountryID,
+                            CityID = s.CityID,
+                            Area = s.Area,
+                            Street = s.Street,
+                            Home = s.Home,
+                            Apartment = s.Apartment,
+                            IsDeleted = s.IsDeleted
                         }).ToList();
+            }
+            return recordList;
+        }
+
+        /// <summary>
+        /// Get list, consists all countries.
+        /// </summary>
+        /// <returns>All countries.</returns>
+        public static IEnumerable<Country> GetAllCountries()
+        {
+            IEnumerable<Country> recordList = null;
+            using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+            {
+                recordList = record.Countries
+                    .OrderBy(o => o.Name)
+                    .Select(s => new Country
+                    {
+                        CountryID = s.CountryID,
+                        Name = s.Name
+                    }).ToList();
+            }
+            return recordList;
+        }
+
+        /// <summary>
+        /// Get list, consists all cities.
+        /// </summary>
+        /// <returns>All cities.</returns>
+        public static IEnumerable<City> GetAllCountryCities(Guid countryID)
+        {
+            IEnumerable<City> recordList = null;
+            using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+            {
+                recordList = record.Cities
+                    .Where(w => w.CountryID.Equals(countryID))
+                    .OrderBy(o => o.Name)
+                    .Select(s => new City
+                    {
+                        CityID = s.CityID,
+                        CountryID = s.CountryID,
+                        Name = s.Name
+                    }).ToList();
             }
             return recordList;
         }
@@ -54,29 +96,13 @@
         /// </summary>
         /// <param name="countryID">Country identificator.</param>
         /// <returns>Country name.</returns>
-        //public static String GetCountryName(Guid countryID)
-        //{
-        //    String countryName = String.Empty;
-        //    using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
-        //    {
-        //        countryName = record.Countries
-        //            .Where(x => x.CountryID == countryID)
-        //            .Select(x => x.Name)
-        //            .First();
-        //    }
-        //    return countryName;
-        //}
         public static String GetCountryName(Guid countryID)
         {
             String countryName = String.Empty;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                countryName = record.Countries
-                    .Where(x => x.CountryID == countryID)
-                    .Select(x => new Country
-                        {
-                            Name = x.Name
-                        }).First().Name;
+                var rawCountry = record.Countries.FirstOrDefault(f => f.CountryID.Equals(countryID));
+                countryName = rawCountry == null ?  _defaultCountryName : rawCountry.Name;
             }
             return countryName;
         }
@@ -86,29 +112,13 @@
         /// </summary>
         /// <param name="cityID">City identificator.</param>
         /// <returns>City name.</returns>
-        //public static String GetCityName(Guid cityID)
-        //{
-        //    String cityName = String.Empty;
-        //    using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
-        //    {
-        //        cityName = record.Cities
-        //            .Where(x => x.CityID == cityID)
-        //            .Select(x => x.Name)
-        //            .First();
-        //    }
-        //    return cityName;
-        //}
         public static String GetCityName(Guid cityID)
         {
             String cityName = String.Empty;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                cityName = record.Cities
-                    .Where(x => x.CityID == cityID)
-                    .Select(x => new City
-                        {
-                            Name = x.Name
-                        }).First().Name;
+                var rawCity = record.Cities.FirstOrDefault(f => f.CityID.Equals(cityID));
+                cityName = rawCity == null ? _defaultCityName : rawCity.Name;
             }
             return cityName;
         }

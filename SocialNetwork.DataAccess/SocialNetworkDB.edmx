@@ -466,15 +466,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="sfGetRole" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="userID" Type="uniqueidentifier" Mode="In" />
-        </Function>
-        <Function Name="spDelBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="banID" Type="uniqueidentifier" Mode="In" />
-        </Function>
-        <Function Name="spDelBanItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ItemID" Type="uniqueidentifier" Mode="In" />
-        </Function>
         <Function Name="spDelWallBoardItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ItemID" Type="uniqueidentifier" Mode="In" />
         </Function>
@@ -502,13 +493,9 @@
           <Parameter Name="ToID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Message" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="spSelectRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="userID" Type="uniqueidentifier" Mode="In" />
-        </Function>
-        <Function Name="spUpdBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="banID" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="reason" Type="nvarchar" Mode="In" />
-          <Parameter Name="todate" Type="smalldatetime" Mode="In" />
+        <Function Name="spUpdAvatar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ImagePath" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="spUpdDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
@@ -518,7 +505,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SocialNetworkDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="SocialNetworkDBEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+        <EntityContainer Name="SocialNetworkDBEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <EntitySet Name="Addresses" EntityType="SocialNetworkDBModel.Address" />
           <EntitySet Name="Bans" EntityType="SocialNetworkDBModel.Ban" />
           <EntitySet Name="Cities" EntityType="SocialNetworkDBModel.City" />
@@ -632,6 +619,10 @@
           </FunctionImport>
           <FunctionImport Name="spDelBan">
             <Parameter Name="banID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdAvatar">
+            <Parameter Name="UserID" Mode="In" Type="Guid" />
+            <Parameter Name="ImagePath" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Address">
@@ -1165,11 +1156,8 @@
           <FunctionImportMapping FunctionImportName="spDelWallBoardItem" FunctionName="SocialNetworkDBModel.Store.spDelWallBoardItem" />
           <FunctionImportMapping FunctionImportName="spInsWallBoardTextMessage" FunctionName="SocialNetworkDBModel.Store.spInsWallBoardTextMessage" />
           <FunctionImportMapping FunctionImportName="spInsStatus" FunctionName="SocialNetworkDBModel.Store.spInsStatus" />
-          <FunctionImportMapping FunctionImportName="spDelBanItem" FunctionName="SocialNetworkDBModel.Store.spDelBanItem" />
-          <FunctionImportMapping FunctionImportName="spSelectRole" FunctionName="SocialNetworkDBModel.Store.spSelectRole" />
-          <FunctionImportMapping FunctionImportName="spUpdBan" FunctionName="SocialNetworkDBModel.Store.spUpdBan" />
-          <FunctionImportMapping FunctionImportName="spDelBan" FunctionName="SocialNetworkDBModel.Store.spDelBan" />
-        </EntityContainerMapping>
+          <FunctionImportMapping FunctionImportName="spUpdAvatar" FunctionName="SocialNetworkDBModel.Store.spUpdAvatar" />
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -81,7 +81,7 @@
                        
                             <asp:DetailsView ID="dvUserInfo" runat="server" Height="50px" Width="98%" 
                                 AutoGenerateRows="false"
-                                DataKeyNames="ID" DataSourceID="dsPersonalInfo"
+                                DataKeyNames="ID"
                                 ondatabound="OnUserInfoDataBound" GridLines="None">
                                 <Fields>
                                     <asp:TemplateField HeaderText="Birthday:" SortExpression="Birthday">
@@ -135,12 +135,6 @@
                                     </asp:TemplateField>
                                 </Fields>
                             </asp:DetailsView>
-                            <asp:EntityDataSource ID="dsPersonalInfo" runat="server" 
-                                ConnectionString="name=SocialNetworkDBEntities" 
-                                DefaultContainerName="SocialNetworkDBEntities" 
-                                EnableFlattening="False" 
-                                EntitySetName="PersonalInfoes">
-                            </asp:EntityDataSource>
                         </div>
                                       
                         <div style="padding-top:10px;">
@@ -176,13 +170,6 @@
                                                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
                                                     SortExpression="ID" Visible="False" />
                                                 <asp:TemplateField HeaderText="Message" SortExpression="Message">
-                                                    <EditItemTemplate>
-
-                                                        <asp:Label ID="lblFromID" runat="server" Text='<%# Bind("FromID") %>'></asp:Label>
-                                        
-                                                        <asp:TextBox ID="lblMessage" runat="server" Text='<%# Bind("Message") %>'></asp:TextBox>
-                                                        <asp:Label ID="lblSendDate" runat="server" Text='<%# Bind("SendDate") %>'></asp:Label>
-                                                    </EditItemTemplate>
                                                     <ItemTemplate>
                                                         <table width="100%">
                                                             <tr style="width:98%;">

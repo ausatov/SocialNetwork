@@ -1,4 +1,4 @@
-﻿namespace RuzWizardsSocialNetworkApplication.App_Code
+namespace RuzWizardsSocialNetworkApplication.App_Code
 {
     using System;
     using System.Collections.Generic;

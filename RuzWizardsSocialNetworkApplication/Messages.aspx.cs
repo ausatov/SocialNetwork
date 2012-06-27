@@ -58,7 +58,7 @@ public partial class Messages : System.Web.UI.Page
         LinkButton btnSender = item.FindControl("btnSender") as LinkButton;
         if (btnSender != null)
         {
-            PersonalInfo person = PersonalInfoRepository.GetUserInfo(Guid.Parse(btnSender.Text));
+            PersonalInfo person = PersonalInfoRepository.GetUserInfo(Guid.Parse(btnSender.Text)).First();
             btnSender.Text = String.Format("{0} {1}", person.FirstName, person.LastName);
         }
     }

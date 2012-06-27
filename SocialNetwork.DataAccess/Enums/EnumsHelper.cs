@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SocialNetwork.DataAccess.Enums
+﻿namespace SocialNetwork.DataAccess.Enums
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    /// <summary>
+    /// Help to work with Enums.
+    /// </summary>
     public static class EnumsHelper
     {
+        /// <summary>
+        /// Convert UserStatus to string status name.
+        /// </summary>
+        /// <param name="status">Enum UserStatus.</param>
+        /// <returns>Status name.</returns>
         public static String ToString(UserStatus status)
         {
             String statusName = String.Empty;
@@ -15,27 +23,37 @@ namespace SocialNetwork.DataAccess.Enums
                 case UserStatus.Offline:
                     {
                         statusName = "offline";
-                    } break;
+                    } 
+                    break;
                 case UserStatus.Online:
                     {
                         statusName = "online";
-                    } break;
+                    } 
+                    break;
                 case UserStatus.AtHome:
                     {
                         statusName = "at home";
-                    } break;
+                    } 
+                    break;
                 case UserStatus.AtWork:
                     {
                         statusName = "at work";
-                    } break;
+                    } 
+                    break;
                 case UserStatus.Busy:
                     {
                         statusName = "busy";
-                    } break;
+                    } 
+                    break;
             }
             return statusName;
         }
 
+        /// <summary>
+        /// Convert Enum Sex to string sex name.
+        /// </summary>
+        /// <param name="sex">Enum Sex.</param>
+        /// <returns>Sex name.</returns>
         public static String ToString(Sex sex)
         {
             String sexName = String.Empty;
@@ -44,19 +62,15 @@ namespace SocialNetwork.DataAccess.Enums
                 case Sex.Male:
                     {
                         sexName = "male";
-                    } break;
+                    } 
+                    break;
                 case Sex.Female:
                     {
                         sexName = "female";
-                    } break;
-                default:
-                    {
-                        sexName = "not set";
-                    } break;
+                    } 
+                    break;
             }
             return sexName;
         }
-
-        
     }
 }
