@@ -12,7 +12,7 @@
 </head>
 <body>
     <div id="wrapper" style="height:100%; min-height:100%;">
-        <form id="form1" runat="server" enctype="multipart/form-data" method="post">
+        <form id="frmMain" runat="server" enctype="multipart/form-data" method="post">
         <center>
             <div id="header">
             </div>
@@ -77,9 +77,6 @@
 
                 <asp:ContentPlaceHolder ID="cphLeftSideBar" runat="server">
                 </asp:ContentPlaceHolder>
-
-
-
             </div>
             <!-- .sidebar#sideLeft -->
         </div>

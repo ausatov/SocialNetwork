@@ -1,21 +1,25 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="UserRoleRepository.cs" company="">
-// TODO: Update copyright text.
+// <copyright file="UserRepository.cs" company="RusWizards">
+// Author: Usatov A.B. 
+// Date: 29.06.12
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace SocialNetwork.DataAccess.Repositories
 {
+    #region Using
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    #endregion
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class UserRoleRepository
     {
+        #region Public methods
         //public String GetRoleName(Int32 privelegeMask)
         //{
         //    String roleName=null;
@@ -36,6 +40,6 @@ namespace SocialNetwork.DataAccess.Repositories
         //    }
         //    return roleName;
         //}
-
+        #endregion
     }
 }

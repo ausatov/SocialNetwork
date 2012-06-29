@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="MessageSelectType.cs" company="RusWizards">
+// <copyright file="UserPrivilege.cs" company="RusWizards">
 // Author: Mankevich M.V. 
 // Date: 29.06.12
 // </copyright>
@@ -8,23 +8,18 @@
 namespace SocialNetwork.DataAccess.Enums
 {
     /// <summary>
-    /// Type of select filter.
+    /// Users privileges.
     /// </summary>
-    public enum MessageSelectType
+    public enum UserPrivilege
     {
         /// <summary>
-        /// All items.
+        /// Simple user.
         /// </summary>
-        All = 0,
+        User = 0,
 
         /// <summary>
-        /// Only new messages.
+        /// Super privilege.
         /// </summary>
-        OnlyNew = 1,
-
-        /// <summary>
-        /// Only old messages.
-        /// </summary>
-        OnlyOld = 2
+        God = 1
     }
 }

@@ -466,6 +466,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pkID" Type="uniqueidentifier" Mode="InOut" />
+          <Parameter Name="updateByUserInfo" Type="bit" Mode="In" />
+          <Parameter Name="fkUserInfoID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="fkCountryID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="fkCityID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="area" Type="nvarchar" Mode="In" />
+          <Parameter Name="street" Type="nvarchar" Mode="In" />
+          <Parameter Name="home" Type="nvarchar" Mode="In" />
+          <Parameter Name="apartment" Type="nvarchar" Mode="In" />
+          <Parameter Name="isDeleted" Type="bit" Mode="In" />
+        </Function>
         <Function Name="spDelWallBoardItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ItemID" Type="uniqueidentifier" Mode="In" />
         </Function>
@@ -492,6 +504,20 @@
           <Parameter Name="FromID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="ToID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Message" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spPersonalInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pkID" Type="uniqueidentifier" Mode="InOut" />
+          <Parameter Name="updateByUser" Type="bit" Mode="In" />
+          <Parameter Name="fkUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="nickName" Type="nvarchar" Mode="In" />
+          <Parameter Name="firstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="lastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="middleName" Type="nvarchar" Mode="In" />
+          <Parameter Name="sex" Type="tinyint" Mode="In" />
+          <Parameter Name="phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="birthday" Type="smalldatetime" Mode="In" />
+          <Parameter Name="imagePath" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="spUpdAvatar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
@@ -623,6 +649,32 @@
           <FunctionImport Name="spUpdAvatar">
             <Parameter Name="UserID" Mode="In" Type="Guid" />
             <Parameter Name="ImagePath" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spAddress">
+            <Parameter Name="pkID" Mode="InOut" Type="Guid" />
+            <Parameter Name="updateByUserInfo" Mode="In" Type="Boolean" />
+            <Parameter Name="fkUserInfoID" Mode="In" Type="Guid" />
+            <Parameter Name="fkCountryID" Mode="In" Type="Guid" />
+            <Parameter Name="fkCityID" Mode="In" Type="Guid" />
+            <Parameter Name="area" Mode="In" Type="String" />
+            <Parameter Name="street" Mode="In" Type="String" />
+            <Parameter Name="home" Mode="In" Type="String" />
+            <Parameter Name="apartment" Mode="In" Type="String" />
+            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spPersonalInfo">
+            <Parameter Name="pkID" Mode="InOut" Type="Guid" />
+            <Parameter Name="updateByUser" Mode="In" Type="Boolean" />
+            <Parameter Name="fkUserID" Mode="In" Type="Guid" />
+            <Parameter Name="nickName" Mode="In" Type="String" />
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+            <Parameter Name="middleName" Mode="In" Type="String" />
+            <Parameter Name="sex" Mode="In" Type="Byte" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="birthday" Mode="In" Type="DateTime" />
+            <Parameter Name="imagePath" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Address">
@@ -1157,6 +1209,8 @@
           <FunctionImportMapping FunctionImportName="spInsWallBoardTextMessage" FunctionName="SocialNetworkDBModel.Store.spInsWallBoardTextMessage" />
           <FunctionImportMapping FunctionImportName="spInsStatus" FunctionName="SocialNetworkDBModel.Store.spInsStatus" />
           <FunctionImportMapping FunctionImportName="spUpdAvatar" FunctionName="SocialNetworkDBModel.Store.spUpdAvatar" />
+          <FunctionImportMapping FunctionImportName="spAddress" FunctionName="SocialNetworkDBModel.Store.spAddress" />
+          <FunctionImportMapping FunctionImportName="spPersonalInfo" FunctionName="SocialNetworkDBModel.Store.spPersonalInfo" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

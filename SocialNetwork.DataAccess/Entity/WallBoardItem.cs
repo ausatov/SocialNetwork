@@ -1,15 +1,18 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="WallBoardItem.cs" company="RusWizards">
-// TODO: Update copyright text.
+// Author: Mankevich M.V. 
+// Date: 29.06.12
 // </copyright>
 // -----------------------------------------------------------------------
 
 namespace SocialNetwork.DataAccess.Entity
 {
+    #region Using
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    #endregion
 
     /// <summary>
     /// TODO: Update summary.

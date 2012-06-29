@@ -668,6 +668,244 @@ namespace SocialNetwork.DataAccess
     
             return base.ExecuteFunction("spUpdAvatar", userIDParameter, imagePathParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pkID">No Metadata Documentation available.</param>
+        /// <param name="updateByUserInfo">No Metadata Documentation available.</param>
+        /// <param name="fkUserInfoID">No Metadata Documentation available.</param>
+        /// <param name="fkCountryID">No Metadata Documentation available.</param>
+        /// <param name="fkCityID">No Metadata Documentation available.</param>
+        /// <param name="area">No Metadata Documentation available.</param>
+        /// <param name="street">No Metadata Documentation available.</param>
+        /// <param name="home">No Metadata Documentation available.</param>
+        /// <param name="apartment">No Metadata Documentation available.</param>
+        /// <param name="isDeleted">No Metadata Documentation available.</param>
+        public int spAddress(ObjectParameter pkID, Nullable<global::System.Boolean> updateByUserInfo, Nullable<global::System.Guid> fkUserInfoID, Nullable<global::System.Guid> fkCountryID, Nullable<global::System.Guid> fkCityID, global::System.String area, global::System.String street, global::System.String home, global::System.String apartment, Nullable<global::System.Boolean> isDeleted)
+        {
+            ObjectParameter updateByUserInfoParameter;
+            if (updateByUserInfo.HasValue)
+            {
+                updateByUserInfoParameter = new ObjectParameter("updateByUserInfo", updateByUserInfo);
+            }
+            else
+            {
+                updateByUserInfoParameter = new ObjectParameter("updateByUserInfo", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter fkUserInfoIDParameter;
+            if (fkUserInfoID.HasValue)
+            {
+                fkUserInfoIDParameter = new ObjectParameter("fkUserInfoID", fkUserInfoID);
+            }
+            else
+            {
+                fkUserInfoIDParameter = new ObjectParameter("fkUserInfoID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter fkCountryIDParameter;
+            if (fkCountryID.HasValue)
+            {
+                fkCountryIDParameter = new ObjectParameter("fkCountryID", fkCountryID);
+            }
+            else
+            {
+                fkCountryIDParameter = new ObjectParameter("fkCountryID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter fkCityIDParameter;
+            if (fkCityID.HasValue)
+            {
+                fkCityIDParameter = new ObjectParameter("fkCityID", fkCityID);
+            }
+            else
+            {
+                fkCityIDParameter = new ObjectParameter("fkCityID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter areaParameter;
+            if (area != null)
+            {
+                areaParameter = new ObjectParameter("area", area);
+            }
+            else
+            {
+                areaParameter = new ObjectParameter("area", typeof(global::System.String));
+            }
+    
+            ObjectParameter streetParameter;
+            if (street != null)
+            {
+                streetParameter = new ObjectParameter("street", street);
+            }
+            else
+            {
+                streetParameter = new ObjectParameter("street", typeof(global::System.String));
+            }
+    
+            ObjectParameter homeParameter;
+            if (home != null)
+            {
+                homeParameter = new ObjectParameter("home", home);
+            }
+            else
+            {
+                homeParameter = new ObjectParameter("home", typeof(global::System.String));
+            }
+    
+            ObjectParameter apartmentParameter;
+            if (apartment != null)
+            {
+                apartmentParameter = new ObjectParameter("apartment", apartment);
+            }
+            else
+            {
+                apartmentParameter = new ObjectParameter("apartment", typeof(global::System.String));
+            }
+    
+            ObjectParameter isDeletedParameter;
+            if (isDeleted.HasValue)
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", isDeleted);
+            }
+            else
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction("spAddress", pkID, updateByUserInfoParameter, fkUserInfoIDParameter, fkCountryIDParameter, fkCityIDParameter, areaParameter, streetParameter, homeParameter, apartmentParameter, isDeletedParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pkID">No Metadata Documentation available.</param>
+        /// <param name="updateByUser">No Metadata Documentation available.</param>
+        /// <param name="fkUserID">No Metadata Documentation available.</param>
+        /// <param name="nickName">No Metadata Documentation available.</param>
+        /// <param name="firstName">No Metadata Documentation available.</param>
+        /// <param name="lastName">No Metadata Documentation available.</param>
+        /// <param name="middleName">No Metadata Documentation available.</param>
+        /// <param name="sex">No Metadata Documentation available.</param>
+        /// <param name="phone">No Metadata Documentation available.</param>
+        /// <param name="birthday">No Metadata Documentation available.</param>
+        /// <param name="imagePath">No Metadata Documentation available.</param>
+        /// <param name="description">No Metadata Documentation available.</param>
+        public int spPersonalInfo(ObjectParameter pkID, Nullable<global::System.Boolean> updateByUser, Nullable<global::System.Guid> fkUserID, global::System.String nickName, global::System.String firstName, global::System.String lastName, global::System.String middleName, Nullable<global::System.Byte> sex, global::System.String phone, Nullable<global::System.DateTime> birthday, global::System.String imagePath, global::System.String description)
+        {
+            ObjectParameter updateByUserParameter;
+            if (updateByUser.HasValue)
+            {
+                updateByUserParameter = new ObjectParameter("updateByUser", updateByUser);
+            }
+            else
+            {
+                updateByUserParameter = new ObjectParameter("updateByUser", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter fkUserIDParameter;
+            if (fkUserID.HasValue)
+            {
+                fkUserIDParameter = new ObjectParameter("fkUserID", fkUserID);
+            }
+            else
+            {
+                fkUserIDParameter = new ObjectParameter("fkUserID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter nickNameParameter;
+            if (nickName != null)
+            {
+                nickNameParameter = new ObjectParameter("nickName", nickName);
+            }
+            else
+            {
+                nickNameParameter = new ObjectParameter("nickName", typeof(global::System.String));
+            }
+    
+            ObjectParameter firstNameParameter;
+            if (firstName != null)
+            {
+                firstNameParameter = new ObjectParameter("firstName", firstName);
+            }
+            else
+            {
+                firstNameParameter = new ObjectParameter("firstName", typeof(global::System.String));
+            }
+    
+            ObjectParameter lastNameParameter;
+            if (lastName != null)
+            {
+                lastNameParameter = new ObjectParameter("lastName", lastName);
+            }
+            else
+            {
+                lastNameParameter = new ObjectParameter("lastName", typeof(global::System.String));
+            }
+    
+            ObjectParameter middleNameParameter;
+            if (middleName != null)
+            {
+                middleNameParameter = new ObjectParameter("middleName", middleName);
+            }
+            else
+            {
+                middleNameParameter = new ObjectParameter("middleName", typeof(global::System.String));
+            }
+    
+            ObjectParameter sexParameter;
+            if (sex.HasValue)
+            {
+                sexParameter = new ObjectParameter("sex", sex);
+            }
+            else
+            {
+                sexParameter = new ObjectParameter("sex", typeof(global::System.Byte));
+            }
+    
+            ObjectParameter phoneParameter;
+            if (phone != null)
+            {
+                phoneParameter = new ObjectParameter("phone", phone);
+            }
+            else
+            {
+                phoneParameter = new ObjectParameter("phone", typeof(global::System.String));
+            }
+    
+            ObjectParameter birthdayParameter;
+            if (birthday.HasValue)
+            {
+                birthdayParameter = new ObjectParameter("birthday", birthday);
+            }
+            else
+            {
+                birthdayParameter = new ObjectParameter("birthday", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter imagePathParameter;
+            if (imagePath != null)
+            {
+                imagePathParameter = new ObjectParameter("imagePath", imagePath);
+            }
+            else
+            {
+                imagePathParameter = new ObjectParameter("imagePath", typeof(global::System.String));
+            }
+    
+            ObjectParameter descriptionParameter;
+            if (description != null)
+            {
+                descriptionParameter = new ObjectParameter("description", description);
+            }
+            else
+            {
+                descriptionParameter = new ObjectParameter("description", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("spPersonalInfo", pkID, updateByUserParameter, fkUserIDParameter, nickNameParameter, firstNameParameter, lastNameParameter, middleNameParameter, sexParameter, phoneParameter, birthdayParameter, imagePathParameter, descriptionParameter);
+        }
 
         #endregion
     }

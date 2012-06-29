@@ -36,16 +36,8 @@
     <Reference Include="AjaxControlToolkit">
       <HintPath>..\packages\AjaxControlToolkit.4.1.60623\lib\40\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="AntiXSSLibrary, Version=4.2.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Bin\AntiXSSLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\AjaxControlToolkit.4.1.60623\lib\40\SanitizerProviders\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlSanitizationLibrary, Version=4.2.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Bin\HtmlSanitizationLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SanitizerProviders">
@@ -391,6 +383,8 @@
     <Content Include="Uploads\Photo\no_photo.jpg" />
     <Content Include="UserProfile.aspx" />
     <Content Include="WebServices\FillItemsService.asmx" />
+    <Content Include="WebServices\ModifyService.asmx" />
+    <Content Include="WebServices\SocialNetworkService.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administration\Bans.aspx.cs">
@@ -414,6 +408,7 @@
     <Compile Include="AdminPage.Master.designer.cs">
       <DependentUpon>AdminPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -479,13 +474,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Code\SessionHelper.cs" />
-    <Compile Include="Site.Master.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Master.designer.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
     <Compile Include="UserPage.master.cs">
       <DependentUpon>UserPage.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -504,9 +492,14 @@
       <DependentUpon>FillItemsService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Site.Master" />
+    <Compile Include="WebServices\ModifyService.asmx.cs">
+      <DependentUpon>ModifyService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebServices\SocialNetworkService.asmx.cs">
+      <DependentUpon>SocialNetworkService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\LoginPage\LoginPage.skin" />

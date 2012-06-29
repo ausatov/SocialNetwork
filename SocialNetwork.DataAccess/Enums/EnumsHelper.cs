@@ -1,15 +1,25 @@
-﻿namespace SocialNetwork.DataAccess.Enums
+﻿// -----------------------------------------------------------------------
+// <copyright file="EnumsHelper.cs" company="RusWizards">
+// Author: Mankevich M.V. 
+// Date: 29.06.12
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace SocialNetwork.DataAccess.Enums
 {
+    #region Using
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    #endregion
 
     /// <summary>
     /// Help to work with Enums.
     /// </summary>
     public static class EnumsHelper
     {
+        #region ToString(Enum)
         /// <summary>
         /// Convert UserStatus to string status name.
         /// </summary>
@@ -72,5 +82,6 @@
             }
             return sexName;
         }
+        #endregion
     }
 }

@@ -1,19 +1,29 @@
-﻿namespace SocialNetwork.DataAccess.Repositories
+﻿// -----------------------------------------------------------------------
+// <copyright file="WallBoardItemRepository.cs" company="RusWizards">
+// Author: Mankevich M.V. 
+// Date: 29.06.12
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace SocialNetwork.DataAccess.Repositories
 {
+    #region Using
+    using SocialNetwork.DataAccess.Entity;
+    using SocialNetwork.DataAccess.Enums;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using SocialNetwork.DataAccess.Entity;
-    using SocialNetwork.DataAccess.Enums;
-    
+    #endregion
+
     /// <summary>
     /// Work with dbo.WallBoardItem.
     /// </summary>
     public static class WallBoardItemRepository
     {
+        #region Public methods
         /// <summary>
-        /// Delete item from wallboard by item identificator.
+        /// Delete item from wallboard by item identifier.
         /// </summary>
         /// <param name="id">Item identificator.</param>
         public static void DeleteItem(Guid id)
@@ -41,7 +51,6 @@
                         {
                             record.spInsWallBoardTextMessage(
                                 (Int32)WallBoardItemType.Text, senderID, receiverID, (String)message);
-                            record.SaveChanges();
                         } 
                         break;
                     case WallBoardItemType.Image:
@@ -61,57 +70,58 @@
         }
 
         /// <summary>
-        /// Select list of wallboars items.
+        /// Select list of wallboards items.
         /// </summary>
-        /// <returns>List of wallboars items.</returns>
+        /// <returns>List of wallboards items.</returns>
         public static IEnumerable<WallBoardItem> SelectAllItems()
         {
             IEnumerable<WallBoardItem> list = null;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 list = record.WallBoardItems
-                    .OrderByDescending(x => x.SendDate)
-                    .Select(x => new WallBoardItem
+                    .OrderByDescending(o => o.SendDate)
+                    .Select(s => new WallBoardItem
                         {
-                            ID = x.ID,
-                            ContentTypeID = x.ContentTypeID,
-                            FromID = x.FromID,
-                            ToID = x.ToID,
-                            SendDate = x.SendDate,
-                            Message = x.Message,
-                            IsDeleted = x.IsDeleted,
-                            NullLink = x.NullLink
+                            ID = s.ID,
+                            ContentTypeID = s.ContentTypeID,
+                            FromID = s.FromID,
+                            ToID = s.ToID,
+                            SendDate = s.SendDate,
+                            Message = s.Message,
+                            IsDeleted = s.IsDeleted,
+                            NullLink = s.NullLink
                         }).ToList();
             }
             return list;
         }
 
-
         /// <summary>
-        /// Select list of current user wallboars items.
+        /// Select list of current user wallboards items.
         /// </summary>
-        /// <returns>List of wallboars items.</returns>
-        public static IEnumerable<WallBoardItem> GetUserWallboardItems(Guid UserID)
+        /// <param name="userID">User identifier.</param>
+        /// <returns>List of wallboards items.</returns>
+        public static IEnumerable<WallBoardItem> GetUserWallboardItems(Guid userID)
         {
             IEnumerable<WallBoardItem> recordList = null;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 recordList = record.WallBoardItems
-                    .Where(x => x.ToID == UserID && !x.IsDeleted)
-                    .OrderByDescending(x => x.SendDate)
-                    .Select(x => new WallBoardItem
+                    .Where(w => w.ToID == userID && !w.IsDeleted)
+                    .OrderByDescending(o => o.SendDate)
+                    .Select(s => new WallBoardItem
                     {
-                        ID = x.ID,
-                        ContentTypeID = x.ContentTypeID,
-                        FromID = x.FromID,
-                        ToID = x.ToID,
-                        SendDate = x.SendDate,
-                        Message = x.Message,
-                        IsDeleted = x.IsDeleted,
-                        NullLink = x.NullLink
+                        ID = s.ID,
+                        ContentTypeID = s.ContentTypeID,
+                        FromID = s.FromID,
+                        ToID = s.ToID,
+                        SendDate = s.SendDate,
+                        Message = s.Message,
+                        IsDeleted = s.IsDeleted,
+                        NullLink = s.NullLink
                     }).ToList();
             }
             return recordList;
         }
+        #endregion
     }
 }

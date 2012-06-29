@@ -1,60 +1,127 @@
-﻿namespace SocialNetwork.DataAccess.Repositories
+﻿// -----------------------------------------------------------------------
+// <copyright file="PersonalInfoRepository.cs" company="RusWizards">
+// Author: Mankevich M.V. 
+// Date: 29.06.12
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace SocialNetwork.DataAccess.Repositories
 {
+    #region Using.
     using SocialNetwork.DataAccess.Entity;
+    using SocialNetwork.DataAccess.Enums;
     using System;
     using System.Collections.Generic;
+    using System.Data.Objects;
     using System.Linq;
     using System.Text;
+    #endregion
 
     /// <summary>
     /// Work with dbo.PersonalInfo.
     /// </summary>
     public static class PersonalInfoRepository
     {
+        #region Public methods
         /// <summary>
         /// Get object of PersonalInfo.
         /// </summary>
         /// <param name="userID">Current user identificator.</param>
         /// <returns>PersonalInfo item.</returns>
-        public static IEnumerable<PersonalInfo> GetUserInfo(Guid userID)
+        public static PersonalInfo GetUserInfo(Guid userID)
         {
-            IEnumerable<PersonalInfo> recordList = null;
+            PersonalInfo personalInfo = null;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                //userInfo = record.PersonalInfoes
-                //    .FirstOrDefault(x => x.UserID.Equals(userID));
-                recordList = record.PersonalInfoes
-                    .Where(x => x.UserID.Equals(userID))
-                    .Select(x => new PersonalInfo
+                personalInfo = record.PersonalInfoes
+                    .Select(s => new PersonalInfo
                         {
-                            ID = x.ID,
-                            UserID = x.UserID,
-                            NickName = x.NickName,
-                            FirstName = x.FirstName,
-                            LastName = x.LastName,
-                            MiddleName = x.MiddleName,
-                            Sex = x.Sex,
-                            Phone = x.Phone,
-                            Birthday = x.Birthday,
-                            ImagePath = x.ImagePath,
-                            Description = x.Description
-                        }).ToList();
+                            ID = s.ID,
+                            UserID = s.UserID,
+                            NickName = s.NickName,
+                            FirstName = s.FirstName,
+                            LastName = s.LastName,
+                            MiddleName = s.MiddleName,
+                            Sex = s.Sex,
+                            Phone = s.Phone,
+                            Birthday = s.Birthday,
+                            ImagePath = s.ImagePath,
+                            Description = s.Description
+                        }).FirstOrDefault(f => f.UserID.Equals(userID));
             }
-            return recordList;
+            return personalInfo;
         }
 
         /// <summary>
-        /// 
+        /// Modify path to user avatar image.
         /// </summary>
-        /// <param name="userID"></param>
-        /// <param name="imagePath"></param>
-        public static void UpdAvatar(Guid userID, String imagePath)
+        /// <param name="userID">User identifier.</param>
+        /// <param name="imagePath">Image path.</param>
+        public static void ModifyAvatar(Guid userID, String imagePath)
         {
+            ModifyPersonalInfo(
+                null,
+                true,
+                userID,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                imagePath,
+                null);
+        }
+
+        /// <summary>
+        /// Modify PersonalInfo.
+        /// </summary>
+        /// <param name="id">Primary key identity.</param>
+        /// <param name="updateByUser">Update type flag.</param>
+        /// <param name="userID">Foreign key identity.</param>
+        /// <param name="nickName">Nick name.</param>
+        /// <param name="firstName">First name.</param>
+        /// <param name="lastName">Last name.</param>
+        /// <param name="middleName">Middle name.</param>
+        /// <param name="sex">User sex.</param>
+        /// <param name="phone">User phone.</param>
+        /// <param name="birthday">Birthday date.</param>
+        /// <param name="imagePath">Avatar image path.</param>
+        /// <param name="description">Personal description.</param>
+        public static void ModifyPersonalInfo(
+            Guid? id,
+            Boolean updateByUser,
+            Guid userID,
+            String nickName,
+            String firstName,
+            String lastName,
+            String middleName,
+            Sex? sex,
+            String phone,
+            DateTime? birthday,
+            String imagePath,
+            String description)
+        {
+            ObjectParameter pkID = (id != null) ? new ObjectParameter("pkID", id) 
+                : new ObjectParameter("pkID", typeof(Guid));
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                record.spUpdAvatar(userID, imagePath);
-                record.SaveChanges();
+                record.spPersonalInfo(
+                    pkID,
+                    updateByUser,
+                    userID,
+                    nickName,
+                    firstName,
+                    lastName,
+                    middleName,
+                    (Byte?)sex,
+                    phone,
+                    birthday,
+                    imagePath,
+                    description);
             }
         }
+        #endregion
     }
 }

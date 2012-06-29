@@ -61,7 +61,7 @@
                     <td>
                         <asp:ImageButton ID="btnShowReceived" runat="server" AlternateText="." ToolTip="Received"
                             CssClass="btnReceivedActive" OnClientClick="OnReceivedClick()" 
-                            OnClick="btnShowReceived_Click" 
+                            OnClick="OnShowReceivedClick" 
                             ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_received.png" />
                     </td>
                     <td>
@@ -70,7 +70,7 @@
                     <td>
                         <asp:ImageButton ID="btnShowPosted" runat="server" AlternateText="." ToolTip="Posted"
                             CssClass="btnPostedPassive" OnClientClick="OnPostedClick()" 
-                            OnClick="btnShowPosted_Click" 
+                            OnClick="OnShowPostedClick" 
                             ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_posted_passive.png" />
                     </td>
                 </tr>

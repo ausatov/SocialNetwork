@@ -75,10 +75,12 @@
     <Compile Include="Enums\MessageSelectType.cs" />
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Enums\Sex.cs" />
-    <Compile Include="Enums\UserPrivelege.cs" />
+    <Compile Include="Enums\UserPrivilege.cs" />
     <Compile Include="Enums\UserStatus.cs" />
     <Compile Include="Enums\WallBoardItemType.cs" />
     <Compile Include="IStatusRepository.cs" />
+    <Compile Include="Repositories\BanRepository.cs" />
+    <Compile Include="Repositories\FriendInvitationsRepository.cs" />
     <Compile Include="Repositories\FriendRepository.cs" />
     <Compile Include="Repositories\StatusRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

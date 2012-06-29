@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="true" Inherits="UserProfile" Codebehind="UserProfile.aspx.cs" %>
+<%--<%@ Register Src="~/UserControls/WallBoardItem.ascx" TagName="WallBoardItem" TagPrefix="uc" %>--%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHead" Runat="Server">
     <script type="text/javascript">
@@ -14,14 +15,12 @@
     <table width="100%" class="" cellpadding="2px" cellspacing="0">
         <tr style="width:1000px;">
             <td class="tblHeaderRow">
-                <div style="float: left; padding-left: 10px;">
+                <div class="floatbarLeft" style="padding-left: 10px;">
                     <asp:Label ID="lblHeadUserName" runat="server" Text="">
-                    Имя пользователя
                     </asp:Label>
                 </div>
-                <div style="float: right; padding-right: 10px;">
+                <div class="floatbarRight" style="padding-right: 10px;">
                     <asp:Label ID="lblHeadUserStatus" runat="server" Text="">
-                    Статус
                     </asp:Label>
                 </div>
             </td>
@@ -31,7 +30,7 @@
                 <div class="innerContainer">
                     <div class="specialSidebar" style="text-align: center;">
                         <div id="divUserAvatar">
-                            <asp:Image ID="imgUserAvatar" Width="200px" runat="server" ImageUrl="~/Uploads/Photo/no_photo.jpg" />
+                            <asp:Image ID="imgUserAvatar" CssClass="imgAvatar" runat="server" />
                         </div>
                         <%-- --%>
 
@@ -215,25 +214,26 @@
                                             </Columns>
                                         </asp:GridView>
 
-                                        <%--Источник данных 
-                                        <asp:EntityDataSource ID="dsWall" runat="server" 
-                                            ConnectionString="name=SocialNetworkDBEntities" 
-                                            DefaultContainerName="SocialNetworkDBEntities" EnableDelete="True" 
-                                            EnableFlattening="False" EnableInsert="True" EnableUpdate="True" 
-                                            EntitySetName="WallBoardItems">
-                                        </asp:EntityDataSource>--%>
 
-                                        <%--<asp:GridView ID="GridView1" runat="server" DataSourceID="ObjectDataSource1">
+
+                                        <%--<asp:Repeater ID="rptWallBoard" runat="server>
+                                        <ItemTemplate>
+                                            <uc:WallBoardItem ID="ucWallBoardItem" runat="server" />
+                                        </ItemTemplate>
+                                        <SeparatorTemplate>
+                                            <hr />
+                                        </SeparatorTemplate>
+                                        </asp:Repeater>--%>
+
+
+                                        <%-- Object datasource example.
+                                        <asp:GridView ID="GridView1" runat="server" DataSourceID="ObjectDataSource1">
                                         </asp:GridView>
                                         
                                         <asp:ObjectDataSource 
                                             ID="ObjectDataSource1" runat="server" SelectMethod="SelectAllItems"
                                             TypeName="SocialNetwork.DataAccess.Repositories.WallBoardItemRepository">
                                         </asp:ObjectDataSource>
-
-
-                                        
-                                        
                                         --%>
                                     </td>
                                 </tr>

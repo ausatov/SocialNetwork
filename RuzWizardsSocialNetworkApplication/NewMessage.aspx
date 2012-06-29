@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="true" CodeBehind="NewMessage.aspx.cs" Inherits="RuzWizardsSocialNetworkApplication.NewMessage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="true" CodeBehind="NewMessage.aspx.cs" Inherits="NewMessage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="server">
 
@@ -9,27 +9,8 @@
     <script src="Scripts/ui/jquery.ui.autocomplete.js" type="text/javascript"></script>
     <script src="Scripts/ui/jquery.ui.widget.js" type="text/javascript"></script>
     <script src="Scripts/ui/jquery-ui-1.8.21.custom.js" type="text/javascript"></script>
-<style>
-	.ui-combobox {
-		position: relative;
-		display: inline-block;
-	}
-	.ui-combobox-toggle {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		margin-left: -1px;
-		padding: 0;
-		/* adjust styles for IE 6/7 */
-		height: 1.7em;
-		top: 0.1em;
-	}
-	.ui-combobox-input {
-		margin: 0;
-		padding: 0.3em;
-	}
-	</style>
-	<script>
+
+	<script type="text/javascript">
 	    (function ($) {
 	        $.widget("ui.combobox", {
 	            _create: function () {

@@ -86,29 +86,6 @@
 </script>
 
 <script type="text/javascript">
-    // Function executed before the file start uploaded.
-    function OnAsyncUploadStarted(sender, args) {
-        var fileName = args.get_fileName();
-        var extensionPointIndex = fileName.lastIndexOf('.');
-        var fileExtension = '-1';
-        if (extensionPointIndex != -1)
-        {
-            fileExtension = fileName.substring(extensionPointIndex);
-        }
-
-        var fileLength = parseInt(args.get_length());
-        var defaultUploadLimit = 5242880;
-
-        if (fileLength > defaultUploadLimit) {
-            return;
-        }
-
-        if (fileExtension == '-1' || fileExtension != '.jpg' || 
-            fileExtension != '.png' || fileExtension != '.jpeg') {
-            return;
-        }
-
-    }
 
     // Function executed after the file successfully uploaded.
     function OnAsyncUploadComplete(sender, args) {
@@ -163,6 +140,34 @@
     }
 </script>
 
+<script type="text/javascript">
+    var pageUrl = '<%=ResolveUrl("~/WebServices/ModifyService.asmx")%>';
+
+    function OnMainSaveClick() {
+//        var nickName = $("[name $= 'tbxNickName']").val();
+//        var firstName = $("[name $= 'tbxFirstName']").val();
+//        var lastName = $("[name $= 'tbxLastName']").val();
+//        var middleName = $("[name $= 'tbxMiddleName']").val();
+//        var sex = $("[name $= 'ddlSex'] option:selected").val();
+//        var phone = $("[name $= 'tbxPhone']").val();
+//        var birthday = $("[name $= 'tbxBirthday']").val();
+//        var description = $("[name $= 'tbxDescription']").val();
+
+//        $.ajax({
+//            type: "POST",
+//            url: pageUrl + "/ModifyMainUserInfo",
+//            data: { "nickName": nickName.toString(), "firstName": firstName.toString(), "lastName": lastName.toString(), "middleName": middleName.toString(), "sex": sex.toString(), "phone": phone.toString(), "birthday": birthday.toString(), "description": description.toString() },
+//            contentType: "application/json; charset=utf-8",
+//            dataType: "json",
+//            success: function (msg) {
+//            },
+//            error: function (msg) {
+//                alert("1");
+//            }
+//        });
+    }
+
+</script>
 
 </asp:Content>
 
@@ -185,7 +190,8 @@
                 <asp:Panel ID="pnlMain" runat="server" Width="50%">
                 
                 <asp:FormView ID="fvMain" runat="server" DataKeyNames="ID" 
-                    DefaultMode="Edit" Width="100%" ondatabound="OnMainDataBound">
+                    DefaultMode="Edit" Width="100%" ondatabound="OnMainDataBound" 
+                        onitemcommand="fvMain_ItemCommand" onitemupdating="fvMain_ItemUpdating">
                     <EditItemTemplate>
                        
                         <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>' Visible="false" />
@@ -284,7 +290,7 @@
                                     <asp:Literal ID="litDescription" runat="server" Text="Description:" />
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="DescriptionTextBox" Height="100px" Width="96%" runat="server" MaxLength="4000" TextMode="MultiLine" 
+                                    <asp:TextBox ID="tbxDescription" Height="100px" Width="96%" runat="server" MaxLength="4000" TextMode="MultiLine" 
                                         Text='<%# Bind("Description") %>' />
                                 </td>
                             </tr>
@@ -299,7 +305,8 @@
 
                             <tr>
                                 <td colspan="2" style="text-align:center;">
-                                    <asp:ImageButton ID="btnSaveMain" runat="server" CommandName="Update" 
+                                    <asp:ImageButton ID="btnSaveMain" runat="server" CommandName="Update"
+                                        OnClientClick="OnMainSaveClick()" 
                                         ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_save.png" />
                                 </td>
                             </tr>
@@ -435,8 +442,7 @@
                             CssClass="AsyncFileUploadControl" UploaderStyle="Traditional"
                             onuploadedcomplete="OnAsyncFileUploadedComplete" 
                             ToolTip="Upload Avatar" onclientuploadcomplete="OnAsyncUploadComplete" 
-                            onclientuploaderror="OnAsyncUploadError" 
-                            onclientuploadstarted="OnAsyncUploadStarted" />
+                            onclientuploaderror="OnAsyncUploadError" />
                         <asp:ImageButton ID="btnAsyncFileUpload" runat="server" 
                             ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_upload.png" 
                             CssClass="AsyncFileUploadControlButton" />

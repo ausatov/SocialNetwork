@@ -1,5 +1,6 @@
 ﻿namespace RuzWizardsSocialNetworkApplication.WebServices
 {
+    #region Using
     using SocialNetwork.DataAccess.Entity;
     using SocialNetwork.DataAccess.Repositories;
     using System;
@@ -7,6 +8,7 @@
     using System.Linq;
     using System.Web;
     using System.Web.Services;
+    #endregion
 
     /// <summary>
     /// Summary description for FillItemsService.
@@ -14,16 +16,19 @@
     [System.Web.Script.Services.ScriptService]
     public class FillItemsService : System.Web.Services.WebService
     {
+        #region Constants
         /// <summary>
         /// Name of default 'noimage' photo.
         /// </summary>
         private const String _defaultAvatarImage = "no_photo.jpg";
+        #endregion
 
+        #region Web methods
         /// <summary>
         /// Return List of cities of the current country.
         /// </summary>
-        /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <param name="countryID">Country identificator.</param>
+        /// <returns>List of country cities.</returns>
         [WebMethod]
         public List<KeyValuePair<Guid, String>> GetAllCountryCities(Guid countryID)
         {
@@ -33,9 +38,9 @@
         }
 
         /// <summary>
-        /// 
+        /// Get path to user avatar image.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Path to user avatar image.</returns>
         [WebMethod(EnableSession = true)] 
         public String GetUploadedAvatarImage()
         {
@@ -47,12 +52,12 @@
             {
                 if (userID != Guid.Empty)
                 {
-                    return PersonalInfoRepository.GetUserInfo(userID)
-                        .Select(s => s.ImagePath).FirstOrDefault();
+                    return PersonalInfoRepository.GetUserInfo(userID).ImagePath;
                 }
             }
             
             return _defaultAvatarImage;
         }
+        #endregion
     }
 }

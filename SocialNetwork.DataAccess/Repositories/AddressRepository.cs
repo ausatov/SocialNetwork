@@ -1,16 +1,26 @@
-﻿namespace SocialNetwork.DataAccess.Repositories
+﻿// -----------------------------------------------------------------------
+// <copyright file="AddressRepository.cs" company="RusWizards">
+// Author: Mankevich M.V. 
+// Date: 29.06.12
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace SocialNetwork.DataAccess.Repositories
 {
+    #region Using
     using SocialNetwork.DataAccess.Entity;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    #endregion
 
     /// <summary>
     /// Work with dbo.Address, dbo.Country, dbo.City. 
     /// </summary>
     public static class AddressRepository
     {
+        #region Constants
         /// <summary>
         /// Default name of country.
         /// </summary>
@@ -20,19 +30,21 @@
         /// Default name of city.
         /// </summary>
         private const String _defaultCityName = "-- not select city --";
+        #endregion
 
+        #region Public methods
         /// <summary>
         /// Get Address of current user.
         /// </summary>
         /// <param name="userID">User identificator.</param>
         /// <returns>Object Address.</returns>
-        public static IEnumerable<Address> GetUserAddress(Guid userID)
+        public static Address GetUserAddress(Guid userID)
         {
-            IEnumerable<Address> recordList = null;
+            Address address = null;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                recordList = record.Addresses
-                    .Where(w => w.PersonalInfo.UserID.Equals(userID) && !w.IsDeleted)
+                address = record.Addresses
+                    .Where(w => w.PersonalInfo.UserID.Equals(userID))
                     .Select(s => new Address
                         {
                             ID = s.ID,
@@ -44,9 +56,9 @@
                             Home = s.Home,
                             Apartment = s.Apartment,
                             IsDeleted = s.IsDeleted
-                        }).ToList();
+                        }).FirstOrDefault(f => !f.IsDeleted);
             }
-            return recordList;
+            return address;
         }
 
         /// <summary>
@@ -72,6 +84,7 @@
         /// <summary>
         /// Get list, consists all cities.
         /// </summary>
+        /// <param name="countryID">Country identifier.</param>
         /// <returns>All cities.</returns>
         public static IEnumerable<City> GetAllCountryCities(Guid countryID)
         {
@@ -102,7 +115,7 @@
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 var rawCountry = record.Countries.FirstOrDefault(f => f.CountryID.Equals(countryID));
-                countryName = rawCountry == null ?  _defaultCountryName : rawCountry.Name;
+                countryName = rawCountry == null ? _defaultCountryName : rawCountry.Name;
             }
             return countryName;
         }
@@ -122,5 +135,6 @@
             }
             return cityName;
         }
+        #endregion
     }
 }

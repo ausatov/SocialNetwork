@@ -1,4 +1,12 @@
-﻿using SocialNetwork.DataAccess.Entity;
+﻿// -----------------------------------------------------------------------
+// <copyright file="UserProfile.cs" company="RusWizards">
+// Author: Mankevich M.V. 
+// Date: 29.06.12
+// </copyright>
+// -----------------------------------------------------------------------
+
+#region Using
+using SocialNetwork.DataAccess.Entity;
 using SocialNetwork.DataAccess.Enums;
 using SocialNetwork.DataAccess.Repositories;
 using System;
@@ -7,20 +15,32 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using RuzWizardsSocialNetworkApplication.Constants;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+#endregion
 
 /// <summary>
 /// Class UserProfile.
 /// </summary>
 public partial class UserProfile : System.Web.UI.Page
 {
+    #region Constants
     /// <summary>
-    /// Curent user identifacator.
+    /// Default empty status message.
+    /// </summary>
+    private const String _defaultEmptyStatusMessage = "-- not set --";
+    #endregion
+
+    #region Private fields
+    /// <summary>
+    /// Current user identifier.
     /// </summary>
     private Guid _userID = Guid.Empty;
+    #endregion
 
+    #region Page handlers
     /// <summary>
     /// Page_Load event.
     /// </summary>
@@ -29,77 +49,60 @@ public partial class UserProfile : System.Web.UI.Page
     protected void Page_Load(Object sender, EventArgs e)
     {
         // Тут должен быть идентификатор текущего пользователя
-        if (Guid.TryParse("e80cd2ac-8517-4e95-8321-3f4593d2106a", out this._userID))
-        {
-            
-        }
+        this._userID = Guid.Parse("e80cd2ac-8517-4e95-8321-3f4593d2106a");
 
         if (!Page.IsPostBack)
         {
-            // RU: Записать имя и статус пользователя в заголовочные поля страницы (шапка таблицы в основной колонке).
-            // EN: Set user name and status on the top of table.
-            IEnumerable<PersonalInfo> personalInfoList = PersonalInfoRepository.GetUserInfo(this._userID);
-            PersonalInfo personalInfo = personalInfoList.First();
+            // Set user name and status on the top of table.
+            PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
             if (personalInfo != null)
             {
+                dvUserInfo.DataSource = new List<PersonalInfo> { personalInfo };
+                lblHeadUserName.Text = String.Join(" ", personalInfo.FirstName, personalInfo.LastName);
+                lblHeadUserStatus.Text = EnumsHelper.ToString(((UserStatus)StatusRepository.GetStatusID(this._userID)));
 
-                dvUserInfo.DataSource = personalInfoList;
-                lblHeadUserName.Text = String.Format(
-                    "{0} {1}", personalInfo.FirstName, personalInfo.LastName);
-                lblHeadUserStatus.Text = StatusRepository.GetStatusName(this._userID);
-
-                // RU: Записать полное имя пользователя и текущее статус-сообщение.
-                // EN: Set user full name an status message.
-                lblUserName.Text = String.Format(
-                    "{0} {1} {2} {3}",
+                // Show user full name.
+                lblUserName.Text = String.Join(
+                    " ",
                     personalInfo.FirstName, 
                     personalInfo.LastName,
                     personalInfo.MiddleName, 
                     personalInfo.NickName);
+
+                // Show status message.
                 btnStatusMessage.Text = StatusRepository.GetStatusMessage(this._userID);
                 if (btnStatusMessage.Text == String.Empty)
                 {
-                    btnStatusMessage.Text = "Not set";
+                    btnStatusMessage.Text = _defaultEmptyStatusMessage;
                 }
             }
 
-            // RU: Привязка данных к стене.
-            // EN: Bind data to wallboard.
+            // Bind data to wallboard.
             IEnumerable<WallBoardItem> dsWallBoardItem = WallBoardItemRepository.GetUserWallboardItems(this._userID);
             fvWall.DataSource = dsWallBoardItem;
             grdWall.DataSource = dsWallBoardItem;
 
-            // EN: Bind all page data elements.
+            // Bind all page data elements.
             Page.DataBind();
         }
 
+        // Set invisible mode to status change panel on postback.
         if (Page.IsPostBack)
         {
-            // Скрыть панель изменения статуса на постбеке.
             this.StatusPanelEditMode(false);
         }
-
-        // Вывести на стену сообщения, адресованные текущему пользователю
-        //dsWall.Where = String.Format("it.ToID = GUID '{0}' AND it.IsDeleted = {1}", this._userID, false);
-        //dsPersonalInfo.Where = String.Format("it.UserID = GUID '{0}'", this._userID);
     }
 
     /// <summary>
-    /// DetailsView event.
-    /// Событие, происходящее после привязки данных к dvUserInfo.
+    /// After dvUserInfo data binding.
     /// </summary>
-    /// <param name="sender">Object sender.</param>
+    /// <param name="sender">Object sender : dvUserInfo.</param>
     /// <param name="e">EventArgs e.</param>
     protected void OnUserInfoDataBound(Object sender, EventArgs e)
     {
-        //Address address = null;// AddressRepository.GetUserAddress(this._userID);
-        IEnumerable<Address> addressList = AddressRepository.GetUserAddress(this._userID);
-
-        //Пусть у нас будет только один возможный адрес у каждого пользователя.
-        Address address = addressList.FirstOrDefault();
-
-        PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID).First();
-        #region // Получение ссылок на элементы dvUserInfo
+        Address address = AddressRepository.GetUserAddress(this._userID);
+        PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
+        #region // Inner controls
         Label lblBirthday = dvUserInfo.FindControl("lblBirthday") as Label;
         Label lblPhone = dvUserInfo.FindControl("lblPhone") as Label;
         Label lblSex = dvUserInfo.FindControl("lblSex") as Label;
@@ -110,14 +113,25 @@ public partial class UserProfile : System.Web.UI.Page
         Label lblHome = dvUserInfo.FindControl("lblHome") as Label;
         Label lblApartment = dvUserInfo.FindControl("lblApartment") as Label;
         #endregion
-        // Записываем в таблицу адресные данные пользователя, если они существуют
-        if (address != null && !address.IsDeleted)
+
+        imgUserAvatar.ImageUrl = personalInfo.ImagePath;
+        if (this.imgUserAvatar.ImageUrl == Constants._defaultAvatarImage)
+        {
+            this.imgUserAvatar.ImageUrl = String.Concat(Constants._defaultPhotoPath, Constants._defaultAvatarImage);
+        }
+        else
+        {
+            this.imgUserAvatar.ImageUrl = String.Concat(Constants._defaultPhotoPath, imgUserAvatar.ImageUrl);
+        }
+
+        // If user have address -> set values to controls.
+        if (address != null)
         {
             this.SetValueOrInvisible(
                 this.dvUserInfo,
                 0,
                 lblBirthday,
-                String.Format("{0:MM/dd/yyyy}", personalInfo.Birthday));
+                String.Format("{0:" + Constants._dateFormat + "}", personalInfo.Birthday));
             
             if (this.SetValueOrInvisible(this.dvUserInfo, 1, lblSex, personalInfo.Sex.ToString()))
             {
@@ -144,37 +158,11 @@ public partial class UserProfile : System.Web.UI.Page
     }
 
     /// <summary>
-    /// Записываем в lbl принадлежащий dv значение value, при условии, 
-    /// что оно существует, иначе скрываем строку с номером row.
-    /// В случае успешного присвоения значения возвращаем true, иначе - false.
-    /// </summary>
-    /// <param name="dv">Control DetailsViev.</param>
-    /// <param name="row">Control row number.</param>
-    /// <param name="lbl">Label, consisted in this row.</param>
-    /// <param name="value">New content for this label.</param>
-    /// <returns>Status of assigment value.</returns>
-    protected Boolean SetValueOrInvisible(DetailsView dv, Int32 row, Label lbl, String value)
-    {
-        if (value != null && lbl != null && value != string.Empty)
-        {
-            lbl.Text = value;
-            return true;
-        }
-        else
-        {
-            dv.Rows[row].Visible = false;
-            return false;
-        }
-    }
-
-    /// <summary>
-    /// Button event.
-    /// RU: Действие по нажатию на кнопку изменения статус-сообщения.
-    /// EN: Button StatusMessage_Click: 
+    /// Button StatusMessage_Click: 
     /// 1. get current status message;
     /// 2. enable 'edit mode' in pnlStatusMessage.
     /// </summary>
-    /// <param name="sender">Object sender.</param>
+    /// <param name="sender">Object sender : LinkButton.</param>
     /// <param name="e">EventArgs e.</param>
     protected void OnStatusMessageClick(Object sender, EventArgs e)
     {
@@ -184,21 +172,19 @@ public partial class UserProfile : System.Web.UI.Page
     }
 
     /// <summary>
-    /// Button event.
-    /// RU: Действие по нажатию на кнопку сохранения статус-сообщения.
-    /// EN: OnSaveStatusMessageClick:
+    /// OnSaveStatusMessageClick:
     /// 1. set text value in btnStatusMessage;
     /// 2. insert new status message to bd;
     /// 3. disable 'edit mode' in pnlStatusMessage.
     /// </summary>
-    /// <param name="sender">Object sender.</param>
-    /// <param name="e">EventArgs e.</param>
+    /// <param name="sender">Object sender : ImageButton.</param>
+    /// <param name="e">ImageClickEventArgs e.</param>
     protected void OnSaveStatusMessageClick(Object sender, ImageClickEventArgs e)
     {
         btnStatusMessage.Text = tbxStatusMessage.Text;
         if (btnStatusMessage.Text == String.Empty)
         {
-            btnStatusMessage.Text = "Not Set";
+            btnStatusMessage.Text = _defaultEmptyStatusMessage;
         }
         StatusRepository.SetStatusMessage(
             this._userID, btnStatusMessage.Text, (UserStatus)Convert.ToInt32(ddlStatus.SelectedValue));
@@ -206,32 +192,28 @@ public partial class UserProfile : System.Web.UI.Page
     }
 
     /// <summary>
-    /// GridView event.
-    /// RU: Привязка данных к стене.
-    /// EN: Bind data to wallboard.
+    /// Bind data to wallboard.
     /// </summary>
-    /// <param name="sender">Object sender.</param>
-    /// <param name="e">EventArgs e.</param>
+    /// <param name="sender">Object sender : GridView.</param>
+    /// <param name="e">GridViewRowEventArgs e.</param>
     protected void OnWallRowDataBound(Object sender, GridViewRowEventArgs e)
     {
         GridViewRow grdRowItem = e.Row;
 
-        // RU: По идентификаторам выводить имена пользователей оставивших сообщения.
-        // EN: Get user names on wallboard by id.
+        // Get user names on wallboard by id.
         Label lblFromID = grdRowItem.FindControl("lblFromID") as Label;
-        PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID).First();
+        PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
         if (lblFromID != null && personalInfo != null)
         {
             Guid fromID = Guid.Parse(lblFromID.Text);
-            lblFromID.Text = String.Format("{0:s} {1:s}", personalInfo.FirstName, personalInfo.LastName);
+            lblFromID.Text = String.Join(" ", personalInfo.FirstName, personalInfo.LastName);
         }
     }
 
     /// <summary>
-    /// DropDownList event.
     /// Bind data to ddlStatus.
     /// </summary>
-    /// <param name="sender">Object sender.</param>
+    /// <param name="sender">Object sender : DropDownList.</param>
     /// <param name="e">EventArgs e.</param>
     protected void OnStatusDataBinding(Object sender, EventArgs e)
     {
@@ -248,30 +230,10 @@ public partial class UserProfile : System.Web.UI.Page
     }
 
     /// <summary>
-    /// RU: Установка состояния редактирования для панели изменения статуса. 
-    /// EN: Set or unset 'edit mode' to status-edit panel.
+    /// Delete row from user wallboard.
     /// </summary>
-    /// <param name="enabled">Type of status panel 'edit mode'.</param>
-    protected void StatusPanelEditMode(Boolean enabled)
-    {
-        if (enabled)
-        {
-            pnlStatusMessage.Visible = true;
-            btnStatusMessage.Visible = false;
-        }
-        else
-        {
-            pnlStatusMessage.Visible = false;
-            btnStatusMessage.Visible = true;
-        }
-    }
-
-    /// <summary>
-    /// GridView event.
-    /// EN: Delete row from user wallboard.
-    /// </summary>
-    /// <param name="sender">Object sender.</param>
-    /// <param name="e">EventArgs e.</param>
+    /// <param name="sender">Object sender : GridView.</param>
+    /// <param name="e">GridViewDeleteEventArgs e.</param>
     protected void OnWallRowDeleting(Object sender, GridViewDeleteEventArgs e)
     {
         Guid id = Guid.Empty;
@@ -284,8 +246,8 @@ public partial class UserProfile : System.Web.UI.Page
     /// <summary>
     /// FormView command-event reactions.
     /// </summary>
-    /// <param name="sender">Object sender.</param>
-    /// <param name="e">EventArgs e.</param>
+    /// <param name="sender">Object sender : FormView.</param>
+    /// <param name="e">FormViewCommandEventArgs e.</param>
     protected void OnWallItemCommand(Object sender, FormViewCommandEventArgs e)
     {
         String commandName = e.CommandName;
@@ -297,4 +259,48 @@ public partial class UserProfile : System.Web.UI.Page
                 WallBoardItemType.Text, this._userID, this._userID, tbxMessage.Text);
         }
     }
+    #endregion
+
+    #region Private methods
+    /// <summary>
+    /// Write to 'lbl' (consisted in 'dv') param value if it exists, 
+    /// else set invisible to row with number 'row'.
+    /// </summary>
+    /// <param name="dv">Control DetailsViev.</param>
+    /// <param name="row">Control row number.</param>
+    /// <param name="lbl">Label, consisted in this row.</param>
+    /// <param name="value">New content for this label.</param>
+    /// <returns>Status of assigment value.</returns>
+    private Boolean SetValueOrInvisible(DetailsView dv, Int32 row, Label lbl, String value)
+    {
+        if (value != null && lbl != null && value != string.Empty)
+        {
+            lbl.Text = value;
+            return true;
+        }
+        else
+        {
+            dv.Rows[row].Visible = false;
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Set or unset 'edit mode' to status-edit panel.
+    /// </summary>
+    /// <param name="enabled">Type of status panel 'edit mode'.</param>
+    private void StatusPanelEditMode(Boolean enabled)
+    {
+        if (enabled)
+        {
+            pnlStatusMessage.Visible = true;
+            btnStatusMessage.Visible = false;
+        }
+        else
+        {
+            pnlStatusMessage.Visible = false;
+            btnStatusMessage.Visible = true;
+        }
+    }
+    #endregion
 }

@@ -1,20 +1,43 @@
-﻿namespace SocialNetwork.DataAccess.Repositories
+﻿// -----------------------------------------------------------------------
+// <copyright file="StatusRepository.cs" company="RusWizards">
+// Author: Mankevich M.V. 
+// Date: 29.06.12
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace SocialNetwork.DataAccess.Repositories
 {
+    #region Using
+    using SocialNetwork.DataAccess.Entity;
+    using SocialNetwork.DataAccess.Enums;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using SocialNetwork.DataAccess.Enums;
+    #endregion
 
     /// <summary>
     /// Work with dbo.Status.
     /// </summary>
     public static class StatusRepository
     {
+        #region Constants
+        /// <summary>
+        /// Default user status.
+        /// </summary>
+        private const UserStatus _defaultStatus = UserStatus.Online;
+
+        /// <summary>
+        /// Default empty status message.
+        /// </summary>
+        private const String _defaultStatusMessage = "";
+        #endregion
+
+        #region Public methods
         /// <summary>
         /// Get current status message.
         /// </summary>
-        /// <param name="userID">User identificator.</param>
+        /// <param name="userID">User identifier.</param>
         /// <returns>String with status message.</returns>
         public static String GetStatusMessage(Guid userID)
         {
@@ -22,34 +45,15 @@
             String statusMessage = String.Empty;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                statusMessage = record.Status
-                    .Where(x => x.UserID.Equals(userID) && x.IsSet && !x.IsDeleted)
-                    .Select(x => x.StatusMessage)
-                    .FirstOrDefault();
+                var rawStatusMessage = record.Status
+                    .FirstOrDefault(f => f.UserID.Equals(userID) && f.IsSet && !f.IsDeleted);
+                statusMessage = (rawStatusMessage == null) ? _defaultStatusMessage : rawStatusMessage.StatusMessage;
             }
             return statusMessage;
         }
 
         /// <summary>
-        /// Get current status name.
-        /// </summary>
-        /// <param name="userID">User identificator.</param>
-        /// <returns>String with status name.</returns>
-        public static String GetStatusName(Guid userID)
-        {
-            Int32 statusID = Int32.MinValue;
-            using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
-            {
-                statusID = record.Status
-                    .Where(x => x.UserID.Equals(userID) && x.IsSet && !x.IsDeleted)
-                    .Select(x => x.StatusID)
-                    .FirstOrDefault();
-            }
-            return EnumsHelper.ToString((UserStatus)statusID);
-        }
-
-        /// <summary>
-        /// Get current status identificator.
+        /// Get current status identifier.
         /// </summary>
         /// <param name="userID">User identificator.</param>
         /// <returns>Status code.</returns>
@@ -58,10 +62,8 @@
             Int32 statusID = Int32.MinValue;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                statusID = record.Status
-                    .Where(x => x.UserID.Equals(userID) && x.IsSet && !x.IsDeleted)
-                    .Select(x => x.StatusID)
-                    .FirstOrDefault();
+                var rawStatus = record.Status.FirstOrDefault(f => f.UserID.Equals(userID) && f.IsSet && !f.IsDeleted);
+                statusID = (rawStatus == null) ? (Int32)_defaultStatus : rawStatus.StatusID;
             }
             return statusID;
         }
@@ -77,8 +79,8 @@
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 record.spInsStatus(userID, message, (Int32)status);
-                record.SaveChanges(System.Data.Objects.SaveOptions.AcceptAllChangesAfterSave);
             }
         }
+        #endregion
     }
 }

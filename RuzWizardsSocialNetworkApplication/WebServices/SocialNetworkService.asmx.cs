@@ -1,20 +1,21 @@
 ﻿namespace RuzWizardsSocialNetworkApplication.WebServices
 {
+    using RuzWizardsSocialNetworkApplication.Constants;
+    using SocialNetwork.DataAccess.Entity;
+    using SocialNetwork.DataAccess.Repositories;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
     using System.Web.Services;
-    using SocialNetwork.DataAccess;
-    using SocialNetwork.DataAccess.Repositories;
     using System.Web.Script.Services;
     using System.Web.Script.Serialization;
 
     /// <summary>
     ///  SocialNetworkService.
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
-    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    //[WebService(Namespace = "http://tempuri.org/")]
+    //[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
@@ -24,26 +25,38 @@
     /// </summary>
     public class SocialNetworkService : System.Web.Services.WebService
     {
+        /// <summary>
+        /// Modify 
+        /// </summary>
+        /// <param name="banReason"></param>
+        /// <param name="toDate"></param>
+        /// <param name="banId"></param>
         [WebMethod]
-        public void UpdateBan(String banReason,DateTime toDate,Guid banId)
+        public void UpdateBan(Guid banID, String banReason, DateTime toDate)
         {
-            BanRepository.UpdateBan(banReason,toDate,banId);
+            BanRepository.UpdateBan(banID, banReason, toDate);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="banId"></param>
         [WebMethod]
-        public void DeleteBan(Guid banId)
+        public void DeleteBan(Guid banID)
         {
-            BanRepository.DeleteBan(banId);
-
+            BanRepository.DeleteBan(banID);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mail"></param>
+        /// <returns></returns>
         [WebMethod]
-        public List<SocialNetwork.DataAccess.Entity.User> FetchEmailList(String mail)
+        public List<SocialNetwork.DataAccess.Entity.User> FetchEmailList(String userEmail)
         {
-            
             var fetchEmail = UserRepository.GetAllUsers()
-            .Where(m => m.Email.ToLower().StartsWith(mail.ToLower()));
+                .Where(w => w.Email.ToLower().StartsWith(userEmail.ToLower()));
             return fetchEmail.ToList();
         }    
 
@@ -52,13 +65,15 @@
         /// </summary>
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public List<KeyValuePair<Guid, String>> GetAllBans(String userMail)
+        public List<KeyValuePair<Guid, String>> GetAllBans(String userEmail)
         {
-            Guid userID = UserRepository.GetUserID(userMail);
+            Guid userID = UserRepository.GetUserID(userEmail);
             var banList = BanRepository.GetUserBans(userID);
-            return banList.Select(s => new KeyValuePair<Guid, String>
-                (s.ID, (s.FromDate.ToShortDateString()+ "-"+s.ToDate.ToShortDateString())
-                .ToString())).ToList();
+            return banList
+                .Select(s => new KeyValuePair<Guid, String>(
+                    s.ID,
+                    (String.Join("-", s.FromDate.ToString(Constants._dateFormat), s.ToDate.ToString(Constants._dateFormat))))
+                    ).ToList();
 
         }
 
@@ -69,8 +84,10 @@
         public List<KeyValuePair<Guid, String>> GetAllFriends(Guid userID)
         {
             var friendList = FriendRepository.GetUserFriends(userID);
-            return friendList.Select(s => new KeyValuePair<Guid, String>(s.FriendID,
-            PersonalInfoRepository.GetUserInfo(s.FriendID).LastName)).ToList();
+            return friendList
+                .Select(s => new KeyValuePair<Guid, String>(
+                    s.FriendID,
+                    PersonalInfoRepository.GetUserInfo(s.FriendID).LastName)).ToList();
         }
 
         /// <summary>
@@ -84,11 +101,15 @@
         //    return (new KeyValuePair<Guid, String>(banObj.ID, (banObj.FromDate + "-" + banObj.ToDate).ToString()));
         //}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="banID"></param>
+        /// <returns></returns>
         [WebMethod]
-        public SocialNetwork.DataAccess.Entity.Ban GetBan(Guid banId)
+        public Ban GetBan(Guid banID)
         {
-
-            var ban = BanRepository.GetBanInfo(banId);
+            Ban ban = BanRepository.GetBanInfo(banID);
             return ban;
         }
 
@@ -111,37 +132,8 @@
         {
             var friendInvList = FriendInvitationsRepository.GetUserFriends(userID);
 
-            return friendInvList.Select(s => new KeyValuePair<Guid, String>(s.InvitationID, s.Message)).ToList();
+            return friendInvList
+                .Select(s => new KeyValuePair<Guid, String>(s.InvitationID, s.Message)).ToList();
         }
-
-        ///// <summary>
-        ///// Get all user's messages.
-        ///// </summary>
-        //[WebMethod]
-        //public List<Message> GetMessages(Guid userID)
-        //{
-        //    List<Message> _messageList = new List<Message>();
-        //    using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
-        //    {
-        //        _messageList = record.Messages
-        //            .Where(x => x.ToID.Equals(userID)).ToList<Message>();
-        //    }
-        //    return _messageList;
-        //}
-
-        ///// <summary>
-        ///// Get message's object.
-        ///// </summary>
-        //[WebMethod]
-        //public Message GetMessage(Guid messageID)
-        //{
-        //    Message _userObject = new Message();
-        //    using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
-        //    {
-        //        _userObject = record.Messages
-        //            .Where(x => x.MessageID.Equals(messageID)).FirstOrDefault<Message>();
-        //    }
-        //    return _userObject;
-        //}
     }
 }
