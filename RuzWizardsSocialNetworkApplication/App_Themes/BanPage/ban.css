@@ -1,0 +1,15 @@
+﻿#ban-control 
+{
+    margin:20px;
+    padding:20px;
+    border-style:dotted;
+    border-color:Black;
+    border-width:3px;
+}
+
+.element-padding
+{
+    padding:20px;
+    margin-top:10px;
+    margin-bottom:10px;
+    }
