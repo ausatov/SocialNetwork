@@ -1,7 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="true" Inherits="UserProfile" Codebehind="UserProfile.aspx.cs" %>
-<%--<%@ Register Src="~/UserControls/WallBoardItem.ascx" TagName="WallBoardItem" TagPrefix="uc" %>--%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="true"
+    Inherits="UserProfile" CodeBehind="UserProfile.aspx.cs" %>
+    <%@ MasterType VirtualPath="~/UserPage.master" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="cphHead" Runat="Server">
+<%--<%@ Register Src="~/UserControls/WallBoardItem.ascx" TagName="WallBoardItem" TagPrefix="uc" %>--%>
+<asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="Server">
     <script type="text/javascript">
 
         function ConfirmDeleteWallBoardItem() {
@@ -10,10 +12,9 @@
     
     </script>
 </asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" runat="Server">
     <table width="100%" class="" cellpadding="2px" cellspacing="0">
-        <tr style="width:1000px;">
+        <tr style="width: 1000px;">
             <td class="tblHeaderRow">
                 <div class="floatbarLeft" style="padding-left: 10px;">
                     <asp:Label ID="lblHeadUserName" runat="server" Text="">
@@ -33,8 +34,7 @@
                             <asp:Image ID="imgUserAvatar" CssClass="imgAvatar" runat="server" />
                         </div>
                         <%-- --%>
-
-                         <div style="padding-top: 10px; width: 200px;">
+                        <div style="padding-top: 10px; width: 200px;">
                             <table width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td class="tblHeaderRow">
@@ -44,13 +44,9 @@
                                 </tr>
                             </table>
                         </div>
-
                         <%-- --%>
-
                     </div>
-
                     <%----------------------------------- --%>
-
                     <div class="mainSidebar">
                         <div>
                             <span style="font-family: MS Sans Serif; font-weight: 900; font-size: 14px;">
@@ -73,15 +69,10 @@
                                     OnClick="OnSaveStatusMessageClick" />
                             </asp:Panel>
                         </div>
-
                         <hr />
-
                         <div>
-                       
-                            <asp:DetailsView ID="dvUserInfo" runat="server" Height="50px" Width="98%" 
-                                AutoGenerateRows="false"
-                                DataKeyNames="ID"
-                                ondatabound="OnUserInfoDataBound" GridLines="None">
+                            <asp:DetailsView ID="dvUserInfo" runat="server" Height="50px" Width="98%" AutoGenerateRows="false"
+                                DataKeyNames="ID" OnDataBound="OnUserInfoDataBound" GridLines="None">
                                 <Fields>
                                     <asp:TemplateField HeaderText="Birthday:" SortExpression="Birthday">
                                         <ItemTemplate>
@@ -135,65 +126,58 @@
                                 </Fields>
                             </asp:DetailsView>
                         </div>
-                                      
-                        <div style="padding-top:10px;">
+                        <div style="padding-top: 10px;">
                             <table width="101%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td class="tblHeaderRow">
-                                        <center><span class="tblHeaderFont">Wall</span></center>
+                                        <center>
+                                            <span class="tblHeaderFont">Wall</span></center>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:FormView ID="fvWall" runat="server" DataKeyNames="ID" 
-                                            DefaultMode="Insert" Width="100%" 
-                                            onitemcommand="OnWallItemCommand">
+                                        <asp:FormView ID="fvWall" runat="server" DataKeyNames="ID" DefaultMode="Insert" Width="100%"
+                                            OnItemCommand="OnWallItemCommand">
                                             <InsertItemTemplate>
-                                                <asp:DropDownList ID="ddlWallItemContentType" SelectedValue='<%# Bind("ContentTypeID") %>' runat="server">
-                                                         </asp:DropDownList>
-                                                        <br />
-                                                         <asp:TextBox ID="tbxMessage" TextMode="MultiLine" Height="60px" MaxLength="4000" Width="98%" runat="server" Text='<%# Bind("Message") %>'></asp:TextBox>
+                                                <asp:DropDownList ID="ddlWallItemContentType" SelectedValue='<%# Bind("ContentTypeID") %>'
+                                                    runat="server">
+                                                </asp:DropDownList>
                                                 <br />
-                                                <asp:ImageButton ID="btnSendWallMessage" 
-                                                    CommandName="SendWallMessage" runat="server"
+                                                <asp:TextBox ID="tbxMessage" TextMode="MultiLine" Height="60px" MaxLength="4000"
+                                                    Width="98%" runat="server" Text='<%# Bind("Message") %>'></asp:TextBox>
+                                                <br />
+                                                <asp:ImageButton ID="btnSendWallMessage" CommandName="SendWallMessage" runat="server"
                                                     ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_send.png" />
                                             </InsertItemTemplate>
                                         </asp:FormView>
-
-                                         <asp:GridView ID="grdWall" runat="server" Width="100%" AllowPaging="True" 
-                                            AutoGenerateColumns="False" DataKeyNames="ID" 
-                                            ShowHeader="False" BorderColor="#E3D5FF" BorderStyle="None" 
-                                            BorderWidth="0px" onrowdatabound="OnWallRowDataBound" 
-                                            onrowdeleting="OnWallRowDeleting">
+                                        <asp:GridView ID="grdWall" runat="server" Width="100%" AllowPaging="True" AutoGenerateColumns="False"
+                                            DataKeyNames="ID" ShowHeader="False" BorderColor="#E3D5FF" BorderStyle="None"
+                                            BorderWidth="0px" OnRowDataBound="OnWallRowDataBound" OnRowDeleting="OnWallRowDeleting">
                                             <Columns>
-                                                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" 
-                                                    SortExpression="ID" Visible="False" />
+                                                <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID"
+                                                    Visible="False" />
                                                 <asp:TemplateField HeaderText="Message" SortExpression="Message">
                                                     <ItemTemplate>
                                                         <table width="100%">
-                                                            <tr style="width:98%;">
+                                                            <tr style="width: 98%;">
                                                                 <td>
                                                                     <div class="txtDescriptive">
-                                                                        <asp:Label ID="lblFromID" runat="server" 
-                                                                            Text='<%# Eval("FromID") %>'>
+                                                                        <asp:Label ID="lblFromID" runat="server" Text='<%# Eval("FromID") %>'>
                                                                         </asp:Label>
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <div class="txtDescriptive" style="float:right;">
-                                                                        <asp:ImageButton ID="btnDelete" runat="server" 
-                                                                        CommandName="Delete" CommandArgument='<%# Bind("ID") %>'
-                                                                        OnClientClick="JavaScript: return ConfirmDeleteWallBoardItem();" 
-                                                                        Height="16px" Width="16px" ImageAlign="Top" 
-                                                                        ImageUrl="~/App_Themes/MainSkin/img/icons/delete-icon.png" />
+                                                                    <div class="txtDescriptive" style="float: right;">
+                                                                        <asp:ImageButton ID="btnDelete" runat="server" CommandName="Delete" CommandArgument='<%# Bind("ID") %>'
+                                                                            OnClientClick="JavaScript: return ConfirmDeleteWallBoardItem();" Height="16px"
+                                                                            Width="16px" ImageAlign="Top" ImageUrl="~/App_Themes/MainSkin/img/icons/delete-icon.png" />
                                                                     </div>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="2">
                                                                     <div>
-                                                                        <asp:Label ID="lblMessage" runat="server" 
-                                                                            Text='<%# Bind("Message") %>'>
+                                                                        <asp:Label ID="lblMessage" runat="server" Text='<%# Bind("Message") %>'>
                                                                         </asp:Label>
                                                                     </div>
                                                                 </td>
@@ -201,9 +185,8 @@
                                                             <tr>
                                                                 <td colspan="2">
                                                                     <div class="txtDescriptive">
-                                                                        Отправлено: 
-                                                                        <asp:Label ID="lblSendDate" runat="server" 
-                                                                            Text='<%# ((DateTime)Eval("SendDate")).ToLongDateString() %>'>
+                                                                        Отправлено:
+                                                                        <asp:Label ID="lblSendDate" runat="server" Text='<%# ((DateTime)Eval("SendDate")).ToLongDateString() %>'>
                                                                         </asp:Label>
                                                                     </div>
                                                                 </td>
@@ -213,9 +196,6 @@
                                                 </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
-
-
-
                                         <%--<asp:Repeater ID="rptWallBoard" runat="server>
                                         <ItemTemplate>
                                             <uc:WallBoardItem ID="ucWallBoardItem" runat="server" />
@@ -224,8 +204,6 @@
                                             <hr />
                                         </SeparatorTemplate>
                                         </asp:Repeater>--%>
-
-
                                         <%-- Object datasource example.
                                         <asp:GridView ID="GridView1" runat="server" DataSourceID="ObjectDataSource1">
                                         </asp:GridView>
@@ -245,7 +223,5 @@
         </tr>
     </table>
 </asp:Content>
-
-<asp:Content ID="Content3" ContentPlaceHolderID="cphLeftSideBar" Runat="Server">
+<asp:Content ID="Content3" ContentPlaceHolderID="cphLeftSideBar" runat="Server">
 </asp:Content>
-

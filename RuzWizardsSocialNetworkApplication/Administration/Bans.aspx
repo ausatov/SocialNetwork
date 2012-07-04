@@ -48,26 +48,13 @@
         });
 
 
-        //        $('#<%=ddlBans.ClientID%>').change(function (e) {
-
-        //            var ddlBans = $('#<%=ddlBans.ClientID%>');
-        //            var banId = ddlBans.val();
-        //            if (banId != -1) {
-        //                // Get Ban Details
-        //                GetBanDetails(banId);
-        //            }
-        //            else {
-        //                $("#outputTable").hide();
-        //            }
-        //        });
-
         function Start() {
             var tbUserMail = $("#<%=tbAuto.ClientID%>");
             var userMail = tbUserMail.val();
             var ddlBans = $('#<%=ddlBans.ClientID%>');
             $("#outputTable").hide();
             ddlBans.empty();
-            ddlBans.append('<option value="-1">--Select from ad to ban date --</option>');
+            ddlBans.append('<option value="-1">--Select from and to ban date --</option>');
             GetAllBans(userMail);
 
             ddlBans.change(function (e) {
@@ -109,6 +96,9 @@
             });
         }
 
+        function addZero(i) {
+            return (i < 10) ? "0" + i : i;
+        }
 
 
         function GetBanDetails(banId) {
@@ -124,12 +114,20 @@
                     $("#spnBanId").html(ban.ID);
                     $("#spnBanReason").html(ban.Reason);
                     //$("#<%=tbReason.ClientID%>").val(ban.Reason.toString());
-                    var parsedFromDate = new Date(parseInt(ban.FromDate.toString().substr(6)));
+                    var parsedFromDate = new Date(parseInt(ban.FromDate.substr(6)));
                     var jsFromDate = new Date(parsedFromDate);
-                    $("#spnFromDate").html(jsFromDate.getMonth()+'/'+jsFromDate.getDay()+'/'+jsFromDate.getFullYear());
+                    var day = jsFromDate.getDate();
+                    var month = jsFromDate.getMonth() + 1;
+                    month = addZero(month);
+                    day = addZero(day);
+                    $("#spnFromDate").html(month + '/' + day + '/' + jsFromDate.getFullYear());
                     var parsedToDate = new Date(parseInt(ban.ToDate.substr(6)));
                     var jsToDate = new Date(parsedToDate);
-                    $("#spnToDate").html(jsToDate.getMonth() + '/' + jsToDate.getDay() + '/' + jsToDate.getFullYear());
+                    month = jsToDate.getMonth() + 1;
+                    month = addZero(month);
+                    day = jsToDate.getDate();
+                    day = addZero(day);
+                    $("#spnToDate").html(month + '/' + day + '/' + jsToDate.getFullYear());
                     $("#outputTable").show();
                 },
                 error: function (xhr, status, error) {
@@ -160,20 +158,16 @@
             SaveParams(banReason, toDate, banId);
 
         }
-        function SaveParams(banReason, toDate, banId) {
+        function SaveParams(banReason, toDate, banID) {
             var pageUrl = '<%=ResolveUrl("~/WebServices/SocialNetworkService.asmx")%>';
             $.ajax({
                 type: "POST",
                 url: pageUrl + "/UpdateBan",
-                data: "{'banReason': '" + banReason + "', 'toDate': '" + toDate + "','banId':'" + banId + "'}",
+                data: "{'banReason': '" + banReason + "', 'toDate': '" + toDate + "','banID':'" + banID + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (response) {
                     OnCancelClick();
-                },
-                error: function (xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    alert(err.Message);
                 }
             });
         }
@@ -200,7 +194,7 @@
             $.ajax({
                 type: "POST",
                 url: pageUrl + "/DeleteBan",
-                data: "{'banId':'" + banId + "'}",
+                data: "{'banID':'" + banId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
                 success: function (response) {
@@ -218,7 +212,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" runat="server">
-    <div id="ban-control">
+    <div id="ban-control" class="banDiv">
         <!--<asp:TextBox ID="tbUserMail" runat="server"></asp:TextBox> -->
         <table>
             <tr>
@@ -303,6 +297,35 @@
             </tr>
         </table>
     </div>
+    <asp:ObjectDataSource ID="odsBans" runat="server" SelectMethod="GetAllBans" TypeName="SocialNetwork.DataAccess.Repositories.BanRepository"
+        EnablePaging="true" SelectCountMethod="GetAllBansCount" MaximumRowsParameterName="maximumRows"
+        StartRowIndexParameterName="startRowIndex"></asp:ObjectDataSource>
+    <div class="banDiv">
+    <p align="center">
+    <asp:Label ID="lblPageSize" Text="Choose page size..." runat="server"></asp:Label>
+    <asp:DropDownList AutoPostBack="true" ID="rowsToDisplay" runat="server" OnSelectedIndexChanged="rowsToDisplay_SelectedIndexChanged">
+        <asp:ListItem Value="1"></asp:ListItem>
+        <asp:ListItem Value="2" Selected="True"></asp:ListItem>
+        <asp:ListItem Value="3"></asp:ListItem>
+    </asp:DropDownList>
+    </p>
+        <asp:GridView ID="gvBans" runat="server" AutoGenerateColumns="False" AllowPaging="true"
+            PageSize="2" CellPadding="4" DataSourceID="odsBans" ForeColor="#333333" GridLines="None"
+            OnRowDataBound="gvBans_RowDataBound" OnRowCreated="gvBans_RowCreated" CssClass="mGrid">
+            <Columns>
+                <asp:BoundField DataField="UserID" HeaderText="User ID" SortExpression="UserID" />
+                <asp:BoundField DataField="Reason" HeaderText="Reason" SortExpression="Reason" />
+                <asp:BoundField DataField="FromDate" HeaderText="From Date" SortExpression="FromDate" />
+                <asp:BoundField DataField="ToDate" HeaderText="To Date" SortExpression="ToDate" />
+                <asp:TemplateField HeaderText="User's page">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="hlUserPage" runat="server"></asp:HyperLink>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphLeftSideBar" runat="server">
 </asp:Content>

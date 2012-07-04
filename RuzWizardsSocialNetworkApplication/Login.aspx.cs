@@ -1,3 +1,4 @@
+#region Using
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,14 @@ using System.Configuration;
 using SocialNetwork.DataAccess;
 using SocialNetwork.DataAccess.Repositories;
 using RuzWizardsSocialNetworkApplication.App_Code;
+#endregion
 
 /// <summary>
 /// Login page class.
 /// </summary>
 public partial class Login : System.Web.UI.Page
 {
+    #region Page handlers
     /// <summary>
     /// Page load event.
     /// </summary>
@@ -24,6 +27,11 @@ public partial class Login : System.Web.UI.Page
     /// <param name="e">Eventargs e.</param>
     protected void Page_Load(Object sender, EventArgs e)
     {
+        HttpCookie exCookie = Request.Cookies["EmailCookie"];
+        if (exCookie != null)
+        {
+            tbxEmail.Text = exCookie["Email"].ToString();
+        }
         if (Request.QueryString["reg"] != null)
         {
             pnlLogin.Visible = false;
@@ -140,53 +148,46 @@ public partial class Login : System.Web.UI.Page
     /// <param name="e">Eventargs e.</param>
     protected void OnbtnLogin_Click(Object sender, ImageClickEventArgs e)
     {
-        bool exist = false;
-        bool admin = false;
-        HttpCookie exCookie = Request.Cookies["EmailCookie"];
-        if (exCookie != null)
+        CheckLoginInfo();
+    }
+    #endregion
+
+    #region Private methods
+    private void CheckLoginInfo()
+    {
+        Guid userID;
+        userID = UserRepository.GetUserID(tbxEmail.Text, tbxPassword.Text);
+        if (userID != Guid.Empty)
         {
-            tbxEmail.Text = exCookie["Email"].ToString();
-        }
-
-        Guid userId;
-
-        userId = UserRepository.GetUserID(tbxEmail.Text, tbxPassword.Text);
-        if (userId != null)
-        {
-            SessionHelper.UserID = userId;
-            exist = true;
-            System.Nullable<int> privelegeMask = 0;
-            //// Int32? _privelegeMask = 0;
-            //using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
-            //{
-            //    privelegeMask = record.spSelectRole(userId).FirstOrDefault();
-
-            //}
+            SessionHelper.UserID = userID;
+            SessionHelper.UserEmail = tbxEmail.Text;
+            System.Nullable<Int16> privelegeMask = 0;
+            privelegeMask = UserRoleRepository.GetMinPrivelegeMask(userID);
             if (privelegeMask.HasValue)
             {
+                if (privelegeMask == 1)
+                    return;
+                SessionHelper.IsAuthenticated = true;
+                privelegeMask = UserRoleRepository.GetMaxPrivelegeMask(userID);
+                if (privelegeMask == 127)
+                {
+                    SessionHelper.IsModerator = true;
+                }
                 if (privelegeMask >= 254)
                 {
-                    admin = true;
+                    SessionHelper.IsAdmin = true;
                 }
             }
+            //Cookies for login.
+            HttpCookie emailCookie = new HttpCookie("EmailCookie");
+            emailCookie.Expires = DateTime.Now.AddMonths(1);
+            //Push email to cookie.
+            emailCookie["Email"] = tbxEmail.Text;
+            //Add cookie to user's brouser.
+            Response.Cookies.Add(emailCookie);
+            Response.Redirect("~/UserProfile.aspx?id=" + SessionHelper.UserID);
+
         }
-        if (exist)
-        {
-            SessionHelper.IsAuthenticated = true;
-            if (admin)
-            {
-                SessionHelper.IsAdmin = true;
-            }
-        }
-        //куки для логина
-        HttpCookie emailCookie = new HttpCookie("EmailCookie");
-        //куки будет храниться в течение одного месяца (можно поменять)
-        emailCookie.Expires = DateTime.Now.AddMonths(1);
-        //заносим в куки введенный Email
-        emailCookie["Email"] = tbxEmail.Text;
-        //добавляем куки в браузер пользователя
-        Response.Cookies.Add(emailCookie);
-        //после id идет айди определенный по email и passward из базы
-        Response.Redirect("~/UserProfile.aspx?id=" + userId);
     }
+    #endregion
 }

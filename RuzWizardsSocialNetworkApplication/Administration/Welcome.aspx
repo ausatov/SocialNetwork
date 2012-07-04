@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" runat="server">
     <p>
-        Приветствуем тебя ,о , Администратор ! Хотя для теста пока Що тут все админы!</p>
+        Приветствуем тебя ,о , Администратор !!!</p>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphLeftSideBar" runat="server">
 </asp:Content>

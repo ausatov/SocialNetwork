@@ -15,6 +15,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using RuzWizardsSocialNetworkApplication.App_Code;
 using RuzWizardsSocialNetworkApplication.Constants;
 using System.Web;
 using System.Web.UI;
@@ -48,8 +49,35 @@ public partial class UserProfile : System.Web.UI.Page
     /// <param name="e">EventArgs e.</param>
     protected void Page_Load(Object sender, EventArgs e)
     {
+        if (!SessionHelper.IsAuthenticated)
+        {
+            Response.Redirect("~/Login.aspx");
+        }
+        this._userID = new Guid(Request.QueryString["id"].ToString());
+        if (_userID != SessionHelper.UserID)
+        {
+            //invisible and visible needled things...
+        }
+        if (SessionHelper.IsModerator)
+        {
+            //visible needled things
+            Button btnBan = (Button)Master.FindControl("btnBan");
+            btnBan.Visible = true;
+        }
+        if (SessionHelper.IsAdmin)
+        {
+            //visible needled things
+            Label lblEmail = (Label)Master.FindControl("lblEmail");
+            lblEmail.Text = (UserRepository.GetUserInfo(this._userID)).Email;
+            lblEmail.Visible = true;
+            ImageButton btnBan = (ImageButton)Master.FindControl("btnBan");
+            btnBan.Visible = true;
+            ImageButton btnAdmin = (ImageButton)Master.FindControl("btnAdmin");
+            btnAdmin.Visible = true;
+        }
         // Тут должен быть идентификатор текущего пользователя
-        this._userID = Guid.Parse("e80cd2ac-8517-4e95-8321-3f4593d2106a");
+        this._userID = new Guid(Request.QueryString["id"].ToString());
+        //Guid.Parse("e80cd2ac-8517-4e95-8321-3f4593d2106a");
 
         if (!Page.IsPostBack)
         {
@@ -64,9 +92,9 @@ public partial class UserProfile : System.Web.UI.Page
                 // Show user full name.
                 lblUserName.Text = String.Join(
                     " ",
-                    personalInfo.FirstName, 
+                    personalInfo.FirstName,
                     personalInfo.LastName,
-                    personalInfo.MiddleName, 
+                    personalInfo.MiddleName,
                     personalInfo.NickName);
 
                 // Show status message.
@@ -132,7 +160,7 @@ public partial class UserProfile : System.Web.UI.Page
                 0,
                 lblBirthday,
                 String.Format("{0:" + Constants._dateFormat + "}", personalInfo.Birthday));
-            
+
             if (this.SetValueOrInvisible(this.dvUserInfo, 1, lblSex, personalInfo.Sex.ToString()))
             {
                 lblSex.Text = EnumsHelper.ToString((Sex)Convert.ToInt32(lblSex.Text));

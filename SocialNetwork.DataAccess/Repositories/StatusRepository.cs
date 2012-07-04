@@ -30,7 +30,7 @@ namespace SocialNetwork.DataAccess.Repositories
         /// <summary>
         /// Default empty status message.
         /// </summary>
-        private const String _defaultStatusMessage = "";
+        private const String _defaultStatusMessage = "--status is no set--";
         #endregion
 
         #region Public methods

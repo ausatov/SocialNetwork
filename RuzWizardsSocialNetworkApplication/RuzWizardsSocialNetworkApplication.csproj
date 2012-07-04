@@ -70,10 +70,14 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Administration\Banned.aspx" />
     <Content Include="Administration\Bans.aspx" />
     <Content Include="Administration\RolesPage.aspx" />
     <Content Include="Administration\Welcome.aspx" />
     <Content Include="App_Themes\BanPage\ban.css" />
+    <Content Include="App_Themes\BanPage\grd_alt.png" />
+    <Content Include="App_Themes\BanPage\grd_pgr.png" />
+    <Content Include="App_Themes\BanPage\grd_head.png" />
     <Content Include="App_Themes\MainSkin\img\actions-arrow-down.png" />
     <Content Include="App_Themes\MainSkin\img\actions-arrow-up.png" />
     <Content Include="App_Themes\MainSkin\img\bg\snw_footer_gradient.png" />
@@ -137,7 +141,12 @@
     <Content Include="App_Themes\MainSkin\MainStyle.css" />
     <Content Include="App_Themes\MainSkin\SpecialStyles.css" />
     <Content Include="EditProfile.aspx" />
+    <Content Include="FriendInvWrite.aspx" />
+    <Content Include="Friends.aspx" />
+    <Content Include="Scripts\ajaxfunc.js" />
     <Content Include="Scripts\jquery.MultiFile.pack.js" />
+    <Content Include="Scripts\LoginValidate.js" />
+    <Content Include="Styles\images\loader.gif" />
     <Content Include="Styles\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Styles\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Styles\images\ui-bg_flat_100_f6f6f6_40x100.png" />
@@ -154,6 +163,8 @@
     <Content Include="Styles\images\ui-icons_ef8c08_256x240.png" />
     <Content Include="Styles\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Styles\jQueryUI.css" />
+    <Content Include="UserControls\FriendInvItem.ascx" />
+    <Content Include="UserControls\FriendItem.ascx" />
     <Content Include="UserControls\PrivateMessageItem.ascx" />
     <Content Include="UserControls\WallBoardItem.ascx" />
     <Content Include="WebServices\AutocompleteService.asmx" />
@@ -387,6 +398,13 @@
     <Content Include="WebServices\SocialNetworkService.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\Banned.aspx.cs">
+      <DependentUpon>Banned.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Banned.aspx.designer.cs">
+      <DependentUpon>Banned.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administration\Bans.aspx.cs">
       <DependentUpon>Bans.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -419,6 +437,34 @@
     <Compile Include="Administration\RolesPage.aspx.cs">
       <DependentUpon>RolesPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FriendInvWrite.aspx.cs">
+      <DependentUpon>FriendInvWrite.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FriendInvWrite.aspx.designer.cs">
+      <DependentUpon>FriendInvWrite.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Friends.aspx.cs">
+      <DependentUpon>Friends.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Friends.aspx.designer.cs">
+      <DependentUpon>Friends.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FriendInvItem.ascx.cs">
+      <DependentUpon>FriendInvItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\FriendInvItem.ascx.designer.cs">
+      <DependentUpon>FriendInvItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FriendItem.ascx.cs">
+      <DependentUpon>FriendItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\FriendItem.ascx.designer.cs">
+      <DependentUpon>FriendItem.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\PrivateMessageItem.ascx.cs">
       <DependentUpon>PrivateMessageItem.ascx</DependentUpon>
@@ -504,6 +550,7 @@
   <ItemGroup>
     <Content Include="App_Themes\LoginPage\LoginPage.skin" />
     <Content Include="AdminPage.Master" />
+    <Content Include="App_Themes\MainSkin\MainSkin.skin" />
     <None Include="Bin\AjaxControlToolkit.dll.refresh" />
     <None Include="Bin\AntiXSSLibrary.dll.refresh" />
     <None Include="Bin\HtmlSanitizationLibrary.dll.refresh" />
@@ -536,7 +583,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>30756</DevelopmentServerPort>
+          <DevelopmentServerPort>16165</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

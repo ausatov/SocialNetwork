@@ -19,3 +19,4 @@ Default skin template. The following skins are provided as examples only.
 </asp:DropDownList>
 
 <asp:TextBox runat="server" Width="150px"></asp:TextBox>
+<asp:ImageButton runat="server" Style="margin:10px;"/>

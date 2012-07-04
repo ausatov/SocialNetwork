@@ -40,7 +40,7 @@ namespace SocialNetwork.DataAccess.Repositories
                         Password = s.Password
                     }).ToList();
             }
-            
+
             return userList;
         }
 
@@ -88,15 +88,21 @@ namespace SocialNetwork.DataAccess.Repositories
         /// <returns>User object.</returns>
         public static User GetUserInfo(Guid userID)
         {
-            User userInfo = null;
+            Entity.User rawUserInfo;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
-                var rawUserInfo = record.Users
-                    .FirstOrDefault(f => f.UserID.Equals(userID));
+                rawUserInfo = record.Users
 
-                userInfo = (userInfo == null) ? null : userInfo;
+                  .Select(s => new User
+                  {
+                      UserID = s.UserID,
+                      Password = s.Password,
+                      Email = s.Email
+                  })
+                  .FirstOrDefault(f => f.UserID.Equals(userID));
+                //UserInfo = (rawUserInfo == null) ? null : rawUserInfo;
             }
-            return userInfo;
+            return rawUserInfo;
         }
         #endregion
     }

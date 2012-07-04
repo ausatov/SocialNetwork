@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
     var ddlBans = $('#<%=ddlBans.ClientID%>');
     ddlBans.hide();
     $("#<%=imgBtnSave.ClientID%>").hide();
@@ -13,7 +15,7 @@ $(function () {
             var pageUrl = '<%=ResolveUrl("~/WebServices/SocialNetworkService.asmx")%>';
             $.ajax({
                 url: pageUrl + "/FetchEmailList",
-                data: "{ 'mail': '" + request.term + "' }",
+                data: "{ 'userEmail': '" + request.term + "' }",
                 dataType: "json",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
@@ -36,19 +38,6 @@ $(function () {
 });
 
 
-ddlBans.change(function (e) {
-
-    var ddlBans = $('#<%=ddlBans.ClientID%>');
-    var banId = ddlBans.val();
-    if (banId != -1) {
-        // Get Ban Details
-        GetBanDetails(banId);
-    }
-    else {
-        $("#outputTable").hide();
-    }
-});
-// });
 function Start() {
     var tbUserMail = $("#<%=tbAuto.ClientID%>");
     var userMail = tbUserMail.val();
@@ -79,7 +68,7 @@ function GetAllBans(userMail) {
     $.ajax({
         type: "POST",
         url: pageUrl + "/GetAllBans",
-        data: "{'userMail':'" + userMail + "'}",
+        data: "{'userEmail':'" + userMail + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
@@ -104,7 +93,7 @@ function GetBanDetails(banId) {
     $.ajax({
         type: "POST",
         url: pageUrl + "/GetBan",
-        data: "{'banId':'" + banId + "'}",
+        data: "{'banID':'" + banId + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
@@ -113,9 +102,11 @@ function GetBanDetails(banId) {
             $("#spnBanReason").html(ban.Reason);
             //$("#<%=tbReason.ClientID%>").val(ban.Reason.toString());
             var parsedFromDate = new Date(parseInt(ban.FromDate.toString().substr(6)));
-            $("#spnFromDate").html(parsedFromDate.toString());
-            var parsedToDate = new Date(parseInt(ban.ToDate.toString().substr(6)));
-            $("#spnToDate").html(parsedToDate.toString());
+            var jsFromDate = new Date(parsedFromDate);
+            $("#spnFromDate").html(jsFromDate.getMonth() + '/' + jsFromDate.getDay() + '/' + jsFromDate.getFullYear());
+            var parsedToDate = new Date(parseInt(ban.ToDate.substr(6)));
+            var jsToDate = new Date(parsedToDate);
+            $("#spnToDate").html(jsToDate.getMonth() + '/' + jsToDate.getDay() + '/' + jsToDate.getFullYear());
             $("#outputTable").show();
         },
         error: function (xhr, status, error) {
@@ -129,12 +120,13 @@ function GetBanDetails(banId) {
 
 function Edit() {
     var reason = $('#spnBanReason').html();
+    var todate = $('#spnToDate').html();
     $("#<%=imgBtnEditBan.ClientID%>").hide();
     $("#<%=imgBtnSave.ClientID%>").show();
     $("#<%=imgBtnCancel.ClientID%>").show();
     $("#<%=tbReason.ClientID%>").val(reason.toString());
     $("#<%=tbReason.ClientID%>").show();
-    $("#<%=tbToDate.ClientID%>").val("");
+    $("#<%=tbToDate.ClientID%>").val(todate);
     $("#<%=tbToDate.ClientID%>").show();
 
 }
@@ -189,7 +181,9 @@ function Deleteban(banId) {
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (response) {
-            alert("success");
+            $('#<%=ddlBans.ClientID%>').val('-1');
+            $("#outputTable").hide();
+            Start();
         },
         error: function (xhr, status, error) {
             var err = eval("(" + xhr.responseText + ")");
@@ -197,3 +191,5 @@ function Deleteban(banId) {
         }
     });
 }
+    
+   

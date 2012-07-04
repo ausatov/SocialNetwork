@@ -466,16 +466,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="spAddress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="fnGetRoleByID" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="spBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pkID" Type="uniqueidentifier" Mode="InOut" />
           <Parameter Name="updateByUserInfo" Type="bit" Mode="In" />
-          <Parameter Name="fkUserInfoID" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="fkCountryID" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="fkCityID" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="area" Type="nvarchar" Mode="In" />
-          <Parameter Name="street" Type="nvarchar" Mode="In" />
-          <Parameter Name="home" Type="nvarchar" Mode="In" />
-          <Parameter Name="apartment" Type="nvarchar" Mode="In" />
+          <Parameter Name="fkUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="fkAdminID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="reason" Type="nvarchar" Mode="In" />
+          <Parameter Name="fromDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="toDate" Type="smalldatetime" Mode="In" />
           <Parameter Name="isDeleted" Type="bit" Mode="In" />
         </Function>
         <Function Name="spDelWallBoardItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -505,23 +506,8 @@
           <Parameter Name="ToID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Message" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="spPersonalInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="pkID" Type="uniqueidentifier" Mode="InOut" />
-          <Parameter Name="updateByUser" Type="bit" Mode="In" />
-          <Parameter Name="fkUserID" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="nickName" Type="nvarchar" Mode="In" />
-          <Parameter Name="firstName" Type="nvarchar" Mode="In" />
-          <Parameter Name="lastName" Type="nvarchar" Mode="In" />
-          <Parameter Name="middleName" Type="nvarchar" Mode="In" />
-          <Parameter Name="sex" Type="tinyint" Mode="In" />
-          <Parameter Name="phone" Type="nvarchar" Mode="In" />
-          <Parameter Name="birthday" Type="smalldatetime" Mode="In" />
-          <Parameter Name="imagePath" Type="nvarchar" Mode="In" />
-          <Parameter Name="description" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="spUpdAvatar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="ImagePath" Type="nvarchar" Mode="In" />
+        <Function Name="spRoleGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="spUpdDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
@@ -531,7 +517,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SocialNetworkDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="SocialNetworkDBEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+        <EntityContainer Name="SocialNetworkDBEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <EntitySet Name="Addresses" EntityType="SocialNetworkDBModel.Address" />
           <EntitySet Name="Bans" EntityType="SocialNetworkDBModel.Ban" />
           <EntitySet Name="Cities" EntityType="SocialNetworkDBModel.City" />
@@ -632,19 +618,8 @@
             <Parameter Name="Message" Mode="In" Type="String" />
             <Parameter Name="StatusID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spDelBanItem">
-          <Parameter Name="ItemID" Mode="In" Type="Guid" />
-          </FunctionImport>
           <FunctionImport Name="spSelectRole" ReturnType="Collection(Int32)">
           <Parameter Name="userID" Mode="In" Type="Guid" />
-          </FunctionImport>
-          <FunctionImport Name="spUpdBan">
-            <Parameter Name="banID" Mode="In" Type="Guid" />
-            <Parameter Name="reason" Mode="In" Type="String" />
-            <Parameter Name="todate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="spDelBan">
-            <Parameter Name="banID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="spUpdAvatar">
             <Parameter Name="UserID" Mode="In" Type="Guid" />
@@ -675,6 +650,19 @@
             <Parameter Name="birthday" Mode="In" Type="DateTime" />
             <Parameter Name="imagePath" Mode="In" Type="String" />
             <Parameter Name="description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spRoleGet" EntitySet="UserRoles" ReturnType="Collection(SocialNetworkDBModel.UserRole)">
+          <Parameter Name="userID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="spBan">
+            <Parameter Name="pkID" Mode="InOut" Type="Guid" />
+            <Parameter Name="updateByUserInfo" Mode="In" Type="Boolean" />
+            <Parameter Name="fkUserID" Mode="In" Type="Guid" />
+            <Parameter Name="fkAdminID" Mode="In" Type="Guid" />
+            <Parameter Name="reason" Mode="In" Type="String" />
+            <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="toDate" Mode="In" Type="DateTime" />
+            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Address">
@@ -1208,9 +1196,8 @@
           <FunctionImportMapping FunctionImportName="spDelWallBoardItem" FunctionName="SocialNetworkDBModel.Store.spDelWallBoardItem" />
           <FunctionImportMapping FunctionImportName="spInsWallBoardTextMessage" FunctionName="SocialNetworkDBModel.Store.spInsWallBoardTextMessage" />
           <FunctionImportMapping FunctionImportName="spInsStatus" FunctionName="SocialNetworkDBModel.Store.spInsStatus" />
-          <FunctionImportMapping FunctionImportName="spUpdAvatar" FunctionName="SocialNetworkDBModel.Store.spUpdAvatar" />
-          <FunctionImportMapping FunctionImportName="spAddress" FunctionName="SocialNetworkDBModel.Store.spAddress" />
-          <FunctionImportMapping FunctionImportName="spPersonalInfo" FunctionName="SocialNetworkDBModel.Store.spPersonalInfo" />
+          <FunctionImportMapping FunctionImportName="spRoleGet" FunctionName="SocialNetworkDBModel.Store.spRoleGet" />
+          <FunctionImportMapping FunctionImportName="spBan" FunctionName="SocialNetworkDBModel.Store.spBan" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

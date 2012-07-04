@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RuzWizardsSocialNetworkApplication.Administration
+namespace RuzWizardsSocialNetworkApplication
 {
 
 
-    public partial class WebForm1
+    public partial class FriendInvWrite
     {
 
         /// <summary>

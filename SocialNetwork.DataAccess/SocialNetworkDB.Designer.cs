@@ -46,7 +46,7 @@ namespace SocialNetwork.DataAccess
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    internal partial class SocialNetworkDBEntities : ObjectContext
+    public partial class SocialNetworkDBEntities : ObjectContext
     {
         #region Constructors
     
@@ -544,25 +544,6 @@ namespace SocialNetwork.DataAccess
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="itemID">No Metadata Documentation available.</param>
-        public int spDelBanItem(Nullable<global::System.Guid> itemID)
-        {
-            ObjectParameter itemIDParameter;
-            if (itemID.HasValue)
-            {
-                itemIDParameter = new ObjectParameter("ItemID", itemID);
-            }
-            else
-            {
-                itemIDParameter = new ObjectParameter("ItemID", typeof(global::System.Guid));
-            }
-    
-            return base.ExecuteFunction("spDelBanItem", itemIDParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="userID">No Metadata Documentation available.</param>
         public ObjectResult<Nullable<global::System.Int32>> spSelectRole(Nullable<global::System.Guid> userID)
         {
@@ -577,66 +558,6 @@ namespace SocialNetwork.DataAccess
             }
     
             return base.ExecuteFunction<Nullable<global::System.Int32>>("spSelectRole", userIDParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="banID">No Metadata Documentation available.</param>
-        /// <param name="reason">No Metadata Documentation available.</param>
-        /// <param name="todate">No Metadata Documentation available.</param>
-        public int spUpdBan(Nullable<global::System.Guid> banID, global::System.String reason, Nullable<global::System.DateTime> todate)
-        {
-            ObjectParameter banIDParameter;
-            if (banID.HasValue)
-            {
-                banIDParameter = new ObjectParameter("banID", banID);
-            }
-            else
-            {
-                banIDParameter = new ObjectParameter("banID", typeof(global::System.Guid));
-            }
-    
-            ObjectParameter reasonParameter;
-            if (reason != null)
-            {
-                reasonParameter = new ObjectParameter("reason", reason);
-            }
-            else
-            {
-                reasonParameter = new ObjectParameter("reason", typeof(global::System.String));
-            }
-    
-            ObjectParameter todateParameter;
-            if (todate.HasValue)
-            {
-                todateParameter = new ObjectParameter("todate", todate);
-            }
-            else
-            {
-                todateParameter = new ObjectParameter("todate", typeof(global::System.DateTime));
-            }
-    
-            return base.ExecuteFunction("spUpdBan", banIDParameter, reasonParameter, todateParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="banID">No Metadata Documentation available.</param>
-        public int spDelBan(Nullable<global::System.Guid> banID)
-        {
-            ObjectParameter banIDParameter;
-            if (banID.HasValue)
-            {
-                banIDParameter = new ObjectParameter("banID", banID);
-            }
-            else
-            {
-                banIDParameter = new ObjectParameter("banID", typeof(global::System.Guid));
-            }
-    
-            return base.ExecuteFunction("spDelBan", banIDParameter);
         }
     
         /// <summary>
@@ -905,6 +826,130 @@ namespace SocialNetwork.DataAccess
             }
     
             return base.ExecuteFunction("spPersonalInfo", pkID, updateByUserParameter, fkUserIDParameter, nickNameParameter, firstNameParameter, lastNameParameter, middleNameParameter, sexParameter, phoneParameter, birthdayParameter, imagePathParameter, descriptionParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="userID">No Metadata Documentation available.</param>
+        public ObjectResult<UserRole> spRoleGet(Nullable<global::System.Guid> userID)
+        {
+            ObjectParameter userIDParameter;
+            if (userID.HasValue)
+            {
+                userIDParameter = new ObjectParameter("userID", userID);
+            }
+            else
+            {
+                userIDParameter = new ObjectParameter("userID", typeof(global::System.Guid));
+            }
+    
+            return base.ExecuteFunction<UserRole>("spRoleGet", userIDParameter);
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="mergeOption"></param>
+        /// <param name="userID">No Metadata Documentation available.</param>
+        public ObjectResult<UserRole> spRoleGet(Nullable<global::System.Guid> userID, MergeOption mergeOption)
+        {
+            ObjectParameter userIDParameter;
+            if (userID.HasValue)
+            {
+                userIDParameter = new ObjectParameter("userID", userID);
+            }
+            else
+            {
+                userIDParameter = new ObjectParameter("userID", typeof(global::System.Guid));
+            }
+    
+            return base.ExecuteFunction<UserRole>("spRoleGet", mergeOption, userIDParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pkID">No Metadata Documentation available.</param>
+        /// <param name="updateByUserInfo">No Metadata Documentation available.</param>
+        /// <param name="fkUserID">No Metadata Documentation available.</param>
+        /// <param name="fkAdminID">No Metadata Documentation available.</param>
+        /// <param name="reason">No Metadata Documentation available.</param>
+        /// <param name="fromDate">No Metadata Documentation available.</param>
+        /// <param name="toDate">No Metadata Documentation available.</param>
+        /// <param name="isDeleted">No Metadata Documentation available.</param>
+        public int spBan(ObjectParameter pkID, Nullable<global::System.Boolean> updateByUserInfo, Nullable<global::System.Guid> fkUserID, Nullable<global::System.Guid> fkAdminID, global::System.String reason, Nullable<global::System.DateTime> fromDate, Nullable<global::System.DateTime> toDate, Nullable<global::System.Boolean> isDeleted)
+        {
+            ObjectParameter updateByUserInfoParameter;
+            if (updateByUserInfo.HasValue)
+            {
+                updateByUserInfoParameter = new ObjectParameter("updateByUserInfo", updateByUserInfo);
+            }
+            else
+            {
+                updateByUserInfoParameter = new ObjectParameter("updateByUserInfo", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter fkUserIDParameter;
+            if (fkUserID.HasValue)
+            {
+                fkUserIDParameter = new ObjectParameter("fkUserID", fkUserID);
+            }
+            else
+            {
+                fkUserIDParameter = new ObjectParameter("fkUserID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter fkAdminIDParameter;
+            if (fkAdminID.HasValue)
+            {
+                fkAdminIDParameter = new ObjectParameter("fkAdminID", fkAdminID);
+            }
+            else
+            {
+                fkAdminIDParameter = new ObjectParameter("fkAdminID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter reasonParameter;
+            if (reason != null)
+            {
+                reasonParameter = new ObjectParameter("reason", reason);
+            }
+            else
+            {
+                reasonParameter = new ObjectParameter("reason", typeof(global::System.String));
+            }
+    
+            ObjectParameter fromDateParameter;
+            if (fromDate.HasValue)
+            {
+                fromDateParameter = new ObjectParameter("fromDate", fromDate);
+            }
+            else
+            {
+                fromDateParameter = new ObjectParameter("fromDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter toDateParameter;
+            if (toDate.HasValue)
+            {
+                toDateParameter = new ObjectParameter("toDate", toDate);
+            }
+            else
+            {
+                toDateParameter = new ObjectParameter("toDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter isDeletedParameter;
+            if (isDeleted.HasValue)
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", isDeleted);
+            }
+            else
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction("spBan", pkID, updateByUserInfoParameter, fkUserIDParameter, fkAdminIDParameter, reasonParameter, fromDateParameter, toDateParameter, isDeletedParameter);
         }
 
         #endregion

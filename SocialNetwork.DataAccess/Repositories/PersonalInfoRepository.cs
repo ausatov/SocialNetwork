@@ -24,6 +24,17 @@ namespace SocialNetwork.DataAccess.Repositories
     {
         #region Public methods
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
+        public static String GetFullName(Guid userID)
+        {
+            return GetUserInfo(userID).FirstName + " " + GetUserInfo(userID).LastName;
+
+        }
+
+        /// <summary>
         /// Get object of PersonalInfo.
         /// </summary>
         /// <param name="userID">Current user identificator.</param>

@@ -118,4 +118,16 @@ public partial class UserProfile {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.GridView grdWall;
+    
+    /// <summary>
+    /// Master property.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated property.
+    /// </remarks>
+    public new UserPage Master {
+        get {
+            return ((UserPage)(base.Master));
+        }
+    }
 }
