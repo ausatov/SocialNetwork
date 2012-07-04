@@ -47,8 +47,10 @@ namespace SocialNetwork.DataAccess.Repositories
                             Birthday = s.Birthday,
                             ImagePath = s.ImagePath,
                             Description = s.Description
-                        }).FirstOrDefault(f => f.UserID.Equals(userID));
+                        })
+                    .FirstOrDefault(f => f.UserID.Equals(userID));
             }
+
             return personalInfo;
         }
 
@@ -61,6 +63,7 @@ namespace SocialNetwork.DataAccess.Repositories
         {
             ModifyPersonalInfo(
                 null,
+                true,
                 true,
                 userID,
                 null,
@@ -79,6 +82,7 @@ namespace SocialNetwork.DataAccess.Repositories
         /// </summary>
         /// <param name="id">Primary key identity.</param>
         /// <param name="updateByUser">Update type flag.</param>
+        /// <param name="updateImagePath">Update image flag.</param>
         /// <param name="userID">Foreign key identity.</param>
         /// <param name="nickName">Nick name.</param>
         /// <param name="firstName">First name.</param>
@@ -92,6 +96,7 @@ namespace SocialNetwork.DataAccess.Repositories
         public static void ModifyPersonalInfo(
             Guid? id,
             Boolean updateByUser,
+            Boolean updateImagePath,
             Guid userID,
             String nickName,
             String firstName,
@@ -105,11 +110,13 @@ namespace SocialNetwork.DataAccess.Repositories
         {
             ObjectParameter pkID = (id != null) ? new ObjectParameter("pkID", id) 
                 : new ObjectParameter("pkID", typeof(Guid));
+
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 record.spPersonalInfo(
                     pkID,
                     updateByUser,
+                    updateImagePath,
                     userID,
                     nickName,
                     firstName,

@@ -56,6 +56,7 @@ namespace SocialNetwork.DataAccess.Enums
                     } 
                     break;
             }
+
             return statusName;
         }
 
@@ -72,14 +73,15 @@ namespace SocialNetwork.DataAccess.Enums
                 case Sex.Male:
                     {
                         sexName = "male";
-                    } 
+                    }
                     break;
                 case Sex.Female:
                     {
                         sexName = "female";
-                    } 
+                    }
                     break;
             }
+
             return sexName;
         }
         #endregion

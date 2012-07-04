@@ -39,8 +39,10 @@ namespace SocialNetwork.DataAccess.Repositories
                         ToID = s.ToID,
                         CreateDate = s.CreateDate,
                         Message = s.Message
-                    }).ToList();
+                    })
+                    .ToList();
             }
+
             return friendList;
         }
         #endregion

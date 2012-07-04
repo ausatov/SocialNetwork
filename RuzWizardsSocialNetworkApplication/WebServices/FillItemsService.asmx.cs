@@ -42,20 +42,26 @@
         /// </summary>
         /// <returns>Path to user avatar image.</returns>
         [WebMethod(EnableSession = true)] 
-        public String GetUploadedAvatarImage()
+        public String GetUploadedAvatarImage(Guid? id = null)
         {
             HttpContext.Current.Session["_userID"] = "e80cd2ac-8517-4e95-8321-3f4593d2106a";
 
-            Guid userID = Guid.Empty;
+            //Guid userID = (id == null) ? Guid.Empty : (Guid)id;
 
-            if (Guid.TryParse((String)Session["_userID"], out userID))
+            Guid userID = (id == Guid.Empty) ? Guid.Empty : (Guid)id;
+
+            if (userID == Guid.Empty)
             {
-                if (userID != Guid.Empty)
+                if (Guid.TryParse((String)Session["_userID"], out userID))
                 {
                     return PersonalInfoRepository.GetUserInfo(userID).ImagePath;
                 }
             }
-            
+            else
+            {
+                return PersonalInfoRepository.GetUserInfo(userID).ImagePath;
+            }
+
             return _defaultAvatarImage;
         }
         #endregion

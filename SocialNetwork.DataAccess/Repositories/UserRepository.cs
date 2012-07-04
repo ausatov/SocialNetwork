@@ -49,7 +49,7 @@ namespace SocialNetwork.DataAccess.Repositories
         /// <returns></returns>
         public static Guid GetUserID(String userEmail)
         {
-            Guid userID = Guid.Empty;
+            Guid userID;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 var rawUserID = record.Users
@@ -90,7 +90,7 @@ namespace SocialNetwork.DataAccess.Repositories
             {
                 var rawUserInfo = record.Users
                     .FirstOrDefault(f => f.UserID.Equals(userID));
-
+                // TODO: fix it
                 userInfo = (userInfo == null) ? null : userInfo;
             }
             return userInfo;

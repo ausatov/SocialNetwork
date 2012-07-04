@@ -32,7 +32,7 @@ namespace SocialNetwork.DataAccess.Repositories
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 recordList = record.Friends
-                    .Where(w => w.UserID.Equals(userID) && !w.IsDeleted)
+                    .Where(w => w.UserID == userID && !w.IsDeleted)
                     .Select(s => new Friend
                         {
                             ID = s.ID,
@@ -40,10 +40,45 @@ namespace SocialNetwork.DataAccess.Repositories
                             FriendID = s.FriendID,
                             FriendshipDate = s.FriendshipDate,
                             IsDeleted = s.IsDeleted
-                        }).ToList();
+                        })
+                    .ToList();
             }
-            return null;
+
+            return recordList;
+        }
+
+        public static List<KeyValuePair<Guid, String>> GetFriendlist(Guid userID)
+        {
+            List<KeyValuePair<Guid, String>> recordList = null;
+            using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
+            {
+                var rawRecord = GetUserFriends(userID);
+
+                recordList = rawRecord
+                    .Where(w => w.UserID == userID && !w.IsDeleted)
+                    .Select(s => new KeyValuePair<Guid, String>(
+                            s.FriendID,
+                            record.PersonalInfoes
+                                .Where(w => w.UserID == s.FriendID && !w.User.IsDeleted)
+                                .Select(ss => ss.FirstName + " " + ss.LastName)
+                                .FirstOrDefault()))
+                    .ToList();
+
+            }
+
+            return recordList;
         }
         #endregion
     }
 }
+
+/*
+.Where(w => w.UserID == userID && !w.IsDeleted)
+                    .Select(s => new KeyValuePair<Guid, String>(
+                            s.FriendID,
+                            record.PersonalInfoes
+                                .Where(w => w.UserID == userID && !w.User.IsDeleted)
+                                .Select(ss => String.Join(" ", ss.FirstName, ss.LastName))
+                                .FirstOrDefault().ToString()))
+                    .ToList();
+*/

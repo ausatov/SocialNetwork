@@ -166,7 +166,8 @@
           <Property Name="Header" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Text" Type="nvarchar" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IsDeletedBySender" Type="bit" Nullable="false" />
+          <Property Name="IsDeletedByReceiver" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PersonalInfo">
           <Key>
@@ -478,8 +479,35 @@
           <Parameter Name="apartment" Type="nvarchar" Mode="In" />
           <Parameter Name="isDeleted" Type="bit" Mode="In" />
         </Function>
+        <Function Name="spBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pkID" Type="uniqueidentifier" Mode="InOut" />
+          <Parameter Name="updateByUserInfo" Type="bit" Mode="In" />
+          <Parameter Name="fkUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="fkAdminID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="reason" Type="nvarchar" Mode="In" />
+          <Parameter Name="fromDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="toDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="isDeleted" Type="bit" Mode="In" />
+        </Function>
         <Function Name="spDelWallBoardItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ItemID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="spFriend" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pkID" Type="uniqueidentifier" Mode="InOut" />
+          <Parameter Name="updateByUserInfo" Type="bit" Mode="In" />
+          <Parameter Name="fkUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="fkFriendID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="friendshipDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="isDeleted" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spFriendInvitation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pkID" Type="uniqueidentifier" Mode="InOut" />
+          <Parameter Name="updateByUserInfo" Type="bit" Mode="In" />
+          <Parameter Name="fkFromID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="fkToID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="message" Type="nvarchar" Mode="In" />
+          <Parameter Name="createDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="isDeleted" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
@@ -505,9 +533,20 @@
           <Parameter Name="ToID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="Message" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="spMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pkMessageID" Type="uniqueidentifier" Mode="InOut" />
+          <Parameter Name="fkFromID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="fkToID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="header" Type="nvarchar" Mode="In" />
+          <Parameter Name="text" Type="nvarchar" Mode="In" />
+          <Parameter Name="status" Type="bit" Mode="In" />
+          <Parameter Name="isDeletedBySender" Type="bit" Mode="In" />
+          <Parameter Name="isDeletedByReceiver" Type="bit" Mode="In" />
+        </Function>
         <Function Name="spPersonalInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pkID" Type="uniqueidentifier" Mode="InOut" />
           <Parameter Name="updateByUser" Type="bit" Mode="In" />
+          <Parameter Name="updateImgPath" Type="bit" Mode="In" />
           <Parameter Name="fkUserID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="nickName" Type="nvarchar" Mode="In" />
           <Parameter Name="firstName" Type="nvarchar" Mode="In" />
@@ -519,13 +558,22 @@
           <Parameter Name="imagePath" Type="nvarchar" Mode="In" />
           <Parameter Name="description" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="spUpdAvatar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="ImagePath" Type="nvarchar" Mode="In" />
+        <Function Name="spRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pkID" Type="uniqueidentifier" Mode="InOut" />
+          <Parameter Name="fkUserID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="privelegeMask" Type="tinyint" Mode="In" />
+          <Parameter Name="roleName" Type="nvarchar" Mode="In" />
+          <Parameter Name="delete" Type="bit" Mode="In" />
         </Function>
-        <Function Name="spUpdDescription" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserID" Type="int" Mode="In" />
-          <Parameter Name="Description" Type="varchar" Mode="In" />
+        <Function Name="spUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pkUserID" Type="uniqueidentifier" Mode="InOut" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="sqID" Type="int" Mode="In" />
+          <Parameter Name="sqResponse" Type="nvarchar" Mode="In" />
+          <Parameter Name="regDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="lastLoginDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="isDeleted" Type="bit" Mode="In" />
         </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -538,7 +586,6 @@
           <EntitySet Name="Countries" EntityType="SocialNetworkDBModel.Country" />
           <EntitySet Name="FriendInvitations" EntityType="SocialNetworkDBModel.FriendInvitation" />
           <EntitySet Name="Friends" EntityType="SocialNetworkDBModel.Friend" />
-          <EntitySet Name="Messages" EntityType="SocialNetworkDBModel.Message" />
           <EntitySet Name="PersonalInfoes" EntityType="SocialNetworkDBModel.PersonalInfo" />
           <EntitySet Name="Status" EntityType="SocialNetworkDBModel.Status" />
           <EntitySet Name="sysdiagrams" EntityType="SocialNetworkDBModel.sysdiagram" />
@@ -585,14 +632,6 @@
           <AssociationSet Name="FK_Friends_Users1" Association="SocialNetworkDBModel.FK_Friends_Users1">
             <End Role="Users" EntitySet="Users" />
             <End Role="Friends" EntitySet="Friends" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Messages_Users" Association="SocialNetworkDBModel.FK_Messages_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Messages" EntitySet="Messages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Messages_Users1" Association="SocialNetworkDBModel.FK_Messages_Users1">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Messages" EntitySet="Messages" />
           </AssociationSet>
           <AssociationSet Name="FK_PersonalInfo_Users" Association="SocialNetworkDBModel.FK_PersonalInfo_Users">
             <End Role="Users" EntitySet="Users" />
@@ -646,10 +685,6 @@
           <FunctionImport Name="spDelBan">
             <Parameter Name="banID" Mode="In" Type="Guid" />
           </FunctionImport>
-          <FunctionImport Name="spUpdAvatar">
-            <Parameter Name="UserID" Mode="In" Type="Guid" />
-            <Parameter Name="ImagePath" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="spAddress">
             <Parameter Name="pkID" Mode="InOut" Type="Guid" />
             <Parameter Name="updateByUserInfo" Mode="In" Type="Boolean" />
@@ -665,6 +700,7 @@
           <FunctionImport Name="spPersonalInfo">
             <Parameter Name="pkID" Mode="InOut" Type="Guid" />
             <Parameter Name="updateByUser" Mode="In" Type="Boolean" />
+            <Parameter Name="updateImgPath" Mode="In" Type="Boolean" />
             <Parameter Name="fkUserID" Mode="In" Type="Guid" />
             <Parameter Name="nickName" Mode="In" Type="String" />
             <Parameter Name="firstName" Mode="In" Type="String" />
@@ -675,6 +711,69 @@
             <Parameter Name="birthday" Mode="In" Type="DateTime" />
             <Parameter Name="imagePath" Mode="In" Type="String" />
             <Parameter Name="description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spMessage">
+            <Parameter Name="pkMessageID" Mode="InOut" Type="Guid" />
+            <Parameter Name="fkFromID" Mode="In" Type="Guid" />
+            <Parameter Name="fkToID" Mode="In" Type="Guid" />
+            <Parameter Name="header" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="Boolean" />
+            <Parameter Name="isDeletedBySender" Mode="In" Type="Boolean" />
+            <Parameter Name="isDeletedByReceiver" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="Messages" EntityType="SocialNetworkDBModel.Message" />
+          <AssociationSet Name="FK_Messages_Users" Association="SocialNetworkDBModel.FK_Messages_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Users1" Association="SocialNetworkDBModel.FK_Messages_Users1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <FunctionImport Name="spUser">
+            <Parameter Name="pkUserID" Mode="InOut" Type="Guid" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="sqID" Mode="In" Type="Int32" />
+            <Parameter Name="sqResponse" Mode="In" Type="String" />
+            <Parameter Name="regDate" Mode="In" Type="DateTime" />
+            <Parameter Name="lastLoginDate" Mode="In" Type="DateTime" />
+            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spRole">
+            <Parameter Name="pkID" Mode="InOut" Type="Guid" />
+            <Parameter Name="fkUserID" Mode="In" Type="Guid" />
+            <Parameter Name="privelegeMask" Mode="In" Type="Byte" />
+            <Parameter Name="roleName" Mode="In" Type="String" />
+            <Parameter Name="delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spFriendInvitation">
+            <Parameter Name="pkID" Mode="InOut" Type="Guid" />
+            <Parameter Name="updateByUserInfo" Mode="In" Type="Boolean" />
+            <Parameter Name="fkFromID" Mode="In" Type="Guid" />
+            <Parameter Name="fkToID" Mode="In" Type="Guid" />
+            <Parameter Name="message" Mode="In" Type="String" />
+            <Parameter Name="createDate" Mode="In" Type="DateTime" />
+            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spFriend">
+            <Parameter Name="pkID" Mode="InOut" Type="Guid" />
+            <Parameter Name="updateByUserInfo" Mode="In" Type="Boolean" />
+            <Parameter Name="fkUserID" Mode="In" Type="Guid" />
+            <Parameter Name="fkFriendID" Mode="In" Type="Guid" />
+            <Parameter Name="friendshipDate" Mode="In" Type="DateTime" />
+            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spBan">
+            <Parameter Name="pkID" Mode="InOut" Type="Guid" />
+            <Parameter Name="updateByUserInfo" Mode="In" Type="Boolean" />
+            <Parameter Name="fkUserID" Mode="In" Type="Guid" />
+            <Parameter Name="fkAdminID" Mode="In" Type="Guid" />
+            <Parameter Name="reason" Mode="In" Type="String" />
+            <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="toDate" Mode="In" Type="DateTime" />
+            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Address">
@@ -752,21 +851,6 @@
           <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_Friends_Users" FromRole="Friends" ToRole="Users" />
           <NavigationProperty Name="User1" Relationship="SocialNetworkDBModel.FK_Friends_Users1" FromRole="Friends" ToRole="Users" />
         </EntityType>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="MessageID" />
-          </Key>
-          <Property Name="MessageID" Type="Guid" Nullable="false" />
-          <Property Name="FromID" Type="Guid" Nullable="false" />
-          <Property Name="ToID" Type="Guid" Nullable="false" />
-          <Property Name="SendDate" Type="DateTime" Nullable="false" />
-          <Property Name="Header" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Text" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
-          <Property Name="Status" Type="Boolean" Nullable="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_Messages_Users" FromRole="Messages" ToRole="Users" />
-          <NavigationProperty Name="User1" Relationship="SocialNetworkDBModel.FK_Messages_Users1" FromRole="Messages" ToRole="Users" />
-        </EntityType>
         <EntityType Name="PersonalInfo">
           <Key>
             <PropertyRef Name="ID" />
@@ -835,13 +919,13 @@
           <NavigationProperty Name="FriendInvitations1" Relationship="SocialNetworkDBModel.FK_FriendInvitations_Users1" FromRole="Users" ToRole="FriendInvitations" />
           <NavigationProperty Name="Friends" Relationship="SocialNetworkDBModel.FK_Friends_Users" FromRole="Users" ToRole="Friends" />
           <NavigationProperty Name="Friends1" Relationship="SocialNetworkDBModel.FK_Friends_Users1" FromRole="Users" ToRole="Friends" />
-          <NavigationProperty Name="Messages" Relationship="SocialNetworkDBModel.FK_Messages_Users" FromRole="Users" ToRole="Messages" />
-          <NavigationProperty Name="Messages1" Relationship="SocialNetworkDBModel.FK_Messages_Users1" FromRole="Users" ToRole="Messages" />
           <NavigationProperty Name="PersonalInfoes" Relationship="SocialNetworkDBModel.FK_PersonalInfo_Users" FromRole="Users" ToRole="PersonalInfo" />
           <NavigationProperty Name="Status" Relationship="SocialNetworkDBModel.FK_Status_Users" FromRole="Users" ToRole="Status" />
           <NavigationProperty Name="UsersXUserRoles" Relationship="SocialNetworkDBModel.FK_UsersXUserRoles_Users" FromRole="Users" ToRole="UsersXUserRoles" />
           <NavigationProperty Name="WallBoardItems" Relationship="SocialNetworkDBModel.FK_WallBoardItems_Users" FromRole="Users" ToRole="WallBoardItems" />
           <NavigationProperty Name="WallBoardItems1" Relationship="SocialNetworkDBModel.FK_WallBoardItems_Users1" FromRole="Users" ToRole="WallBoardItems" />
+          <NavigationProperty Name="Messages" Relationship="SocialNetworkDBModel.FK_Messages_Users" FromRole="User" ToRole="Message" />
+          <NavigationProperty Name="Messages1" Relationship="SocialNetworkDBModel.FK_Messages_Users1" FromRole="User" ToRole="Message" />
         </EntityType>
         <EntityType Name="UsersXUserRole">
           <Key>
@@ -990,30 +1074,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Messages_Users">
-          <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-          <End Role="Messages" Type="SocialNetworkDBModel.Message" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Messages">
-              <PropertyRef Name="FromID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Messages_Users1">
-          <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
-          <End Role="Messages" Type="SocialNetworkDBModel.Message" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Messages">
-              <PropertyRef Name="ToID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PersonalInfo_Users">
           <End Role="Users" Type="SocialNetworkDBModel.User" Multiplicity="1" />
           <End Role="PersonalInfo" Type="SocialNetworkDBModel.PersonalInfo" Multiplicity="*" />
@@ -1086,6 +1146,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Type="Guid" Name="MessageID" Nullable="false" />
+          <Property Type="Guid" Name="FromID" Nullable="false" />
+          <Property Type="Guid" Name="ToID" Nullable="false" />
+          <Property Type="DateTime" Name="SendDate" Nullable="false" />
+          <Property Type="String" Name="Header" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeletedBySender" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeletedByReceiver" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="SocialNetworkDBModel.FK_Messages_Users" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="SocialNetworkDBModel.FK_Messages_Users1" FromRole="Message" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Messages_Users">
+          <End Type="SocialNetworkDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="SocialNetworkDBModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="FromID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Users1">
+          <End Type="SocialNetworkDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="SocialNetworkDBModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ToID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1134,16 +1234,6 @@
             <ScalarProperty Name="UserID" ColumnName="UserID" />
             <ScalarProperty Name="FriendID" ColumnName="FriendID" />
             <ScalarProperty Name="FriendshipDate" ColumnName="FriendshipDate" />
-            <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Messages"><EntityTypeMapping TypeName="SocialNetworkDBModel.Message"><MappingFragment StoreEntitySet="Messages">
-            <ScalarProperty Name="MessageID" ColumnName="MessageID" />
-            <ScalarProperty Name="FromID" ColumnName="FromID" />
-            <ScalarProperty Name="ToID" ColumnName="ToID" />
-            <ScalarProperty Name="SendDate" ColumnName="SendDate" />
-            <ScalarProperty Name="Header" ColumnName="Header" />
-            <ScalarProperty Name="Text" ColumnName="Text" />
-            <ScalarProperty Name="Status" ColumnName="Status" />
             <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="PersonalInfoes"><EntityTypeMapping TypeName="SocialNetworkDBModel.PersonalInfo"><MappingFragment StoreEntitySet="PersonalInfo">
@@ -1208,9 +1298,29 @@
           <FunctionImportMapping FunctionImportName="spDelWallBoardItem" FunctionName="SocialNetworkDBModel.Store.spDelWallBoardItem" />
           <FunctionImportMapping FunctionImportName="spInsWallBoardTextMessage" FunctionName="SocialNetworkDBModel.Store.spInsWallBoardTextMessage" />
           <FunctionImportMapping FunctionImportName="spInsStatus" FunctionName="SocialNetworkDBModel.Store.spInsStatus" />
-          <FunctionImportMapping FunctionImportName="spUpdAvatar" FunctionName="SocialNetworkDBModel.Store.spUpdAvatar" />
           <FunctionImportMapping FunctionImportName="spAddress" FunctionName="SocialNetworkDBModel.Store.spAddress" />
           <FunctionImportMapping FunctionImportName="spPersonalInfo" FunctionName="SocialNetworkDBModel.Store.spPersonalInfo" />
+          <FunctionImportMapping FunctionImportName="spMessage" FunctionName="SocialNetworkDBModel.Store.spMessage" />
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="SocialNetworkDBModel.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="IsDeletedByReceiver" ColumnName="IsDeletedByReceiver" />
+                <ScalarProperty Name="IsDeletedBySender" ColumnName="IsDeletedBySender" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+                <ScalarProperty Name="ToID" ColumnName="ToID" />
+                <ScalarProperty Name="FromID" ColumnName="FromID" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spUser" FunctionName="SocialNetworkDBModel.Store.spUser" />
+          <FunctionImportMapping FunctionImportName="spRole" FunctionName="SocialNetworkDBModel.Store.spRole" />
+          <FunctionImportMapping FunctionImportName="spFriendInvitation" FunctionName="SocialNetworkDBModel.Store.spFriendInvitation" />
+          <FunctionImportMapping FunctionImportName="spFriend" FunctionName="SocialNetworkDBModel.Store.spFriend" />
+          <FunctionImportMapping FunctionImportName="spBan" FunctionName="SocialNetworkDBModel.Store.spBan" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1238,7 +1348,6 @@
         <EntityTypeShape EntityType="SocialNetworkDBModel.Country" Width="1.5" PointX="0.75" PointY="28.75" Height="1.5923063151041674" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialNetworkDBModel.FriendInvitation" Width="1.5" PointX="3" PointY="6.875" Height="2.2496956380208335" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialNetworkDBModel.Friend" Width="1.5" PointX="3" PointY="9.875" Height="2.0853483072916674" IsExpanded="true" />
-        <EntityTypeShape EntityType="SocialNetworkDBModel.Message" Width="1.5" PointX="3" PointY="12.625" Height="2.5783902994791674" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialNetworkDBModel.PersonalInfo" Width="1.5" PointX="3" PointY="16" Height="3.0714322916666674" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialNetworkDBModel.Status" Width="1.5" PointX="3" PointY="19.875" Height="2.2496956380208317" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialNetworkDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="1.125" Height="1.7566536458333317" IsExpanded="true" />
@@ -1263,62 +1372,54 @@
           <ConnectorPoint PointX="5.25" PointY="17.578542480468748" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Bans_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="12.375" />
-          <ConnectorPoint PointX="1.5" PointY="4.832021484375" />
-          <ConnectorPoint PointX="3" PointY="4.832021484375" />
+          <ConnectorPoint PointX="1.48242234375" PointY="12.375" />
+          <ConnectorPoint PointX="1.48242234375" PointY="4.435294458007812" />
+          <ConnectorPoint PointX="3" PointY="4.435294458007812" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Bans_Users1" ManuallyRouted="false">
           <ConnectorPoint PointX="1.9062525" PointY="12.375" />
-          <ConnectorPoint PointX="1.9062525" PointY="5.4667847265625" />
-          <ConnectorPoint PointX="3" PointY="5.4667847265625" />
+          <ConnectorPoint PointX="1.9062525" PointY="5.2684212133789057" />
+          <ConnectorPoint PointX="3" PointY="5.2684212133789057" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Cities_Countries" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="29.577982080629006" />
           <ConnectorPoint PointX="3" PointY="29.577982080629006" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_FriendInvitations_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.0937475" PointY="12.375" />
-          <ConnectorPoint PointX="1.0937475" PointY="7.9998478190104167" />
-          <ConnectorPoint PointX="1.4166666666666667" PointY="7.9998478190104159" />
-          <ConnectorPoint PointX="1.5833333333333333" PointY="7.9998478190104167" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="7.9998478190104159" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="7.9998478190104167" />
-          <ConnectorPoint PointX="3" PointY="7.9998478190104167" />
+          <ConnectorPoint PointX="0.97460671874999993" PointY="12.375" />
+          <ConnectorPoint PointX="0.97460671874999993" PointY="7.6288000630696615" />
+          <ConnectorPoint PointX="1.3990890104166667" PointY="7.6288000630696606" />
+          <ConnectorPoint PointX="1.5657556770833332" PointY="7.6288000630696615" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="7.6288000630696606" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="7.6288000630696615" />
+          <ConnectorPoint PointX="3" PointY="7.6288000630696615" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_FriendInvitations_Users1" ManuallyRouted="false">
           <ConnectorPoint PointX="2.10937875" PointY="12.375" />
-          <ConnectorPoint PointX="2.10937875" PointY="8.5935242285156264" />
-          <ConnectorPoint PointX="3" PointY="8.5935242285156264" />
+          <ConnectorPoint PointX="2.10937875" PointY="8.4080003505452474" />
+          <ConnectorPoint PointX="3" PointY="8.4080003505452474" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Friends_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.70312625" PointY="12.375" />
-          <ConnectorPoint PointX="1.70312625" PointY="10.917674153645834" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="10.917674153645834" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="10.917674153645834" />
-          <ConnectorPoint PointX="2.0260454166666664" PointY="10.917674153645834" />
-          <ConnectorPoint PointX="2.1927120833333333" PointY="10.917674153645834" />
-          <ConnectorPoint PointX="3" PointY="10.917674153645834" />
+          <ConnectorPoint PointX="1.6943374218749998" PointY="12.375" />
+          <ConnectorPoint PointX="1.6943374218749998" PointY="10.572305668131509" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="10.572305668131509" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="10.572305668131509" />
+          <ConnectorPoint PointX="2.0260454166666664" PointY="10.572305668131509" />
+          <ConnectorPoint PointX="2.1927120833333333" PointY="10.572305668131509" />
+          <ConnectorPoint PointX="3" PointY="10.572305668131509" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_Friends_Users1" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.29687375" PointY="12.375" />
-          <ConnectorPoint PointX="1.29687375" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.4166666666666667" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.5833333333333333" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.6197929166666667" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.7864595833333332" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="2.0260454166666664" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="2.1927120833333333" PointY="11.470263730468751" />
-          <ConnectorPoint PointX="3" PointY="11.470263730468751" />
-        </AssociationConnector>
-        <AssociationConnector Association="SocialNetworkDBModel.FK_Messages_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="13.914195149739584" />
-          <ConnectorPoint PointX="3" PointY="13.914195149739584" />
-        </AssociationConnector>
-        <AssociationConnector Association="SocialNetworkDBModel.FK_Messages_Users1" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="13.207097574869792" />
-          <ConnectorPoint PointX="3" PointY="13.207097574869792" />
+          <ConnectorPoint PointX="1.2285145312499999" PointY="12.375" />
+          <ConnectorPoint PointX="1.2285145312499999" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.3990890104166667" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.5657556770833332" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.6110040885416666" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.7776707552083331" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="2.0260454166666664" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="2.1927120833333333" PointY="11.297579487711589" />
+          <ConnectorPoint PointX="3" PointY="11.297579487711589" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_PersonalInfo_Users" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="16.38060546875" />
@@ -1339,25 +1440,33 @@
           <ConnectorPoint PointX="6.75" PointY="12.625" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_UsersXUserRoles_Users" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="15.601695149739584" />
-          <ConnectorPoint PointX="7.15625" PointY="15.601695149739584" />
-          <ConnectorPoint PointX="7.15625" PointY="14.381653645833339" />
+          <ConnectorPoint PointX="2.25" PointY="12.65625" />
+          <ConnectorPoint PointX="6" PointY="12.65625" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_WallBoardItems_Users" ManuallyRouted="false">
           <ConnectorPoint PointX="1.9062525" PointY="16.761210937500003" />
-          <ConnectorPoint PointX="1.9062525" PointY="26.664195149739584" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="26.664195149739584" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="26.664195149739584" />
-          <ConnectorPoint PointX="3" PointY="26.664195149739584" />
+          <ConnectorPoint PointX="1.9062525" PointY="27.086601446533205" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="27.086601446533205" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="27.086601446533205" />
+          <ConnectorPoint PointX="3" PointY="27.086601446533205" />
         </AssociationConnector>
         <AssociationConnector Association="SocialNetworkDBModel.FK_WallBoardItems_Users1" ManuallyRouted="false">
           <ConnectorPoint PointX="1.0937475" PointY="16.761210937500003" />
-          <ConnectorPoint PointX="1.0937475" PointY="25.988345074869791" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="25.988345074869791" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="25.988345074869791" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="25.988345074869791" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="25.988345074869791" />
-          <ConnectorPoint PointX="3" PointY="25.988345074869791" />
+          <ConnectorPoint PointX="1.0937475" PointY="26.199548223266603" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="26.199548223266603" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="26.199548223266603" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="26.199548223266603" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="26.199548223266603" />
+          <ConnectorPoint PointX="3" PointY="26.199548223266603" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SocialNetworkDBModel.Message" Width="1.5" PointX="3.125" PointY="12.75" Height="2.7427376302083388" />
+        <AssociationConnector Association="SocialNetworkDBModel.FK_Messages_Users" >
+          <ConnectorPoint PointX="2.25" PointY="14.121368815104169" />
+          <ConnectorPoint PointX="3.125" PointY="14.121368815104169" />
+        </AssociationConnector>
+        <AssociationConnector Association="SocialNetworkDBModel.FK_Messages_Users1" >
+          <ConnectorPoint PointX="2.25" PointY="13.373184407552085" />
+          <ConnectorPoint PointX="3.125" PointY="13.373184407552085" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

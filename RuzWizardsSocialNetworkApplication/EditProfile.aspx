@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="true" CodeBehind="EditProfile.aspx.cs" Theme="MainSkin" Inherits="EditProfile" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="true" CodeBehind="EditProfile.aspx.cs" Theme="MainSkin" Inherits="EditProfile" EnableEventValidation="false" %>
 <%@ Register TagPrefix="cc" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="server">
@@ -6,176 +6,26 @@
     <script src="Scripts/ui/jquery-ui-1.8.21.custom.js" type="text/javascript"></script>
     <script src="Scripts/ui/jquery.ui.tabs.js" type="text/javascript"></script>
     <script src="Scripts/ui/jquery.ui.datepicker.js" type="text/javascript"></script>
-    <script src="Scripts/jquery.MultiFile.pack.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-        $(function () {
-            $("#divTabs").tabs();
-        });
-
+    <script src="Scripts/jquery-cookies.js" type="text/javascript"></script>
+    <script src="Scripts/main-scripts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var webServiceURL = '<%=ResolveUrl("~/WebServices/FillItemsService.asmx")%>';
 
         $(function () {
-            var minDate = new Date('1/1/1900');
-            var todaysDate = new Date();
-            var maxDate = new Date(todaysDate.getFullYear(),
-                               todaysDate.getMonth(),
-                               todaysDate.getDate() - 1);
-            var currentsYear = todaysDate.getFullYear();
-
-            var range = '1900:' + currentsYear
-            $("[name $= 'tbxBirthday']").datepicker({
-                dateFormat: 'mm.dd.yy',
-                minDate: minDate,
-                maxDate: maxDate,
-                changeMonth: true,
-                changeYear: true,
-                yearRange: range
-            });
+            TabsFnc("#divTabs");
+            DatepickerFnc("tbxBirthday");
+            FillCountryXCitiesCascadeDropList("ddlCountry", "ddlCity", webServiceURL);
         });
 
-        
-</script>
-
-
-<script type="text/javascript">
-    // Default 'unselected' value.
-    var defaultCity = "-- Select City --";
-
-    // OnPageLoad event.
-    $().ready(function () {
-        // Web-service URL.
-        var pageUrl = '<%=ResolveUrl("~/WebServices/FillItemsService.asmx")%>';
-        // Control ddlCountry OnChange function.
-        $("[name $= 'ddlCountry']").change(function () {
-            // Get ID of selected item in ddlCountry.
-            var countryID = $("#ddlCountry option:selected").val();
-            // If that ID equal 'not selected' then append default value.
-            if (countryID == '0') {
-                $("[name $= 'ddlCity']").empty();
-                $("[name $= 'ddlCity']").append($("<option></option>").val("0").html(defaultCity));
-            }
-            // Else get list if cities of current country.
-            else {
-                $.ajax({
-                    type: "POST",
-                    url: pageUrl + "/GetAllCountryCities",
-                    data: "{countryID:'" + countryID + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (msg) {
-                        BindCityddl(msg.d)
-                    }
-                });
-            }
-        });
-    });
-
-    // Bing droplist by cities of current country.
-    function BindCityddl(msg) {
-        $("[name $= 'ddlCity']").empty();
-        $("[name $= 'ddlCity']").append($("<option></option>").val("0").html(defaultCity));
-        $.each(msg, function () {
-            $("[name $= 'ddlCity']").append($("<option></option>").val(this['Key']).html(this['Value']));
-        });
-    }
-</script>
-
-
-<script type="text/javascript">
-  
-</script>
-
-<script type="text/javascript">
-
-    // Function executed after the file successfully uploaded.
-    function OnAsyncUploadComplete(sender, args) {
-
-        var fileName = args.get_fileName();
-        var extensionPointIndex = fileName.lastIndexOf('.');
-        var fileExtension = '-1';
-        if (extensionPointIndex != -1) {
-            fileExtension = fileName.substring(extensionPointIndex).toLowerCase();
+        // Function executed after the file successfully uploaded.
+        function OnAsyncUploadComplete(sender, args) {
+            AsyncUploadComplete(sender, args, webServiceURL, "imgAvatar");
         }
-
-        var fileLength = parseInt(args.get_length());
-        var defaultUploadLimit = 5242880;
-
-        if (fileLength > defaultUploadLimit) {
-            alert("Error. File size too big.");
-            return;
-        }
-
-        if (fileExtension != '-1' 
-            && (fileExtension == '.jpg' || fileExtension == '.png' || fileExtension == '.jpeg')) {
-
-            var pageUrl = '<%=ResolveUrl("~/WebServices/FillItemsService.asmx")%>';
-            $.ajax({
-                type: "POST",
-                url: pageUrl + "/GetUploadedAvatarImage",
-                data: '{}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    BindAvatarImage(msg.d)
-                }
-            });
-        }
-        else {
-            alert("Error. Incorrect file format. Upload only: jpg, jpeg, png.");
-            return;
-        }
-    }
-
-    // Change image without reload.
-    function BindAvatarImage(msg) {
-        var imagePath = "Uploads/Photo/";
-        
-        $("img[id$='imgAvatar']").attr("src", imagePath + msg + "?" + Math.random());
-
-    }
-
-    // Executed if the file uploading failed.
-    function OnAsyncUploadError(sender, args) {
-        alert("Upload error.");
-    }
-</script>
-
-<script type="text/javascript">
-    var pageUrl = '<%=ResolveUrl("~/WebServices/ModifyService.asmx")%>';
-
-    function OnMainSaveClick() {
-//        var nickName = $("[name $= 'tbxNickName']").val();
-//        var firstName = $("[name $= 'tbxFirstName']").val();
-//        var lastName = $("[name $= 'tbxLastName']").val();
-//        var middleName = $("[name $= 'tbxMiddleName']").val();
-//        var sex = $("[name $= 'ddlSex'] option:selected").val();
-//        var phone = $("[name $= 'tbxPhone']").val();
-//        var birthday = $("[name $= 'tbxBirthday']").val();
-//        var description = $("[name $= 'tbxDescription']").val();
-
-//        $.ajax({
-//            type: "POST",
-//            url: pageUrl + "/ModifyMainUserInfo",
-//            data: { "nickName": nickName.toString(), "firstName": firstName.toString(), "lastName": lastName.toString(), "middleName": middleName.toString(), "sex": sex.toString(), "phone": phone.toString(), "birthday": birthday.toString(), "description": description.toString() },
-//            contentType: "application/json; charset=utf-8",
-//            dataType: "json",
-//            success: function (msg) {
-//            },
-//            error: function (msg) {
-//                alert("1");
-//            }
-//        });
-    }
-
-</script>
-
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" runat="server">
     <div class="innerContainer">
-
-    
-
 
         <div id="divTabs" style="width:98%;">
             <ul>
@@ -191,7 +41,7 @@
                 
                 <asp:FormView ID="fvMain" runat="server" DataKeyNames="ID" 
                     DefaultMode="Edit" Width="100%" ondatabound="OnMainDataBound" 
-                        onitemcommand="fvMain_ItemCommand" onitemupdating="fvMain_ItemUpdating">
+                        onitemupdating="OnMainItemUpdating">
                     <EditItemTemplate>
                        
                         <asp:Label ID="lblID" runat="server" Text='<%# Bind("ID") %>' Visible="false" />
@@ -245,7 +95,7 @@
                                     <asp:Literal ID="litSex" runat="server" Text="Sex:" />
                                 </td>
                                 <td>
-                                     <asp:DropDownList ID="ddlSex" runat="server" SelectedValue='<%# Bind("Sex") %>'
+                                     <asp:DropDownList ID="ddlSex" runat="server" SelectedValue='<%# Eval("Sex") ?? 0 %>'
                                         Width="100%" OnDataBinding="OnSexDataBinding">
                                     </asp:DropDownList>
                                 </td>
@@ -274,8 +124,8 @@
                                     <asp:Literal ID="litBirthday" runat="server" Text="Birthday:" />
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="tbxBirthday" runat="server" ReadOnly="true" 
-                                        Text='<%# Bind("Birthday") %>' ClientIDMode="Static" />
+                                    <asp:TextBox ID="tbxBirthday" runat="server" 
+                                        Text='<%# Eval("Birthday") %>' ClientIDMode="Static" />
                                 </td>
                             </tr>
                             
@@ -306,7 +156,6 @@
                             <tr>
                                 <td colspan="2" style="text-align:center;">
                                     <asp:ImageButton ID="btnSaveMain" runat="server" CommandName="Update"
-                                        OnClientClick="OnMainSaveClick()" 
                                         ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_save.png" />
                                 </td>
                             </tr>
@@ -325,7 +174,7 @@
                 <asp:Panel ID="pnlAddress" runat="server" Width="50%">
                 
                 <asp:FormView ID="fvAddress" runat="server" DataKeyNames="ID" 
-                    DefaultMode="Edit" Width="100%">
+                    DefaultMode="Edit" Width="100%" onitemupdating="OnAddressItemUpdating">
                     <EditItemTemplate>
                         <asp:Label ID="lblID" runat="server" 
                             Text='<%# Bind("ID") %>' Visible="false"/>
@@ -340,10 +189,10 @@
                                 </td>
                                 <td>
                                     <asp:DropDownList ID="ddlCountry" runat="server" AppendDataBoundItems="true" 
-                                        SelectedValue='<%# Eval("CountryID") != null ? Eval("CountryID") : 0 %>'
+                                        SelectedValue='<%# Eval("CountryID") ?? 0 %>'
                                         Width="100%" ClientIDMode="Static" ondatabinding="OnCountryDataBinding" 
                                         DataTextField="Name" DataValueField="CountryID">
-                                        <asp:ListItem Text="-- Select Country --" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="- Select Country -" Value="0"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>
@@ -354,10 +203,10 @@
                                 <td>
                                     <asp:DropDownList ID="ddlCity" runat="server" Width="100%" 
                                         AppendDataBoundItems="true"
-                                        SelectedValue='<%# Eval("CityID") != null ? Eval("CityID") : 0 %>' 
+                                        SelectedValue='<%# Eval("CityID") ?? 0 %>' 
                                         OnDataBinding="OnCityDataBinding"
                                         DataTextField="Name" DataValueField="CityID">
-                                        <asp:ListItem Text="-- Select City --" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="- Select City -" Value="0"></asp:ListItem>
                                     </asp:DropDownList>
                                 </td>
                             </tr>

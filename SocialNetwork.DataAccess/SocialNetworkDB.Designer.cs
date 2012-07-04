@@ -28,14 +28,14 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_FriendInvitations_Users1", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "FriendInvitations", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.FriendInvitation), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Friends_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Friends", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Friend), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Friends_Users1", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Friends", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Friend), true)]
-[assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Messages_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Message), true)]
-[assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Messages_Users1", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Message), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_PersonalInfo_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "PersonalInfo", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.PersonalInfo), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Status_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Status", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Status), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_UsersXUserRoles_UserRoles", "UserRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SocialNetwork.DataAccess.UserRole), "UsersXUserRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.UsersXUserRole), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_UsersXUserRoles_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SocialNetwork.DataAccess.User), "UsersXUserRoles", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.UsersXUserRole), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_WallBoardItems_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "WallBoardItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.WallBoardItem), true)]
 [assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_WallBoardItems_Users1", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "WallBoardItems", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.WallBoardItem), true)]
+[assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Messages_Users", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Message", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Message), true)]
+[assembly: EdmRelationshipAttribute("SocialNetworkDBModel", "FK_Messages_Users1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SocialNetwork.DataAccess.User), "Message", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SocialNetwork.DataAccess.Message), true)]
 
 #endregion
 
@@ -186,22 +186,6 @@ namespace SocialNetwork.DataAccess
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Message> Messages
-        {
-            get
-            {
-                if ((_Messages == null))
-                {
-                    _Messages = base.CreateObjectSet<Message>("Messages");
-                }
-                return _Messages;
-            }
-        }
-        private ObjectSet<Message> _Messages;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<PersonalInfo> PersonalInfoes
         {
             get
@@ -310,6 +294,22 @@ namespace SocialNetwork.DataAccess
             }
         }
         private ObjectSet<WallBoardItem> _WallBoardItems;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Message> Messages
+        {
+            get
+            {
+                if ((_Messages == null))
+                {
+                    _Messages = base.CreateObjectSet<Message>("Messages");
+                }
+                return _Messages;
+            }
+        }
+        private ObjectSet<Message> _Messages;
 
         #endregion
         #region AddTo Methods
@@ -360,14 +360,6 @@ namespace SocialNetwork.DataAccess
         public void AddToFriends(Friend friend)
         {
             base.AddObject("Friends", friend);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Messages EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToMessages(Message message)
-        {
-            base.AddObject("Messages", message);
         }
     
         /// <summary>
@@ -424,6 +416,14 @@ namespace SocialNetwork.DataAccess
         public void AddToWallBoardItems(WallBoardItem wallBoardItem)
         {
             base.AddObject("WallBoardItems", wallBoardItem);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Messages EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMessages(Message message)
+        {
+            base.AddObject("Messages", message);
         }
 
         #endregion
@@ -642,36 +642,6 @@ namespace SocialNetwork.DataAccess
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="userID">No Metadata Documentation available.</param>
-        /// <param name="imagePath">No Metadata Documentation available.</param>
-        public int spUpdAvatar(Nullable<global::System.Guid> userID, global::System.String imagePath)
-        {
-            ObjectParameter userIDParameter;
-            if (userID.HasValue)
-            {
-                userIDParameter = new ObjectParameter("UserID", userID);
-            }
-            else
-            {
-                userIDParameter = new ObjectParameter("UserID", typeof(global::System.Guid));
-            }
-    
-            ObjectParameter imagePathParameter;
-            if (imagePath != null)
-            {
-                imagePathParameter = new ObjectParameter("ImagePath", imagePath);
-            }
-            else
-            {
-                imagePathParameter = new ObjectParameter("ImagePath", typeof(global::System.String));
-            }
-    
-            return base.ExecuteFunction("spUpdAvatar", userIDParameter, imagePathParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="pkID">No Metadata Documentation available.</param>
         /// <param name="updateByUserInfo">No Metadata Documentation available.</param>
         /// <param name="fkUserInfoID">No Metadata Documentation available.</param>
@@ -782,6 +752,7 @@ namespace SocialNetwork.DataAccess
         /// </summary>
         /// <param name="pkID">No Metadata Documentation available.</param>
         /// <param name="updateByUser">No Metadata Documentation available.</param>
+        /// <param name="updateImgPath">No Metadata Documentation available.</param>
         /// <param name="fkUserID">No Metadata Documentation available.</param>
         /// <param name="nickName">No Metadata Documentation available.</param>
         /// <param name="firstName">No Metadata Documentation available.</param>
@@ -792,7 +763,7 @@ namespace SocialNetwork.DataAccess
         /// <param name="birthday">No Metadata Documentation available.</param>
         /// <param name="imagePath">No Metadata Documentation available.</param>
         /// <param name="description">No Metadata Documentation available.</param>
-        public int spPersonalInfo(ObjectParameter pkID, Nullable<global::System.Boolean> updateByUser, Nullable<global::System.Guid> fkUserID, global::System.String nickName, global::System.String firstName, global::System.String lastName, global::System.String middleName, Nullable<global::System.Byte> sex, global::System.String phone, Nullable<global::System.DateTime> birthday, global::System.String imagePath, global::System.String description)
+        public int spPersonalInfo(ObjectParameter pkID, Nullable<global::System.Boolean> updateByUser, Nullable<global::System.Boolean> updateImgPath, Nullable<global::System.Guid> fkUserID, global::System.String nickName, global::System.String firstName, global::System.String lastName, global::System.String middleName, Nullable<global::System.Byte> sex, global::System.String phone, Nullable<global::System.DateTime> birthday, global::System.String imagePath, global::System.String description)
         {
             ObjectParameter updateByUserParameter;
             if (updateByUser.HasValue)
@@ -802,6 +773,16 @@ namespace SocialNetwork.DataAccess
             else
             {
                 updateByUserParameter = new ObjectParameter("updateByUser", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter updateImgPathParameter;
+            if (updateImgPath.HasValue)
+            {
+                updateImgPathParameter = new ObjectParameter("updateImgPath", updateImgPath);
+            }
+            else
+            {
+                updateImgPathParameter = new ObjectParameter("updateImgPath", typeof(global::System.Boolean));
             }
     
             ObjectParameter fkUserIDParameter;
@@ -904,7 +885,457 @@ namespace SocialNetwork.DataAccess
                 descriptionParameter = new ObjectParameter("description", typeof(global::System.String));
             }
     
-            return base.ExecuteFunction("spPersonalInfo", pkID, updateByUserParameter, fkUserIDParameter, nickNameParameter, firstNameParameter, lastNameParameter, middleNameParameter, sexParameter, phoneParameter, birthdayParameter, imagePathParameter, descriptionParameter);
+            return base.ExecuteFunction("spPersonalInfo", pkID, updateByUserParameter, updateImgPathParameter, fkUserIDParameter, nickNameParameter, firstNameParameter, lastNameParameter, middleNameParameter, sexParameter, phoneParameter, birthdayParameter, imagePathParameter, descriptionParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pkMessageID">No Metadata Documentation available.</param>
+        /// <param name="fkFromID">No Metadata Documentation available.</param>
+        /// <param name="fkToID">No Metadata Documentation available.</param>
+        /// <param name="header">No Metadata Documentation available.</param>
+        /// <param name="text">No Metadata Documentation available.</param>
+        /// <param name="status">No Metadata Documentation available.</param>
+        /// <param name="isDeletedBySender">No Metadata Documentation available.</param>
+        /// <param name="isDeletedByReceiver">No Metadata Documentation available.</param>
+        public int spMessage(ObjectParameter pkMessageID, Nullable<global::System.Guid> fkFromID, Nullable<global::System.Guid> fkToID, global::System.String header, global::System.String text, Nullable<global::System.Boolean> status, Nullable<global::System.Boolean> isDeletedBySender, Nullable<global::System.Boolean> isDeletedByReceiver)
+        {
+            ObjectParameter fkFromIDParameter;
+            if (fkFromID.HasValue)
+            {
+                fkFromIDParameter = new ObjectParameter("fkFromID", fkFromID);
+            }
+            else
+            {
+                fkFromIDParameter = new ObjectParameter("fkFromID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter fkToIDParameter;
+            if (fkToID.HasValue)
+            {
+                fkToIDParameter = new ObjectParameter("fkToID", fkToID);
+            }
+            else
+            {
+                fkToIDParameter = new ObjectParameter("fkToID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter headerParameter;
+            if (header != null)
+            {
+                headerParameter = new ObjectParameter("header", header);
+            }
+            else
+            {
+                headerParameter = new ObjectParameter("header", typeof(global::System.String));
+            }
+    
+            ObjectParameter textParameter;
+            if (text != null)
+            {
+                textParameter = new ObjectParameter("text", text);
+            }
+            else
+            {
+                textParameter = new ObjectParameter("text", typeof(global::System.String));
+            }
+    
+            ObjectParameter statusParameter;
+            if (status.HasValue)
+            {
+                statusParameter = new ObjectParameter("status", status);
+            }
+            else
+            {
+                statusParameter = new ObjectParameter("status", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter isDeletedBySenderParameter;
+            if (isDeletedBySender.HasValue)
+            {
+                isDeletedBySenderParameter = new ObjectParameter("isDeletedBySender", isDeletedBySender);
+            }
+            else
+            {
+                isDeletedBySenderParameter = new ObjectParameter("isDeletedBySender", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter isDeletedByReceiverParameter;
+            if (isDeletedByReceiver.HasValue)
+            {
+                isDeletedByReceiverParameter = new ObjectParameter("isDeletedByReceiver", isDeletedByReceiver);
+            }
+            else
+            {
+                isDeletedByReceiverParameter = new ObjectParameter("isDeletedByReceiver", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction("spMessage", pkMessageID, fkFromIDParameter, fkToIDParameter, headerParameter, textParameter, statusParameter, isDeletedBySenderParameter, isDeletedByReceiverParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pkUserID">No Metadata Documentation available.</param>
+        /// <param name="password">No Metadata Documentation available.</param>
+        /// <param name="email">No Metadata Documentation available.</param>
+        /// <param name="sqID">No Metadata Documentation available.</param>
+        /// <param name="sqResponse">No Metadata Documentation available.</param>
+        /// <param name="regDate">No Metadata Documentation available.</param>
+        /// <param name="lastLoginDate">No Metadata Documentation available.</param>
+        /// <param name="isDeleted">No Metadata Documentation available.</param>
+        public int spUser(ObjectParameter pkUserID, global::System.String password, global::System.String email, Nullable<global::System.Int32> sqID, global::System.String sqResponse, Nullable<global::System.DateTime> regDate, Nullable<global::System.DateTime> lastLoginDate, Nullable<global::System.Boolean> isDeleted)
+        {
+            ObjectParameter passwordParameter;
+            if (password != null)
+            {
+                passwordParameter = new ObjectParameter("password", password);
+            }
+            else
+            {
+                passwordParameter = new ObjectParameter("password", typeof(global::System.String));
+            }
+    
+            ObjectParameter emailParameter;
+            if (email != null)
+            {
+                emailParameter = new ObjectParameter("email", email);
+            }
+            else
+            {
+                emailParameter = new ObjectParameter("email", typeof(global::System.String));
+            }
+    
+            ObjectParameter sqIDParameter;
+            if (sqID.HasValue)
+            {
+                sqIDParameter = new ObjectParameter("sqID", sqID);
+            }
+            else
+            {
+                sqIDParameter = new ObjectParameter("sqID", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter sqResponseParameter;
+            if (sqResponse != null)
+            {
+                sqResponseParameter = new ObjectParameter("sqResponse", sqResponse);
+            }
+            else
+            {
+                sqResponseParameter = new ObjectParameter("sqResponse", typeof(global::System.String));
+            }
+    
+            ObjectParameter regDateParameter;
+            if (regDate.HasValue)
+            {
+                regDateParameter = new ObjectParameter("regDate", regDate);
+            }
+            else
+            {
+                regDateParameter = new ObjectParameter("regDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter lastLoginDateParameter;
+            if (lastLoginDate.HasValue)
+            {
+                lastLoginDateParameter = new ObjectParameter("lastLoginDate", lastLoginDate);
+            }
+            else
+            {
+                lastLoginDateParameter = new ObjectParameter("lastLoginDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter isDeletedParameter;
+            if (isDeleted.HasValue)
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", isDeleted);
+            }
+            else
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction("spUser", pkUserID, passwordParameter, emailParameter, sqIDParameter, sqResponseParameter, regDateParameter, lastLoginDateParameter, isDeletedParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pkID">No Metadata Documentation available.</param>
+        /// <param name="fkUserID">No Metadata Documentation available.</param>
+        /// <param name="privelegeMask">No Metadata Documentation available.</param>
+        /// <param name="roleName">No Metadata Documentation available.</param>
+        /// <param name="delete">No Metadata Documentation available.</param>
+        public int spRole(ObjectParameter pkID, Nullable<global::System.Guid> fkUserID, Nullable<global::System.Byte> privelegeMask, global::System.String roleName, Nullable<global::System.Boolean> delete)
+        {
+            ObjectParameter fkUserIDParameter;
+            if (fkUserID.HasValue)
+            {
+                fkUserIDParameter = new ObjectParameter("fkUserID", fkUserID);
+            }
+            else
+            {
+                fkUserIDParameter = new ObjectParameter("fkUserID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter privelegeMaskParameter;
+            if (privelegeMask.HasValue)
+            {
+                privelegeMaskParameter = new ObjectParameter("privelegeMask", privelegeMask);
+            }
+            else
+            {
+                privelegeMaskParameter = new ObjectParameter("privelegeMask", typeof(global::System.Byte));
+            }
+    
+            ObjectParameter roleNameParameter;
+            if (roleName != null)
+            {
+                roleNameParameter = new ObjectParameter("roleName", roleName);
+            }
+            else
+            {
+                roleNameParameter = new ObjectParameter("roleName", typeof(global::System.String));
+            }
+    
+            ObjectParameter deleteParameter;
+            if (delete.HasValue)
+            {
+                deleteParameter = new ObjectParameter("delete", delete);
+            }
+            else
+            {
+                deleteParameter = new ObjectParameter("delete", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction("spRole", pkID, fkUserIDParameter, privelegeMaskParameter, roleNameParameter, deleteParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pkID">No Metadata Documentation available.</param>
+        /// <param name="updateByUserInfo">No Metadata Documentation available.</param>
+        /// <param name="fkFromID">No Metadata Documentation available.</param>
+        /// <param name="fkToID">No Metadata Documentation available.</param>
+        /// <param name="message">No Metadata Documentation available.</param>
+        /// <param name="createDate">No Metadata Documentation available.</param>
+        /// <param name="isDeleted">No Metadata Documentation available.</param>
+        public int spFriendInvitation(ObjectParameter pkID, Nullable<global::System.Boolean> updateByUserInfo, Nullable<global::System.Guid> fkFromID, Nullable<global::System.Guid> fkToID, global::System.String message, Nullable<global::System.DateTime> createDate, Nullable<global::System.Boolean> isDeleted)
+        {
+            ObjectParameter updateByUserInfoParameter;
+            if (updateByUserInfo.HasValue)
+            {
+                updateByUserInfoParameter = new ObjectParameter("updateByUserInfo", updateByUserInfo);
+            }
+            else
+            {
+                updateByUserInfoParameter = new ObjectParameter("updateByUserInfo", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter fkFromIDParameter;
+            if (fkFromID.HasValue)
+            {
+                fkFromIDParameter = new ObjectParameter("fkFromID", fkFromID);
+            }
+            else
+            {
+                fkFromIDParameter = new ObjectParameter("fkFromID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter fkToIDParameter;
+            if (fkToID.HasValue)
+            {
+                fkToIDParameter = new ObjectParameter("fkToID", fkToID);
+            }
+            else
+            {
+                fkToIDParameter = new ObjectParameter("fkToID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter messageParameter;
+            if (message != null)
+            {
+                messageParameter = new ObjectParameter("message", message);
+            }
+            else
+            {
+                messageParameter = new ObjectParameter("message", typeof(global::System.String));
+            }
+    
+            ObjectParameter createDateParameter;
+            if (createDate.HasValue)
+            {
+                createDateParameter = new ObjectParameter("createDate", createDate);
+            }
+            else
+            {
+                createDateParameter = new ObjectParameter("createDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter isDeletedParameter;
+            if (isDeleted.HasValue)
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", isDeleted);
+            }
+            else
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction("spFriendInvitation", pkID, updateByUserInfoParameter, fkFromIDParameter, fkToIDParameter, messageParameter, createDateParameter, isDeletedParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pkID">No Metadata Documentation available.</param>
+        /// <param name="updateByUserInfo">No Metadata Documentation available.</param>
+        /// <param name="fkUserID">No Metadata Documentation available.</param>
+        /// <param name="fkFriendID">No Metadata Documentation available.</param>
+        /// <param name="friendshipDate">No Metadata Documentation available.</param>
+        /// <param name="isDeleted">No Metadata Documentation available.</param>
+        public int spFriend(ObjectParameter pkID, Nullable<global::System.Boolean> updateByUserInfo, Nullable<global::System.Guid> fkUserID, Nullable<global::System.Guid> fkFriendID, Nullable<global::System.DateTime> friendshipDate, Nullable<global::System.Boolean> isDeleted)
+        {
+            ObjectParameter updateByUserInfoParameter;
+            if (updateByUserInfo.HasValue)
+            {
+                updateByUserInfoParameter = new ObjectParameter("updateByUserInfo", updateByUserInfo);
+            }
+            else
+            {
+                updateByUserInfoParameter = new ObjectParameter("updateByUserInfo", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter fkUserIDParameter;
+            if (fkUserID.HasValue)
+            {
+                fkUserIDParameter = new ObjectParameter("fkUserID", fkUserID);
+            }
+            else
+            {
+                fkUserIDParameter = new ObjectParameter("fkUserID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter fkFriendIDParameter;
+            if (fkFriendID.HasValue)
+            {
+                fkFriendIDParameter = new ObjectParameter("fkFriendID", fkFriendID);
+            }
+            else
+            {
+                fkFriendIDParameter = new ObjectParameter("fkFriendID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter friendshipDateParameter;
+            if (friendshipDate.HasValue)
+            {
+                friendshipDateParameter = new ObjectParameter("friendshipDate", friendshipDate);
+            }
+            else
+            {
+                friendshipDateParameter = new ObjectParameter("friendshipDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter isDeletedParameter;
+            if (isDeleted.HasValue)
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", isDeleted);
+            }
+            else
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction("spFriend", pkID, updateByUserInfoParameter, fkUserIDParameter, fkFriendIDParameter, friendshipDateParameter, isDeletedParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pkID">No Metadata Documentation available.</param>
+        /// <param name="updateByUserInfo">No Metadata Documentation available.</param>
+        /// <param name="fkUserID">No Metadata Documentation available.</param>
+        /// <param name="fkAdminID">No Metadata Documentation available.</param>
+        /// <param name="reason">No Metadata Documentation available.</param>
+        /// <param name="fromDate">No Metadata Documentation available.</param>
+        /// <param name="toDate">No Metadata Documentation available.</param>
+        /// <param name="isDeleted">No Metadata Documentation available.</param>
+        public int spBan(ObjectParameter pkID, Nullable<global::System.Boolean> updateByUserInfo, Nullable<global::System.Guid> fkUserID, Nullable<global::System.Guid> fkAdminID, global::System.String reason, Nullable<global::System.DateTime> fromDate, Nullable<global::System.DateTime> toDate, Nullable<global::System.Boolean> isDeleted)
+        {
+            ObjectParameter updateByUserInfoParameter;
+            if (updateByUserInfo.HasValue)
+            {
+                updateByUserInfoParameter = new ObjectParameter("updateByUserInfo", updateByUserInfo);
+            }
+            else
+            {
+                updateByUserInfoParameter = new ObjectParameter("updateByUserInfo", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter fkUserIDParameter;
+            if (fkUserID.HasValue)
+            {
+                fkUserIDParameter = new ObjectParameter("fkUserID", fkUserID);
+            }
+            else
+            {
+                fkUserIDParameter = new ObjectParameter("fkUserID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter fkAdminIDParameter;
+            if (fkAdminID.HasValue)
+            {
+                fkAdminIDParameter = new ObjectParameter("fkAdminID", fkAdminID);
+            }
+            else
+            {
+                fkAdminIDParameter = new ObjectParameter("fkAdminID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter reasonParameter;
+            if (reason != null)
+            {
+                reasonParameter = new ObjectParameter("reason", reason);
+            }
+            else
+            {
+                reasonParameter = new ObjectParameter("reason", typeof(global::System.String));
+            }
+    
+            ObjectParameter fromDateParameter;
+            if (fromDate.HasValue)
+            {
+                fromDateParameter = new ObjectParameter("fromDate", fromDate);
+            }
+            else
+            {
+                fromDateParameter = new ObjectParameter("fromDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter toDateParameter;
+            if (toDate.HasValue)
+            {
+                toDateParameter = new ObjectParameter("toDate", toDate);
+            }
+            else
+            {
+                toDateParameter = new ObjectParameter("toDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter isDeletedParameter;
+            if (isDeleted.HasValue)
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", isDeleted);
+            }
+            else
+            {
+                isDeletedParameter = new ObjectParameter("isDeleted", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction("spBan", pkID, updateByUserInfoParameter, fkUserIDParameter, fkAdminIDParameter, reasonParameter, fromDateParameter, toDateParameter, isDeletedParameter);
         }
 
         #endregion
@@ -2391,8 +2822,9 @@ namespace SocialNetwork.DataAccess
         /// <param name="header">Initial value of the Header property.</param>
         /// <param name="text">Initial value of the Text property.</param>
         /// <param name="status">Initial value of the Status property.</param>
-        /// <param name="isDeleted">Initial value of the IsDeleted property.</param>
-        public static Message CreateMessage(global::System.Guid messageID, global::System.Guid fromID, global::System.Guid toID, global::System.DateTime sendDate, global::System.String header, global::System.String text, global::System.Boolean status, global::System.Boolean isDeleted)
+        /// <param name="isDeletedBySender">Initial value of the IsDeletedBySender property.</param>
+        /// <param name="isDeletedByReceiver">Initial value of the IsDeletedByReceiver property.</param>
+        public static Message CreateMessage(global::System.Guid messageID, global::System.Guid fromID, global::System.Guid toID, global::System.DateTime sendDate, global::System.String header, global::System.String text, global::System.Boolean status, global::System.Boolean isDeletedBySender, global::System.Boolean isDeletedByReceiver)
         {
             Message message = new Message();
             message.MessageID = messageID;
@@ -2402,7 +2834,8 @@ namespace SocialNetwork.DataAccess
             message.Header = header;
             message.Text = text;
             message.Status = status;
-            message.IsDeleted = isDeleted;
+            message.IsDeletedBySender = isDeletedBySender;
+            message.IsDeletedByReceiver = isDeletedByReceiver;
             return message;
         }
 
@@ -2585,24 +3018,48 @@ namespace SocialNetwork.DataAccess
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean IsDeleted
+        public global::System.Boolean IsDeletedBySender
         {
             get
             {
-                return _IsDeleted;
+                return _IsDeletedBySender;
             }
             set
             {
-                OnIsDeletedChanging(value);
-                ReportPropertyChanging("IsDeleted");
-                _IsDeleted = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsDeleted");
-                OnIsDeletedChanged();
+                OnIsDeletedBySenderChanging(value);
+                ReportPropertyChanging("IsDeletedBySender");
+                _IsDeletedBySender = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDeletedBySender");
+                OnIsDeletedBySenderChanged();
             }
         }
-        private global::System.Boolean _IsDeleted;
-        partial void OnIsDeletedChanging(global::System.Boolean value);
-        partial void OnIsDeletedChanged();
+        private global::System.Boolean _IsDeletedBySender;
+        partial void OnIsDeletedBySenderChanging(global::System.Boolean value);
+        partial void OnIsDeletedBySenderChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDeletedByReceiver
+        {
+            get
+            {
+                return _IsDeletedByReceiver;
+            }
+            set
+            {
+                OnIsDeletedByReceiverChanging(value);
+                ReportPropertyChanging("IsDeletedByReceiver");
+                _IsDeletedByReceiver = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDeletedByReceiver");
+                OnIsDeletedByReceiverChanged();
+            }
+        }
+        private global::System.Boolean _IsDeletedByReceiver;
+        partial void OnIsDeletedByReceiverChanging(global::System.Boolean value);
+        partial void OnIsDeletedByReceiverChanged();
 
         #endregion
     
@@ -2614,16 +3071,16 @@ namespace SocialNetwork.DataAccess
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_Messages_Users", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_Messages_Users", "User")]
         public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users", "User").Value = value;
             }
         }
         /// <summary>
@@ -2635,13 +3092,13 @@ namespace SocialNetwork.DataAccess
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users", "User", value);
                 }
             }
         }
@@ -2652,16 +3109,16 @@ namespace SocialNetwork.DataAccess
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_Messages_Users1", "Users")]
+        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_Messages_Users1", "User")]
         public User User1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users1", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users1", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users1", "Users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users1", "User").Value = value;
             }
         }
         /// <summary>
@@ -2673,13 +3130,13 @@ namespace SocialNetwork.DataAccess
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users1", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users1", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users1", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SocialNetworkDBModel.FK_Messages_Users1", "User", value);
                 }
             }
         }
@@ -3831,50 +4288,6 @@ namespace SocialNetwork.DataAccess
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_Messages_Users", "Messages")]
-        public EntityCollection<Message> Messages
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Message>("SocialNetworkDBModel.FK_Messages_Users", "Messages");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Message>("SocialNetworkDBModel.FK_Messages_Users", "Messages", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_Messages_Users1", "Messages")]
-        public EntityCollection<Message> Messages1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Message>("SocialNetworkDBModel.FK_Messages_Users1", "Messages");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Message>("SocialNetworkDBModel.FK_Messages_Users1", "Messages", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_PersonalInfo_Users", "PersonalInfo")]
         public EntityCollection<PersonalInfo> PersonalInfoes
         {
@@ -3975,6 +4388,50 @@ namespace SocialNetwork.DataAccess
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WallBoardItem>("SocialNetworkDBModel.FK_WallBoardItems_Users1", "WallBoardItems", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_Messages_Users", "Message")]
+        public EntityCollection<Message> Messages
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Message>("SocialNetworkDBModel.FK_Messages_Users", "Message");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Message>("SocialNetworkDBModel.FK_Messages_Users", "Message", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SocialNetworkDBModel", "FK_Messages_Users1", "Message")]
+        public EntityCollection<Message> Messages1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Message>("SocialNetworkDBModel.FK_Messages_Users1", "Message");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Message>("SocialNetworkDBModel.FK_Messages_Users1", "Message", value);
                 }
             }
         }

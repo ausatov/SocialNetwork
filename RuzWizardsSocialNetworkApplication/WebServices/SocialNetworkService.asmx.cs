@@ -1,5 +1,13 @@
-﻿namespace RuzWizardsSocialNetworkApplication.WebServices
+﻿// -----------------------------------------------------------------------
+// <copyright file="SocialNetworkService.cs" company="RusWizards">
+// Author: Usatov A.B. 
+// Date: 29.06.12
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace RuzWizardsSocialNetworkApplication.WebServices
 {
+    #region Using
     using RuzWizardsSocialNetworkApplication.Constants;
     using SocialNetwork.DataAccess.Entity;
     using SocialNetwork.DataAccess.Repositories;
@@ -10,6 +18,7 @@
     using System.Web.Services;
     using System.Web.Script.Services;
     using System.Web.Script.Serialization;
+    #endregion
 
     /// <summary>
     ///  SocialNetworkService.
@@ -19,12 +28,12 @@
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
-
     /// <summary>
     ///  Class for SocialNetworkService.
     /// </summary>
     public class SocialNetworkService : System.Web.Services.WebService
     {
+        #region Web methods
         /// <summary>
         /// Modify 
         /// </summary>
@@ -134,6 +143,7 @@
 
             return friendInvList
                 .Select(s => new KeyValuePair<Guid, String>(s.InvitationID, s.Message)).ToList();
-        }
+        } 
+        #endregion
     }
 }

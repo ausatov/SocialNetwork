@@ -81,16 +81,17 @@ namespace SocialNetwork.DataAccess.Repositories
                 list = record.WallBoardItems
                     .OrderByDescending(o => o.SendDate)
                     .Select(s => new WallBoardItem
-                        {
-                            ID = s.ID,
-                            ContentTypeID = s.ContentTypeID,
-                            FromID = s.FromID,
-                            ToID = s.ToID,
-                            SendDate = s.SendDate,
-                            Message = s.Message,
-                            IsDeleted = s.IsDeleted,
-                            NullLink = s.NullLink
-                        }).ToList();
+                    {
+                        ID = s.ID,
+                        ContentTypeID = s.ContentTypeID,
+                        FromID = s.FromID,
+                        ToID = s.ToID,
+                        SendDate = s.SendDate,
+                        Message = s.Message,
+                        IsDeleted = s.IsDeleted,
+                        NullLink = s.NullLink
+                    })
+                    .ToList();
             }
             return list;
         }
@@ -118,7 +119,8 @@ namespace SocialNetwork.DataAccess.Repositories
                         Message = s.Message,
                         IsDeleted = s.IsDeleted,
                         NullLink = s.NullLink
-                    }).ToList();
+                    })
+                    .ToList();
             }
             return recordList;
         }

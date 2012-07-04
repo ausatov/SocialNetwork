@@ -1,4 +1,11 @@
-﻿#region Using
+﻿// -----------------------------------------------------------------------
+// <copyright file="Messages.cs" company="RusWizards">
+// Author: Mankevich M.V. 
+// Date: 29.06.12
+// </copyright>
+// -----------------------------------------------------------------------
+
+#region Using
 using SocialNetwork.DataAccess.Entity;
 using SocialNetwork.DataAccess.Enums;
 using SocialNetwork.DataAccess.Repositories;
@@ -20,6 +27,8 @@ public partial class Messages : System.Web.UI.Page
     /// Current user identifier.
     /// </summary>
     private Guid _userID = Guid.Empty;
+
+    private MessageType _messageType = MessageType.Received;
     #endregion
 
     #region Page handlers
@@ -36,16 +45,8 @@ public partial class Messages : System.Web.UI.Page
 
         if (!Page.IsPostBack)
         {
-            if (Request.QueryString["Posted"] != null && Request.QueryString["Posted"] == "1")
-            {
-                rptMessages.DataSource = MessageRepository.GetUserMessages(
-                    this._userID, MessageType.Posted, MessageSelectType.All);
-            }
-            else
-            {
-                rptMessages.DataSource = MessageRepository.GetUserMessages(
-                    this._userID, MessageType.Received, MessageSelectType.All);
-            }
+            rptMessages.DataSource = MessageRepository.GetUserMessages(
+                this._userID, MessageType.Received, MessageSelectType.All);
             rptMessages.DataBind();
         }
     }
@@ -59,10 +60,27 @@ public partial class Messages : System.Web.UI.Page
     {
         RepeaterItem item = e.Item;
         LinkButton btnSender = item.FindControl("btnSender") as LinkButton;
-        if (btnSender != null)
+        LinkButton btnReceiver = item.FindControl("btnReceiver") as LinkButton;
+        if (_messageType == MessageType.Received && btnSender != null && btnReceiver != null)
         {
-            PersonalInfo person = PersonalInfoRepository.GetUserInfo(Guid.Parse(btnSender.Text));
-            btnSender.Text = String.Join(" ", person.FirstName, person.LastName);
+            FillMessageInfo(item, btnSender);
+            btnSender.Visible = true;
+            btnReceiver.Visible = false;
+        }
+        else if (btnSender != null && btnReceiver != null)
+        {
+            FillMessageInfo(item, btnReceiver);
+            btnSender.Visible = false;
+            btnReceiver.Visible = true;
+        }
+    }
+
+    private void FillMessageInfo(RepeaterItem item, LinkButton btnUserName)
+    {
+        if (btnUserName != null)
+        {
+            PersonalInfo person = PersonalInfoRepository.GetUserInfo(Guid.Parse(btnUserName.Text));
+            btnUserName.Text = String.Join(" ", person.FirstName, person.LastName);
         }
     }
 
@@ -73,7 +91,10 @@ public partial class Messages : System.Web.UI.Page
     /// <param name="e">ImageClickEventArgs e.</param>
     protected void OnShowReceivedClick(Object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("Messages.aspx");
+        _messageType = MessageType.Received;
+        rptMessages.DataSource = MessageRepository.GetUserMessages(
+            this._userID, MessageType.Received, MessageSelectType.All);
+        rptMessages.DataBind();
     }
 
     /// <summary>
@@ -83,7 +104,10 @@ public partial class Messages : System.Web.UI.Page
     /// <param name="e">ImageClickEventArgs e.</param>
     protected void OnShowPostedClick(Object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("Messages.aspx?Posted=1");
+        _messageType = MessageType.Posted;
+        rptMessages.DataSource = MessageRepository.GetUserMessages(
+            this._userID, MessageType.Posted, MessageSelectType.All);
+        rptMessages.DataBind(); 
     }
     #endregion
 }

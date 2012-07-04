@@ -75,6 +75,7 @@
                     PersonalInfoRepository.ModifyPersonalInfo(
                         null,
                         true,
+                        false,
                         userID,
                         nickName,
                         firstName,
