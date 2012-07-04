@@ -1,4 +1,4 @@
-﻿namespace SocialNetwork.DataAccess
+namespace SocialNetwork.DataAccess
 {
     using System;
     using System.Collections.Generic;

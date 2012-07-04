@@ -27,6 +27,6 @@ namespace RuzWizardsSocialNetworkApplication.Constants
         /// <summary>
         /// Default date format.
         /// </summary>
-        public const String _dateFormat = "MM/dd/yyyy";
+        public const String _dateFormat = "MM.dd.yyyy";
     }
 }

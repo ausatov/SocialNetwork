@@ -1,4 +1,4 @@
-﻿namespace RuzWizardsSocialNetworkApplication.WebServices
+namespace RuzWizardsSocialNetworkApplication.WebServices
 {
     #region Using
     using RuzWizardsSocialNetworkApplication.Constants;

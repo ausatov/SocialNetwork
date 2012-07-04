@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="Message.cs" company="RusWizards">
 // Author: Mankevich M.V. 
 // Date: 29.06.12
@@ -54,6 +54,11 @@ namespace SocialNetwork.DataAccess.Entity
         /// <summary>
         /// Gets or sets a value indicating whether.
         /// </summary>
-        public Boolean IsDeleted { get; set; }
+        public Boolean IsDeletedBySender { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether.
+        /// </summary>
+        public Boolean IsDeletedByReceiver { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using RuzWizardsSocialNetworkApplication.App_Code;
+using RuzWizardsSocialNetworkApplication.App_Code;
 using System;
 using System.Collections.Generic;
 using System.Linq;

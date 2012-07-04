@@ -1,4 +1,4 @@
-﻿namespace RuzWizardsSocialNetworkApplication
+namespace RuzWizardsSocialNetworkApplication
 {
     using RuzWizardsSocialNetworkApplication.App_Code;
     using System;

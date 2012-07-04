@@ -1,4 +1,4 @@
-﻿namespace RuzWizardsSocialNetworkApplication.WebServices
+namespace RuzWizardsSocialNetworkApplication.WebServices
 {
     #region Using
     using SocialNetwork.DataAccess.Enums;
@@ -75,6 +75,7 @@
                     PersonalInfoRepository.ModifyPersonalInfo(
                         null,
                         true,
+                        false,
                         userID,
                         nickName,
                         firstName,

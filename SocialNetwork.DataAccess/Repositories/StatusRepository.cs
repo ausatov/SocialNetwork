@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="StatusRepository.cs" company="RusWizards">
 // Author: Mankevich M.V. 
 // Date: 29.06.12
@@ -30,7 +30,7 @@ namespace SocialNetwork.DataAccess.Repositories
         /// <summary>
         /// Default empty status message.
         /// </summary>
-        private const String _defaultStatusMessage = "--status is no set--";
+        private const String _defaultStatusMessage = "";
         #endregion
 
         #region Public methods
@@ -41,7 +41,6 @@ namespace SocialNetwork.DataAccess.Repositories
         /// <returns>String with status message.</returns>
         public static String GetStatusMessage(Guid userID)
         {
-            String status = String.Empty;
             String statusMessage = String.Empty;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
@@ -49,6 +48,7 @@ namespace SocialNetwork.DataAccess.Repositories
                     .FirstOrDefault(f => f.UserID.Equals(userID) && f.IsSet && !f.IsDeleted);
                 statusMessage = (rawStatusMessage == null) ? _defaultStatusMessage : rawStatusMessage.StatusMessage;
             }
+
             return statusMessage;
         }
 
@@ -59,12 +59,13 @@ namespace SocialNetwork.DataAccess.Repositories
         /// <returns>Status code.</returns>
         public static Int32 GetStatusID(Guid userID)
         {
-            Int32 statusID = Int32.MinValue;
+            Int32 statusID;
             using (SocialNetworkDBEntities record = new SocialNetworkDBEntities())
             {
                 var rawStatus = record.Status.FirstOrDefault(f => f.UserID.Equals(userID) && f.IsSet && !f.IsDeleted);
                 statusID = (rawStatus == null) ? (Int32)_defaultStatus : rawStatus.StatusID;
             }
+
             return statusID;
         }
 

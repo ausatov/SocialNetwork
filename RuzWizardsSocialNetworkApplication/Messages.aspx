@@ -1,8 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="True" CodeBehind="Messages.aspx.cs" Inherits="Messages" %>
-
-
-
-
+<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="True" CodeBehind="Messages.aspx.cs" Inherits="Messages" %>
+<%@ Register TagName="PrivateMessageItem" TagPrefix="uc" Src="~/UserControls/PrivateMessageItem.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="server">
 
@@ -61,7 +58,7 @@
                     <td>
                         <asp:ImageButton ID="btnShowReceived" runat="server" AlternateText="." ToolTip="Received"
                             CssClass="btnReceivedActive" OnClientClick="OnReceivedClick()" 
-                            OnClick="OnShowReceivedClick" 
+                            OnClick="OnShowReceivedClick"
                             ImageUrl="~/App_Themes/MainSkin/img/buttons/snw_button_received.png" />
                     </td>
                     <td>
@@ -127,31 +124,6 @@
                 <asp:Label ID="lblMessageID" runat="server" Text='<%# Bind("MessageID") %>' Visible="false"></asp:Label>
                 <tr>
                     <td>
-                        <%--<div class="innerContainer">
-                            <div class="triplebarLeft">
-                                <div style="float: left; padding: 5px;">
-                                    <asp:CheckBox ID="cbSelectItem" runat="server" />
-                                </div>
-                                <div style="float: left; padding: 5px;">
-                                    <asp:Image ID="imgSmallAvatar" runat="server" Width="50px" Height="50px" />
-                                </div>
-                            </div>
-                            <div class="triplebarMiddle" style="float: left; padding: 5px;">
-                                <asp:LinkButton ID="btnSender" Text="btnSender" runat="server"></asp:LinkButton>
-                                <br />
-                                <asp:Label ID="lblStatus" runat="server" Text="lblStatus"></asp:Label>
-                                <br />
-                                <asp:Label ID="lblDate" runat="server" Text="lblDate"></asp:Label>
-                            </div>
-                            <div class="triplebarRight">
-                                <div style="float: left; padding: 5px;">
-                                    <asp:Label ID="lblMessageContent" runat="server" Text="lblMessageContent"></asp:Label>
-                                </div>
-                                <div style="float: right; padding: 5px;">
-                                    <asp:LinkButton ID="btnDelete" runat="server">Delete</asp:LinkButton>
-                                </div>
-                            </div>
-                        </div>--%>
                         <table width="100%">
                             <tr>
                                 <td style="width:10px;">
@@ -162,21 +134,25 @@
 
                                 <td style="width:60px;">
                                     <div style="float: left; padding: 5px;">
-                                        <asp:Image ID="imgSmallAvatar" runat="server" Width="50px" Height="50px" />
+                                        <asp:Image ID="imgMiniAvatar" runat="server" Width="50px" Height="50px" />
                                     </div>
                                 </td>
 
                                 <td style="width:150px;">
                                     <asp:LinkButton CssClass="txtDescriptiveName" ID="btnSender" Text='<%# Bind("FromID") %>' runat="server"></asp:LinkButton>
+                                    <asp:LinkButton CssClass="txtDescriptiveName" ID="btnReceiver" Text='<%# Bind("ToID") %>' runat="server" Visible="false"></asp:LinkButton>
                                     <br />
                                     <%--<asp:Label ID="lblStatus" runat="server" Text="lblStatus"></asp:Label>--%>
                                     <span class="txtDescriptive" id="UserStatus">online/offline</span>
                                     <br />
-                                    <asp:Label CssClass="txtDescriptiveDate"  ID="lblDate" runat="server" Text='<%# Bind("SendDate") %>'></asp:Label>
+                                    <asp:Label CssClass="txtDescriptiveDate" ID="lblDate" runat="server" Text='<%# Bind("SendDate") %>'></asp:Label>
                                 </td>
 
-                                <td>
-                                     <div style="float: left; padding: 5px;">
+                                <td class="floatbarLeft">
+                                    <div style="padding: 5px 0 10px 0;">
+                                        <asp:LinkButton ID="btnMessageHeader" CssClass="txtHeaderPM" runat="server" Text='<%# Bind("Header") %>'></asp:LinkButton>
+                                    </div>
+                                     <div>
                                         <asp:Label ID="lblMessageContent" runat="server" Text='<%# Bind("Text") %>'></asp:Label>
                                     </div>
                                 </td>
@@ -201,7 +177,14 @@
         </SeparatorTemplate>
     </asp:Repeater>
 
-
+    <%--<asp:Repeater ID="Repeater1" runat="server">
+        <ItemTemplate>
+            <uc:PrivateMessageItem ID="PrivateMessageItem" runat="server"></uc:PrivateMessageItem>
+        </ItemTemplate>
+        <SeparatorTemplate>
+            <hr />
+        </SeparatorTemplate>
+    </asp:Repeater>--%>
 
 
 </asp:Content>

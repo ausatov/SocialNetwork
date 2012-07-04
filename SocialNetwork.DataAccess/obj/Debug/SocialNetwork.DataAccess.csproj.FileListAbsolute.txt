@@ -1,0 +1,30 @@
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.pdb
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.dll
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.pdb
+c:\documents and settings\admin\мои документы\visual studio 2010\Projects\RuzWizardsSocialNetworkApplication\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll.config
+D:\GitRepositories\SocialNetwork\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll.config
+D:\GitRepositories\SocialNetwork\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll
+D:\GitRepositories\SocialNetwork\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.pdb
+D:\GitRepositories\SocialNetwork\SocialNetwork.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+D:\GitRepositories\SocialNetwork\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.dll
+D:\GitRepositories\SocialNetwork\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.pdb
+c:\JOB\Repo\SocialNetwork.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+c:\JOB\Repo\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll.config
+c:\JOB\Repo\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll
+c:\JOB\Repo\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.pdb
+c:\JOB\Repo\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.dll
+c:\JOB\Repo\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.pdb
+c:\JOB\mdaaa\Repo\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll.config
+c:\JOB\mdaaa\Repo\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll
+c:\JOB\mdaaa\Repo\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.pdb
+c:\JOB\mdaaa\Repo\SocialNetwork.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+c:\JOB\mdaaa\Repo\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.dll
+c:\JOB\mdaaa\Repo\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.pdb
+c:\JOB\Repository\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll.config
+c:\JOB\Repository\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.dll
+c:\JOB\Repository\SocialNetwork.DataAccess\bin\Debug\SocialNetwork.DataAccess.pdb
+c:\JOB\Repository\SocialNetwork.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+c:\JOB\Repository\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.dll
+c:\JOB\Repository\SocialNetwork.DataAccess\obj\Debug\SocialNetwork.DataAccess.pdb

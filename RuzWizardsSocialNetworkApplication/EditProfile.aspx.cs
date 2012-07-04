@@ -1,4 +1,11 @@
-﻿#region Using
+// -----------------------------------------------------------------------
+// <copyright file="AddressRepository.cs" company="RusWizards">
+// Author: Mankevich M.V. 
+// Date: 29.06.12
+// </copyright>
+// -----------------------------------------------------------------------
+
+#region Using
 using AjaxControlToolkit;
 using RuzWizardsSocialNetworkApplication.Constants;
 using SocialNetwork.DataAccess.Entity;
@@ -6,6 +13,7 @@ using SocialNetwork.DataAccess.Enums;
 using SocialNetwork.DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -56,19 +64,22 @@ public partial class EditProfile : System.Web.UI.Page
     protected void Page_Load(Object sender, EventArgs e)
     {
         Guid.TryParse("e80cd2ac-8517-4e95-8321-3f4593d2106a", out this._userID);
-        PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
-        fvMain.DataSource = new List<PersonalInfo> { personalInfo };
-        fvAddress.DataSource = new List<Address> { AddressRepository.GetUserAddress(this._userID) };
-        imgAvatar.ImageUrl = personalInfo.ImagePath;
-        if (this.imgAvatar.ImageUrl == Constants._defaultAvatarImage)
+        if (!Page.IsPostBack)
         {
-            imgAvatar.ImageUrl = String.Concat(Constants._defaultPhotoPath, Constants._defaultAvatarImage);
+            PersonalInfo personalInfo = PersonalInfoRepository.GetUserInfo(this._userID);
+            fvMain.DataSource = new List<PersonalInfo> { personalInfo };
+            fvAddress.DataSource = new List<Address> { AddressRepository.GetUserAddress(this._userID) };
+            imgAvatar.ImageUrl = personalInfo.ImagePath;
+            if (this.imgAvatar.ImageUrl == Constants._defaultAvatarImage)
+            {
+                imgAvatar.ImageUrl = String.Concat(Constants._defaultPhotoPath, Constants._defaultAvatarImage);
+            }
+            else
+            {
+                this.imgAvatar.ImageUrl = String.Concat(Constants._defaultPhotoPath, imgAvatar.ImageUrl);
+            }
+            Page.DataBind();
         }
-        else
-        {
-            this.imgAvatar.ImageUrl = String.Concat(Constants._defaultPhotoPath, imgAvatar.ImageUrl);
-        }
-        Page.DataBind();
     }
 
     /// <summary>
@@ -148,6 +159,108 @@ public partial class EditProfile : System.Web.UI.Page
     }
 
     /// <summary>
+    /// Save changes in main settings.
+    /// </summary>
+    /// <param name="sender">Object sender : fvMain.</param>
+    /// <param name="e">FormViewUpdateEventArgs e.</param>
+    protected void OnMainItemUpdating(Object sender, FormViewUpdateEventArgs e)
+    {
+        #region Inner controls
+        TextBox tbxNickName = fvMain.FindControl("tbxNickName") as TextBox;
+        TextBox tbxFirstName = fvMain.FindControl("tbxFirstName") as TextBox;
+        TextBox tbxLastName = fvMain.FindControl("tbxLastName") as TextBox;
+        TextBox tbxMiddleName = fvMain.FindControl("tbxMiddleName") as TextBox;
+        TextBox tbxPhone = fvMain.FindControl("tbxPhone") as TextBox;
+        TextBox tbxBirthday = fvMain.FindControl("tbxBirthday") as TextBox;
+        TextBox tbxDescription = fvMain.FindControl("tbxDescription") as TextBox;
+        DropDownList ddlSex = fvMain.FindControl("ddlSex") as DropDownList;
+        #endregion
+
+        DateTime birthday;
+        DateTime? vBirthday = null;
+
+        // Convert date to default date format.
+        if (DateTime.TryParseExact(
+            tbxBirthday.Text, 
+            Constants._dateFormat, 
+            CultureInfo.InvariantCulture, 
+            DateTimeStyles.None, 
+            out birthday))
+        {
+            vBirthday = birthday;
+        }
+
+        Sex sex = new Sex();
+        Sex? vSex = null;
+        Int32 ddlSexSelectedValue;
+        if (Int32.TryParse(ddlSex.SelectedValue, out ddlSexSelectedValue))
+        {
+            if (Enum.TryParse(
+                Enum.GetName(
+                typeof(Sex), 
+                Convert.ToInt32(ddlSex.SelectedValue)), 
+                out sex))
+            {
+                vSex = sex; 
+            }
+        }
+
+        PersonalInfoRepository.ModifyPersonalInfo(
+            null,
+            true,
+            false,
+            this._userID,
+            tbxNickName.Text.Trim(),
+            tbxFirstName.Text.Trim(),
+            tbxLastName.Text.Trim(),
+            tbxMiddleName.Text.Trim(),
+            vSex,
+            tbxPhone.Text.Trim(),
+            vBirthday,
+            null,
+            tbxDescription.Text.Trim());
+    }
+
+    /// <summary>
+    /// Save changes in address settings.
+    /// </summary>
+    /// <param name="sender">Object sender : fvAddress.</param>
+    /// <param name="e">FormViewUpdateEventArgs e.</param>
+    protected void OnAddressItemUpdating(Object sender, FormViewUpdateEventArgs e)
+    {
+        DropDownList ddlCountry = fvAddress.FindControl("ddlCountry") as DropDownList;
+        DropDownList ddlCity = fvAddress.FindControl("ddlCity") as DropDownList;
+        TextBox tbxArea = fvAddress.FindControl("tbxArea") as TextBox;
+        TextBox tbxStreet = fvAddress.FindControl("tbxStreet") as TextBox;
+        TextBox tbxHome = fvAddress.FindControl("tbxHome") as TextBox;
+        TextBox tbxApartment = fvAddress.FindControl("tbxApartment") as TextBox;
+        Guid country;
+        Guid? vCountry = null;
+        Guid city;
+        Guid? vCity = null;
+        if (Guid.TryParse(ddlCountry.SelectedValue, out country))
+        {
+            vCountry = country;
+        }
+
+        if (Guid.TryParse(ddlCity.SelectedValue, out city))
+        {
+            vCity = city;
+        }
+
+        AddressRepository.ModifyAddress(
+            null,
+            true,
+            this._userID,
+            vCountry,
+            vCity,
+            tbxArea.Text.Trim(),
+            tbxStreet.Text.Trim(),
+            tbxHome.Text.Trim(),
+            tbxApartment.Text.Trim());
+    }
+
+    /// <summary>
     /// Event after file uploaded.
     /// </summary>
     /// <param name="sender">Object ccAsyncFileUpload.</param>
@@ -170,7 +283,7 @@ public partial class EditProfile : System.Web.UI.Page
                 String destDir = Server.MapPath(Constants._defaultPhotoPath);
                 String keyName = this._userID.ToString();
                 String destPath = Path.Combine(destDir, String.Concat(keyName, fileExtension));
-                
+
                 // Save photo-file on server.
                 afu.PostedFile.SaveAs(destPath);
 
@@ -181,118 +294,4 @@ public partial class EditProfile : System.Web.UI.Page
         }
     }
     #endregion
-
-    protected void fvMain_ItemCommand(object sender, FormViewCommandEventArgs e)
-    {
-        switch (e.CommandName)
-        {
-            case "Update":
-                {
-                    #region Inner controls
-                    TextBox tbxNickName = fvMain.FindControl("tbxNickName") as TextBox;
-                    TextBox tbxFirstName = fvMain.FindControl("tbxFirstName") as TextBox;
-                    TextBox tbxLastName = fvMain.FindControl("tbxLastName") as TextBox;
-                    TextBox tbxMiddleName = fvMain.FindControl("tbxMiddleName") as TextBox;
-                    TextBox tbxPhone = fvMain.FindControl("tbxPhone") as TextBox;
-                    TextBox tbxBirthday = fvMain.FindControl("tbxBirthday") as TextBox;
-                    TextBox tbxDescription = fvMain.FindControl("tbxDescription") as TextBox;
-                    DropDownList ddlSex = fvMain.FindControl("ddlSex") as DropDownList;
-                    #endregion
-
-                    DateTime? birthday = new DateTime?();
-                    try
-                    {
-                        birthday = Convert.ToDateTime(tbxBirthday.Text);
-                    }
-                    catch (Exception ex)
-                    {
-                    	birthday = null;
-                    }
-
-                    Sex gender = new Sex();
-                    Sex? sex = new Sex?();
-                    if (Enum.TryParse(Enum.GetName(typeof(Sex), ddlSex.SelectedValue), out gender))
-                    {
-                        sex = gender;
-                    }
-                    else
-                    {
-                        sex = null;
-                    }
-
-                    PersonalInfoRepository.ModifyPersonalInfo(
-                        null,
-                        true,
-                        _userID,
-                        tbxNickName.Text,
-                        tbxFirstName.Text,
-                        tbxLastName.Text,
-                        tbxMiddleName.Text,
-                        sex,
-                        tbxPhone.Text,
-                        birthday,
-                        null,
-                        tbxDescription.Text);
-                }
-                break;
-        }
-    }
-
-    protected void btnSaveMain_Click(object sender, ImageClickEventArgs e)
-    {
-        
-        
-    }
-
-    protected void fvMain_ItemUpdating(object sender, FormViewUpdateEventArgs e)
-    {
-        #region Inner controls
-        TextBox tbxNickName = fvMain.FindControl("tbxNickName") as TextBox;
-        TextBox tbxFirstName = fvMain.FindControl("tbxFirstName") as TextBox;
-        TextBox tbxLastName = fvMain.FindControl("tbxLastName") as TextBox;
-        TextBox tbxMiddleName = fvMain.FindControl("tbxMiddleName") as TextBox;
-        TextBox tbxPhone = fvMain.FindControl("tbxPhone") as TextBox;
-        TextBox tbxBirthday = fvMain.FindControl("tbxBirthday") as TextBox;
-        TextBox tbxDescription = fvMain.FindControl("tbxDescription") as TextBox;
-        DropDownList ddlSex = fvMain.FindControl("ddlSex") as DropDownList;
-        #endregion
-
-        DateTime? birthday = new DateTime?();
-        try
-        {
-            birthday = Convert.ToDateTime(tbxBirthday.Text);
-        }
-        catch (Exception ex)
-        {
-            birthday = null;
-        }
-
-        Sex gender = new Sex();
-        Sex? sex = new Sex?();
-        if (Enum.TryParse(Enum.GetName(typeof(Sex), ddlSex.SelectedValue), out gender))
-        {
-            sex = gender;
-        }
-        else
-        {
-            sex = null;
-        }
-
-        PersonalInfoRepository.ModifyPersonalInfo(
-            null,
-            true,
-            _userID,
-            tbxNickName.Text,
-            tbxFirstName.Text,
-            tbxLastName.Text,
-            tbxMiddleName.Text,
-            sex,
-            tbxPhone.Text,
-            birthday,
-            null,
-            tbxDescription.Text);
-
-    }
-
-
 }

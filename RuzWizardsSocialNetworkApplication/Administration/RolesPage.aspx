@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPage.Master" AutoEventWireup="true"
+<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPage.Master" AutoEventWireup="true"
     EnableEventValidation="false" CodeBehind="RolesPage.aspx.cs" Inherits="RuzWizardsSocialNetworkApplication.Administration.RolesPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="server">

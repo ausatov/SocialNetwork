@@ -172,6 +172,12 @@ input {
 	color: #9a9aff;
 }
 
+.txtHeaderPM
+{
+	font-size: 10px;
+	color: #a694c1;
+}
+
 .txtDescriptiveDate
 {
 	font-size: 10px;
@@ -325,11 +331,19 @@ textarea {
 	max-height: 500px;
 }
 
+.imgAvatar100
+{
+	width: 100px;
+	height: 100px;
+}
+
+/* Autocomplete control settings */
 .ui-combobox 
 {
 	position: relative;
 	display: inline-block;
 }
+
 .ui-combobox-toggle 
 {
 	position: absolute;
@@ -341,8 +355,11 @@ textarea {
 	height: 1.7em;
 	top: 0.1em;
 }
+
 .ui-combobox-input 
 {
 	margin: 0;
 	padding: 0.3em;
+	width: 376px;
 }
+/* -- end autocomplete control settings  -- */

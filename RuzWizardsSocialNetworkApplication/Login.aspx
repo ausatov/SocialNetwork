@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LoginPage.master" AutoEventWireup="true" Inherits="Login" Theme="LoginPage" Codebehind="Login.aspx.cs" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/LoginPage.master" AutoEventWireup="true" Inherits="Login" Theme="LoginPage" Codebehind="Login.aspx.cs" %>
 <%@ Register TagPrefix="aspajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit"%>
 
 

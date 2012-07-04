@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="true"
+<%@ Page Title="" Language="C#" MasterPageFile="~/UserPage.master" AutoEventWireup="true"
     Inherits="UserProfile" CodeBehind="UserProfile.aspx.cs" %>
     <%@ MasterType VirtualPath="~/UserPage.master" %>
 
