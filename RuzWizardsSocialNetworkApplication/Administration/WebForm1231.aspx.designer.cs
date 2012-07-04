@@ -11,7 +11,7 @@ namespace RuzWizardsSocialNetworkApplication.Administration
 {
 
 
-    public partial class WebForm1
+    public partial class WebForm1231
     {
 
         /// <summary>
